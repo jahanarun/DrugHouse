@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EDD174B1-63F5-4310-8494-D7FAAAF63665}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DrugHouse.ViewModel</RootNamespace>
+    <AssemblyName>DrugHouse.Sticker</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF45, Version=4.3.31.28649, Culture=neutral, PublicKeyToken=0e27b6f8be9b2ef7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.4.3.31.1\lib\net45\GalaSoft.MvvmLight.Extras.WPF45.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WPF45, Version=4.3.31.28649, Culture=neutral, PublicKeyToken=eabbf6a5f5af5004, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.4.3.31.1\lib\net45\GalaSoft.MvvmLight.WPF45.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminScreen\AdminScreenFactory.cs" />
+    <Compile Include="AdminScreen\DropdownViewModel.cs" />
+    <Compile Include="ReportScreen\IReportScreen.cs" />
+    <Compile Include="ReportScreen\MedicalCertificateViewModel.cs" />
+    <Compile Include="ReportScreen\ReportScreenFactory.cs" />
+    <Compile Include="ReportScreen\ReportViewModelBase.cs" />
+    <Compile Include="RowItems\DropdownItem.cs" />
+    <Compile Include="Tabs\AdminScreenMasterViewModel.cs" />
+    <Compile Include="AdminScreen\AdminScreenBase.cs" />
+    <Compile Include="AdminScreen\AdminScreenType.cs" />
+    <Compile Include="AdminScreen\DropdownAdminScreenViewModel.cs" />
+    <Compile Include="AdminScreen\DrugAdminScreenViewModel.cs" />
+    <Compile Include="RowItems\DrugListItem.cs" />
+    <Compile Include="AdminScreen\IAdminScreen.cs" />
+    <Compile Include="Helper\Helper.cs" />
+    <Compile Include="Interfaces\IDirty.cs" />
+    <Compile Include="Tabs\ITabViewModel.cs" />
+    <Compile Include="Patients\PatientCaseViewModel.cs" />
+    <Compile Include="Patients\PatientPrescriptionViewModel.cs" />
+    <Compile Include="Tabs\DrugHouseViewModelBase.cs" />
+    <Compile Include="Interfaces\IMessage.cs" />
+    <Compile Include="Interfaces\IMessageService.cs" />
+    <Compile Include="NotificationObject.cs" />
+    <Compile Include="MasterViewModel.cs" />
+    <Compile Include="MedicalPractitionerViewModel.cs" />
+    <Compile Include="Tabs\PatientMasterViewModel.cs" />
+    <Compile Include="Tabs\PatientViewModel.cs" />
+    <Compile Include="Patients\PatientAdmitanceViewModel.cs" />
+    <Compile Include="Tabs\ReportScreenViewModel.cs" />
+    <Compile Include="RowItems\TypeRow.cs" />
+    <Compile Include="RowItems\PatientCaseRow.cs" />
+    <Compile Include="RowItems\PrescriptionRow.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tabs\ScreenAttribute.cs" />
+    <Compile Include="Tabs\TabAttribute.cs" />
+    <Compile Include="Tabs\TabManager.cs" />
+    <Compile Include="Tabs\TabViewModel.cs" />
+    <Compile Include="RowItems\PatientListRow.cs" />
+    <Compile Include="ValueConverter\EnumDrugBooleanConverter.cs" />
+    <Compile Include="ValueConverter\VisibilityConverter.cs" />
+    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="Patients\PatientVisitViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DrugHouse.Model\DrugHouse.Model.csproj">
+      <Project>{27966903-5e6a-4c33-ac98-7370c8760615}</Project>
+      <Name>DrugHouse.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DrugHouse.Shared\DrugHouse.Shared.csproj">
+      <Project>{3e617a61-e3c2-44e7-b2d0-e20ebfdbfc89}</Project>
+      <Name>DrugHouse.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

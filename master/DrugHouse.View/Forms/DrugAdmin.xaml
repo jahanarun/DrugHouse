@@ -1,0 +1,174 @@
+﻿<UserControl x:Class="DrugHouse.View.Forms.DrugAdmin"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:DrugHouse.ViewModel.AdminScreen;assembly=DrugHouse.Sticker"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:enumerations="clr-namespace:DrugHouse.Shared.Enumerations;assembly=DrugHouse.Shared"
+             xmlns:valueConverter="clr-namespace:DrugHouse.ViewModel.ValueConverter;assembly=DrugHouse.Sticker"
+             mc:Ignorable="d"  d:DataContext="{d:DesignInstance vm:DrugAdminScreenViewModel}"
+             d:DesignHeight="300" d:DesignWidth="700">
+    <Grid Background="White">
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../Resources/GlassButton.xaml"></ResourceDictionary>
+                </ResourceDictionary.MergedDictionaries>
+
+                <valueConverter:VisibilityConverter x:Key="VisibilityConverter"/>
+
+                <Style x:Key="EmptyButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#00000000"/>
+                <Setter Property="BorderBrush" Value="#00000000"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <ContentPresenter 
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                        Margin="{TemplateBinding Padding}" 
+                        RecognizesAccessKey="True" 
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+                <!-- Regular Drop Shadow -->
+                <DropShadowEffect x:Key="KioskStandardDropShadow" Opacity="0.6" BlurRadius="10" ShadowDepth="5" Direction="308"/>
+                
+                <!-- Blue Button -->
+                <!--<Style x:Key="BlueButton" TargetType="{x:Type Button}">
+                    <Setter Property="OverridesDefaultStyle" Value="True"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Name="border" 
+                    BorderThickness="2"
+                    Padding="4,2" 
+                    BorderBrush="{DynamicResource BlueGradient2}"
+                    CornerRadius="5" 
+                    Background="{TemplateBinding Background}">
+                                    <Grid >
+                                        <ContentPresenter 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Name="content"/>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource BlueGradient3}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="{DynamicResource DarkGradient1}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource BlueGradient3}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource DarkGradient1}"/>
+                                        <Setter Property="BorderBrush" Value="{DynamicResource BlueGradient1}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="SnapsToDevicePixels" Value="true"/>
+                    <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+                    <Setter Property="Background" Value="{DynamicResource BlueGradient1}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource BlueGradient2}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="TextBox.TextAlignment" Value="Center"/>
+                    <Setter Property="FontFamily" Value="Trebuchet MS"/>
+                    <Setter Property="FontSize" Value="15pt"/>
+                    <Setter Property="Effect" Value="{DynamicResource KioskStandardDropShadow}" />
+                </Style>-->
+
+                <ObjectDataProvider x:Key="DrugTypeEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+                    <ObjectDataProvider.MethodParameters>
+                        <x:Type TypeName="enumerations:DrugType"></x:Type>   
+                    </ObjectDataProvider.MethodParameters>    
+                </ObjectDataProvider>
+            </ResourceDictionary>   
+        </Grid.Resources>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" MaxWidth="300"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition />
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Type to filter:" Grid.Row="1"/>
+            <TextBox Grid.Row="2" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Width="250"
+                     Text="{Binding SearchString, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Content="Tablet" Grid.Column="0" IsChecked="{Binding IsTablet, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                <CheckBox Content="Syrup" Grid.Column="1" IsChecked="{Binding IsSyrup, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                <CheckBox Content="Capsule" Grid.Column="2" IsChecked="{Binding IsCapsule, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                <Button  Width="60" Height="30" HorizontalAlignment="Left" Command="{Binding AddDrugCommand}" Content="Add"/>
+                <Border Width="10"/>
+                <Button  Width="60" Height="30" HorizontalAlignment="Left"  SnapsToDevicePixels="True" Command="{Binding RemoveDrugCommand}" 
+                         Content="Remove"/>
+            </StackPanel>
+            <ListBox Grid.Row="5" ItemsSource="{Binding DrugItemsList}" SelectedItem="{Binding SelectedDrugItem, Mode=TwoWay}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>   
+        </Grid>
+        
+        <Grid Grid.Column="2" d:DataContext="Nothing" >
+              <Grid.Visibility>
+                  <Binding Path= "IsSelected" Converter="{StaticResource VisibilityConverter}" UpdateSourceTrigger="PropertyChanged" FallbackValue="Visible" />
+            </Grid.Visibility>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" Text="Name:"/>
+            <TextBox Grid.Row="1"  Grid.Column="1" Height="20" Width="200" HorizontalAlignment="Left"
+                     Text="{Binding DrugName}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Drug Type:"/>
+            <ComboBox Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" Width="200" IsTextSearchEnabled="True"  VerticalAlignment="Center"
+                      ItemsSource="{Binding Source={StaticResource DrugTypeEnum}}" Text="{Binding Path=DrugType}" SelectedItem="{Binding DrugType}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Remarks:"/>
+            <TextBox Grid.Row="3"  Grid.Column="1" Height="50" Width="200" HorizontalAlignment="Left"  AcceptsReturn="True"
+                     Text="{Binding Remark}"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

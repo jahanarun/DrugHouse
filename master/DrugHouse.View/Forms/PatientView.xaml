@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="DrugHouse.View.Forms.PatientView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 mc:Ignorable="d" 
+			 d:DesignHeight="513" d:DesignWidth="809"
+			 xmlns:localControls="clr-namespace:DrugHouse.View.Controls"
+			  xmlns:vm="clr-namespace:DrugHouse.ViewModel;assembly=DrugHouse.Sticker"
+			   xmlns:system="clr-namespace:System;assembly=mscorlib"
+			 xmlns:enumerations="clr-namespace:DrugHouse.Shared.Enumerations;assembly=DrugHouse.Shared"
+			 xmlns:forms="clr-namespace:DrugHouse.View.Forms"
+			 xmlns:patients="clr-namespace:DrugHouse.ViewModel.Patients;assembly=DrugHouse.Sticker"
+			 xmlns:tabs="clr-namespace:DrugHouse.ViewModel.Tabs;assembly=DrugHouse.Sticker"
+			 x:Name="Root"
+			  Background="{DynamicResource PatientTabBrush}"
+			 >
+	<UserControl.Resources>
+		<ObjectDataProvider x:Key="GuardianTypeEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+			<ObjectDataProvider.MethodParameters>
+				<x:Type TypeName="enumerations:RelationshipType"></x:Type>
+			</ObjectDataProvider.MethodParameters>
+		</ObjectDataProvider>
+		<ObjectDataProvider x:Key="GenderTypeEnum" MethodName="GetValues" ObjectType="{x:Type system:Enum}">
+			<ObjectDataProvider.MethodParameters>
+				<x:Type TypeName="enumerations:GenderType"></x:Type>
+			</ObjectDataProvider.MethodParameters>
+		</ObjectDataProvider>
+	</UserControl.Resources>
+	<Grid d:DataContext="{d:DesignInstance Type=tabs:PatientViewModel}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="10"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+
+		<Grid DockPanel.Dock="Top" Grid.Row="0" Background="{StaticResource PatientListTabBrush}" />
+
+		<Grid Grid.Row="1" Background="{StaticResource PatientListTabLiteBrush}" >
+
+			<TabControl TabStripPlacement="Bottom"
+				 Background="White" >
+				<TabItem Header="Patient Info">
+
+					<Grid x:Name="PatientGrid" Height="Auto" >
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="10"/>
+							<ColumnDefinition Width="130"/>
+							<ColumnDefinition Width="200"></ColumnDefinition>
+							<ColumnDefinition Width="50"></ColumnDefinition>
+							<ColumnDefinition Width="130"></ColumnDefinition>
+							<ColumnDefinition Width="250"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="Auto" MinHeight="30"/>
+							<RowDefinition Height="20"/>
+							<RowDefinition Height="15.28"/>
+							<RowDefinition Height="Auto" MinHeight="94"/>
+							<RowDefinition Height="23*"/>
+							<RowDefinition Height="30*"/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Text="Basic" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontSize="16" Foreground="#FF7EA81F" FontWeight="Bold" Height="21.28"/>
+						<TextBlock Text="Id" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+						<TextBlock Text="Name" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
+						<TextBlock Text="Age" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" />
+						<TextBlock Text="Gender" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" />
+						<TextBlock Text="Guardian Relationship" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"/>
+						<TextBlock Text="Guardian Name" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" />
+						<TextBlock Text="Phone" Grid.Row="5" Grid.Column="4" VerticalAlignment="Center"  />
+						<TextBlock Text="Location" Grid.Row="4" Grid.Column="4" VerticalAlignment="Center"  />
+						<TextBlock Text="Remarks" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" FontSize="16" Foreground="#FF7EA81F" FontWeight="Bold" />
+						<TextBlock Text="Address" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" FontSize="16" Foreground="#FF7EA81F" FontWeight="Bold" />
+						<TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=Id}" VerticalAlignment="Center"  />
+						<TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  />
+						<TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Path=Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+						<ComboBox Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100"
+								  Text="{Binding Path=Gender}" ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}" SelectedItem="{Binding Gender}" />
+						<ComboBox Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left"
+								  Text="{Binding Path=GuardianRelationship}" ItemsSource="{Binding Source={StaticResource GuardianTypeEnum}}" SelectedItem="{Binding GuardianRelationship}" />
+						<TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Path=GuardianName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+						<TextBox Grid.Row="1"  Grid.Column="4" Grid.RowSpan="3"  Grid.ColumnSpan="2" Margin="0,10,0,10"
+							 Text="{Binding Path=Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+						<ComboBox x:Name="LocationComboBox" Grid.Row="4" Grid.Column="5"  Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+							  ItemsSource="{Binding Locations}" SelectedItem="{Binding Path=Location, Mode=TwoWay}"/>
+						<TextBox Grid.Row="5" Grid.Column="5"  VerticalAlignment="Center" Width="200" HorizontalAlignment="Left"
+							 Text="{Binding Path=PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+						<TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
+							 Text="{Binding Path=Remark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+					</Grid>
+				</TabItem>
+				<TabItem Header="Cases">
+					<DockPanel LastChildFill="True" >
+						<DockPanel DockPanel.Dock="Left" Width="170">
+							<Grid HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+								<Grid.RowDefinitions>
+									<RowDefinition/>
+									<RowDefinition/>
+								</Grid.RowDefinitions>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="60"/>
+										<ColumnDefinition Width="5"/>
+										<ColumnDefinition/>
+									</Grid.ColumnDefinitions>
+									<Button Content="Add Visit" MinWidth="50"  Grid.Column="0" 
+											Command="{Binding AddVisitCommand}"/>
+
+									<Button Content="Add Admittance" MinWidth="70" Grid.Column="2" HorizontalAlignment="Right" 
+											Command="{Binding AddAdmittanceCommand}"/>
+								</Grid>
+								
+								<Button Content="Delete Case" MinWidth="70" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"                                        
+								Command="{Binding RemoveCaseCommand}"/>
+							</Grid>
+							<ListBox x:Name="VisitList"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" 
+							 ItemsSource="{Binding CaseRows}" SelectedItem="{Binding SelectedCase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<Grid >
+											<Grid.RowDefinitions>
+												<RowDefinition Height="30"/>
+												<RowDefinition Height="25"/>
+											</Grid.RowDefinitions>
+											<TextBlock Grid.Row="0" Text="{Binding Path=Date, StringFormat={}{0:dd-MM-yyyy HH:mm}}" FontWeight="Bold" FontSize="14"/>
+											<TextBlock Grid.Row="1" Text="{Binding Path=PrimaryDiagnosis}" Padding="3,0,0,0"/>
+										</Grid>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</DockPanel>
+
+						<ContentPresenter Content="{Binding PatientVisitViewModel, Mode=OneWay}">
+							<ContentPresenter.Resources>
+								<DataTemplate DataType="{x:Type tabs:DrugHouseViewModelBase}">
+
+								</DataTemplate>
+								<DataTemplate DataType="{x:Type patients:PatientVisitViewModel}">
+									<forms:PatientVisit/>
+								</DataTemplate>
+								<DataTemplate DataType="{x:Type patients:PatientAdmitanceViewModel}">
+									<forms:PatientAdmitance/>
+								</DataTemplate>
+							</ContentPresenter.Resources>
+						</ContentPresenter>
+						<!--<forms:Visit></forms:Visit>-->
+					</DockPanel>
+				</TabItem>
+
+			</TabControl>
+
+		</Grid>
+	</Grid>
+</UserControl>

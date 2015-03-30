@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="DrugHouse.View.Forms.ReportScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:DrugHouse.ViewModel.ReportScreen;assembly=DrugHouse.Sticker"
+             xmlns:tabs="clr-namespace:DrugHouse.ViewModel.Tabs;assembly=DrugHouse.Sticker"
+             xmlns:reports="clr-namespace:DrugHouse.View.Forms.Reports"
+             mc:Ignorable="d"  d:DataContext="{d:DesignInstance tabs:ReportScreenViewModel}"
+             d:DesignHeight="300" d:DesignWidth="1100">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="TopLayer" Height="10" ColumnSpan="2" Background="{StaticResource ReportTabBrush}"/>
+        <ListBox Grid.Column="0" Grid.Row="1" Background="{StaticResource ReportTabLiteBrush}"
+                 ItemsSource="{Binding ReportScreenCollection}" SelectedItem="{Binding SelectedReportScreenType}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Style="{StaticResource TabLevelListItemStyle}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="Linen">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="30"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Generate Report"
+                        Command="{Binding GenerateReportCommand}"/>
+            </Grid>
+            <ContentPresenter Grid.Row="1" Content="{Binding SelectedReport, Mode=OneWay}">
+                <ContentPresenter.Resources>
+                    <DataTemplate DataType="{x:Type vm:MedicalCertificateViewModel}" >                    
+                        <reports:MedicalCertificateReport />
+                    </DataTemplate>
+                </ContentPresenter.Resources>
+            </ContentPresenter>
+        </Grid>
+    </Grid>
+</UserControl>
