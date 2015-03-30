@@ -30,39 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5CA7FA
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8A3E50F9-5BA7-41C0-9B8B-13E1557A94F1}"
-	ProjectSection(SolutionItems) = preProject
-		Performance1.psess = Performance1.psess
-	EndProjectSection
-EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://dexuse.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = DrugHouse.Model\\DrugHouse.Model.csproj
-		SccProjectName1 = DrugHouse.Model
-		SccLocalPath1 = DrugHouse.Model
-		SccProjectUniqueName2 = DrugHouse.Model.Test\\DrugHouse.Model.Test.csproj
-		SccProjectName2 = DrugHouse.Model.Test
-		SccLocalPath2 = DrugHouse.Model.Test
-		SccProjectUniqueName3 = DrugHouse.Shared\\DrugHouse.Shared.csproj
-		SccProjectName3 = DrugHouse.Shared
-		SccLocalPath3 = DrugHouse.Shared
-		SccProjectUniqueName4 = Dexuse\\Dexuse.csproj
-		SccProjectName4 = Dexuse
-		SccLocalPath4 = Dexuse
-		SccProjectUniqueName5 = DrugHouse.ViewModel.Tests\\DrugHouse.ViewModel.Tests.csproj
-		SccProjectName5 = DrugHouse.ViewModel.Tests
-		SccLocalPath5 = DrugHouse.ViewModel.Tests
-		SccProjectUniqueName6 = DrugHouse.View\\DrugHouse.View.csproj
-		SccProjectName6 = DrugHouse.View
-		SccLocalPath6 = DrugHouse.View
-		SccProjectUniqueName7 = DrugHouse.ViewModel\\DrugHouse.ViewModel.csproj
-		SccProjectName7 = DrugHouse.ViewModel
-		SccLocalPath7 = DrugHouse.ViewModel
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -95,8 +63,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
