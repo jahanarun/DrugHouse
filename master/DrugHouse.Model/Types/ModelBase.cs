@@ -30,7 +30,11 @@ namespace DrugHouse.Model.Types
 
         public abstract object Clone();
 
-        public virtual void CleanUp()
+        public virtual void SetValuesBeforeDbSave()
         { }
+
+        public virtual void SetValuesAfterDbSave()
+        { }
+
     }
 }

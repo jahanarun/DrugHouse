@@ -85,6 +85,12 @@ namespace DrugHouse.Model.Repositories
             ResetDbStatus();
         }
 
+        /// <summary>
+        /// Saves the entity and returns the updated value from db.
+        /// This is used when the db inserts identity column value.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         protected T SaveChaangesForEntity(T item) 
         {
             SetChangeTrackerEntityState();

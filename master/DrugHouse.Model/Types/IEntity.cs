@@ -7,7 +7,7 @@ namespace DrugHouse.Model.Types
 {
     public interface IEntity
     {
-        void CleanUp();
+        void SetValuesBeforeDbSave();
         RepositoryStatus DbStatus { get; set; }
     }
 }

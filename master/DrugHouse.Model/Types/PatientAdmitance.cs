@@ -32,7 +32,7 @@ namespace DrugHouse.Model.Types
             throw new NotImplementedException();
         }
 
-        public override void CleanUp()
+        public override void SetValuesBeforeDbSave()
         {
             if (PrimaryDiagnosis != null && PrimaryDiagnosis.GetType() == typeof(SimpleEntityEmpty))
                 PrimaryDiagnosis = null;

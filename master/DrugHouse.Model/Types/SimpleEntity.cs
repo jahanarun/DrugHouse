@@ -56,7 +56,7 @@ namespace DrugHouse.Model.Types
         public SimpleEntityEmpty()
         {
             Id = 0;
-            Name = string.Empty;
+            Name = "None";
         }
     }
 }

@@ -81,7 +81,7 @@ namespace DrugHouse.Model.Types
         /// Remove prescrisptions which has empty drug
         /// Remove diagnosis which are of type simpleentityempty
         /// </summary>
-        public override void CleanUp()
+        public override void SetValuesBeforeDbSave()
         {
             for (int i = Prescriptions.Count - 1; i >= 0; i--)
             {
@@ -93,6 +93,15 @@ namespace DrugHouse.Model.Types
             if (SecondaryDiagnosis != null && SecondaryDiagnosis.GetType() == typeof(SimpleEntityEmpty))
                 SecondaryDiagnosis = null;
             Status = null;
+        }
+
+        public override void SetValuesAfterDbSave()
+        {
+            if (PrimaryDiagnosis == null)
+                PrimaryDiagnosis = SimpleEntity.Empty;
+            if (SecondaryDiagnosis == null)
+                SecondaryDiagnosis = SimpleEntity.Empty;
+            
         }
     }
 }

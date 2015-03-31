@@ -139,17 +139,30 @@ namespace DrugHouse.Model.Types
             return result;
         }
 
-        public override void CleanUp()
+        public override void SetValuesBeforeDbSave()
         {
             foreach (var visit in Visits)
             {
-                visit.CleanUp();
+                visit.SetValuesBeforeDbSave();
             }
             foreach (var admitance in Admitances)
             {
-                admitance.CleanUp();
+                admitance.SetValuesBeforeDbSave();
             }
         }
+
+        public override void SetValuesAfterDbSave()
+        {
+            foreach (var visit in Visits)
+            {
+                visit.SetValuesAfterDbSave();
+            }
+            foreach (var admitance in Admitances)
+            {
+                admitance.SetValuesAfterDbSave();
+            }
+        }
+
         #endregion
     }
 
