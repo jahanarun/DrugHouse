@@ -20,3 +20,5 @@ master/Dexuse/obj/*
 *.vssscc
 master/Performance1.psess
 *.vspx
+*.vspscc
+*.user
