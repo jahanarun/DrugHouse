@@ -4,9 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Timers;
 using DrugHouse.Model.Enum;
 using DrugHouse.Model.Types;
+using DrugHouse.ViewModel.RowItems;
 using DrugHouse.ViewModel.Tabs;
 
 namespace DrugHouse.ViewModel.Patients
@@ -19,7 +21,9 @@ namespace DrugHouse.ViewModel.Patients
         {
             Case = patientCase;
             if (Case.DbStatus == RepositoryStatus.New)
-                Timer();            
+                Timer();
+
+            DiagnosesItems = Diagnoses.Select(diagnosis => new ToggleButtonItem(diagnosis)).ToList();
         }
 
         public new class PropNameBase
@@ -32,6 +36,7 @@ namespace DrugHouse.ViewModel.Patients
 
         #region Properties
 
+        public List<ToggleButtonItem> DiagnosesItems { get; private set; }
         public ICollection<SimpleEntity> Diagnoses { get { return MasterViewModel.Globals.Diagnoses; } }
         public SimpleEntity PrimaryDiagnosis
         {

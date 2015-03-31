@@ -2,6 +2,7 @@
     Copyright (C) {2015}  {Jahan Arun, J}     */
 
 using DrugHouse.Model.Types;
+using DrugHouse.ViewModel.RowItems;
 
 namespace DrugHouse.ViewModel.Patients
 {
@@ -13,6 +14,11 @@ namespace DrugHouse.ViewModel.Patients
         {
             PatientPrescriptionViewModelValue = new PatientPrescriptionViewModel(PatientVisit);
             PatientPrescriptionViewModelValue.OnDirty += (sender, e) => RaiseDirty();
+            foreach (var item in DiagnosesItems)
+            {
+                if (PatientVisit.SecondaryDiagnosis.Equals(item.Model))
+                    SecondaryDiagnosis = item;
+            }
         }
 
         public class PropName
@@ -47,16 +53,20 @@ namespace DrugHouse.ViewModel.Patients
             }
         }
 
-        public SimpleEntity SecondaryDiagnosis
+        private ToggleButtonItem SecondaryDiagnosisValue;
+        public ToggleButtonItem SecondaryDiagnosis
         {
             get
             {
-                return PatientVisit.SecondaryDiagnosis;
+                return SecondaryDiagnosisValue;
             }
             set
             {
-                PatientVisit.SecondaryDiagnosis = value;
+                if (value == null)
+                    return;
+                SecondaryDiagnosisValue = value;
                 RaisePropertyChanged(PropName.SecondaryDiagnosis);
+                PatientVisit.SecondaryDiagnosis = (SimpleEntity)SecondaryDiagnosisValue.Model;
             }
         }
         public string Complaints

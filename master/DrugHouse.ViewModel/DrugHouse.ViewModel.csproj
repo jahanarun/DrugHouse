@@ -62,6 +62,7 @@
     <Compile Include="ReportScreen\ReportScreenFactory.cs" />
     <Compile Include="ReportScreen\ReportViewModelBase.cs" />
     <Compile Include="RowItems\DropdownItem.cs" />
+    <Compile Include="RowItems\ToggleButtonItem.cs" />
     <Compile Include="Tabs\AdminScreenMasterViewModel.cs" />
     <Compile Include="AdminScreen\AdminScreenBase.cs" />
     <Compile Include="AdminScreen\AdminScreenType.cs" />

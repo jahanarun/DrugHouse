@@ -105,6 +105,9 @@
     <Compile Include="Controls\ClickToEditTextboxControl.xaml.cs">
       <DependentUpon>ClickToEditTextboxControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FilterDropDown.xaml.cs">
+      <DependentUpon>FilterDropDown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LoadingOverlay.xaml.cs">
       <DependentUpon>LoadingOverlay.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,10 @@
       <DependentUpon>PatientVisit.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\ClickToEditTextboxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FilterDropDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
