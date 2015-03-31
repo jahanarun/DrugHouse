@@ -301,8 +301,9 @@ namespace DrugHouse.ViewModel.Tabs
                        
         private void SavePatientDetails()
         {
-            Patient.CleanUp();
+            Patient.SetValuesBeforeDbSave();
             Patient = Data.SavePatient(Patient);
+            Patient.SetValuesAfterDbSave();
             RaisePropertyChanged(PropName.Id);
         }
 

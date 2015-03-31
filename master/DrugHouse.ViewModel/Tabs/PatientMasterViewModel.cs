@@ -90,7 +90,7 @@ namespace DrugHouse.ViewModel.Tabs
                 Location = patient.Location.Name                
             }).ToList();
 
-            PatientFilteredCollectionViewValue = new ListCollectionView(patientList);
+            PatientFilteredCollectionView = new ListCollectionView(patientList);
             SelectionChanged(PropName.PatientFilteredCollectionView);
         }
         #endregion
@@ -171,13 +171,8 @@ namespace DrugHouse.ViewModel.Tabs
             }
         }
 
-        public PatientListRow FilterParameter { get; private set; }
-
-        private ListCollectionView PatientFilteredCollectionViewValue;
-        public CollectionView PatientFilteredCollectionView
-        {
-            get { return PatientFilteredCollectionViewValue; }
-        }
+        public PatientListRow FilterParameter { get; private set; } 
+        public ListCollectionView PatientFilteredCollectionView { get; private set; }
 
         private readonly string TabNameValue;
         public override string TabName
@@ -186,7 +181,6 @@ namespace DrugHouse.ViewModel.Tabs
         }
 
         private PatientListRow SelectedPatientValue;
-
         public PatientListRow SelectedPatient
         {
             get { return SelectedPatientValue; }
