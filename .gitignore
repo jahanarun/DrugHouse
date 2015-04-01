@@ -16,6 +16,7 @@ master/DrugHouse.Shared/bin/*
 master/DrugHouse.Shared/obj/*
 master/Dexuse/bin/*
 master/Dexuse/obj/*
+master/.svn
 *.suo
 *.vssscc
 master/Performance1.psess
