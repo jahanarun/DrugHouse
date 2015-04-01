@@ -99,7 +99,7 @@ namespace DrugHouse.ViewModel.Tabs
             }
         }
 
-        public List<SimpleEntity> Locations { get { return MasterViewModel.Globals.Locations; } }
+        public List<SimpleEntity> Locations { get { return MasterViewModel.Globals.Locations(Data); } }
         #endregion
 
         #region Patient Properties
@@ -229,9 +229,9 @@ namespace DrugHouse.ViewModel.Tabs
                 if(value == null)
                     PatientVisitViewModel =  new DrugHouseViewModelBase() ;
                 else if(value.CaseType == "Visit")
-                    PatientVisitViewModel =  new  PatientVisitViewModel((PatientVisit) SelectedCaseValue.Case) ;
+                    PatientVisitViewModel =  new  PatientVisitViewModel(SelectedCaseValue.Case, Data) ;
                 else
-                    PatientVisitViewModel =  new  PatientAdmitanceViewModel((PatientAdmitance) SelectedCaseValue.Case) ;
+                    PatientVisitViewModel =  new  PatientAdmitanceViewModel(SelectedCaseValue.Case, Data) ;
 
                 AttachDirtyState(PatientVisitViewModel);
                 SelectionChanged(PropName.SelectedCase);

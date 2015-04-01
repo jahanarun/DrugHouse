@@ -10,341 +10,346 @@
              xmlns:patients="clr-namespace:DrugHouse.ViewModel.Patients;assembly=DrugHouse.Sticker"
              mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="671" 
              >
-    <!--d:DataContext="{d:DesignInstance Type=vm:PatientViewModel }"-->
     <DockPanel LastChildFill="True" >
         <DockPanel.Resources>
             <valueConverter:VisibilityConverter x:Key="VisibilityConverter"/>
         </DockPanel.Resources>
 
-        <DockPanel LastChildFill="True" >
-            <DockPanel LastChildFill="True" d:DataContext="{d:DesignInstance patients:PatientVisitViewModel}">
-                <DockPanel.Resources>
-                    <SolidColorBrush x:Key="CapsuleBackColorBrush" Color="LightGoldenrodYellow"/>
-                    <SolidColorBrush x:Key="TabletBackColorBrush" Color="LightBlue"/>
-                    <SolidColorBrush x:Key="SyrupBackColorBrush" Color="LightGreen"/>
-                    <SolidColorBrush x:Key="NoDrugBackColorBrush" Color="White"/>
-                </DockPanel.Resources>
-                <Border BorderThickness="1" Background="White" BorderBrush="Gainsboro" MinHeight="50" DockPanel.Dock="Top" Height="50" >
-                    <Grid Name="StatusPanel"  >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Doctor Fees:"/>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Medicine Fees:"/>
-
-                        <TextBox Grid.Row="0" Grid.Column="1" Width="100" HorizontalAlignment="Left"
-                                 Text="{Binding DoctorFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Left"
-                                 Text="{Binding DrugFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding CaseDate}" FontWeight="Bold"/>
-                    </Grid>
-                </Border>
-
-                <Border MinHeight="100" DockPanel.Dock="Bottom" Height="250" BorderThickness="1" Background="White" BorderBrush="Gainsboro">
-                    <Grid Name="MedicinePanel" DataContext="{Binding PatientPrescriptionViewModel }">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7*"/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.Resources>
-                            <valueConverter:EnumDrugBooleanConverter x:Key="EnumDrugTypeConverter"/>
-                        </Grid.Resources>
-
-                        <Grid>
-                            <Grid.Visibility>
-                                <Binding Path= "IsDrugPanelVisible" Converter="{StaticResource VisibilityConverter}" UpdateSourceTrigger="PropertyChanged" FallbackValue="Visible" />
-                            </Grid.Visibility>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border  Grid.Row="0" BorderThickness="0" Margin="5,5,5,5">
+                <DockPanel LastChildFill="True" d:DataContext="{d:DesignInstance patients:PatientVisitViewModel}">
+                    <DockPanel.Resources>
+                        <SolidColorBrush x:Key="CapsuleBackColorBrush" Color="LightGoldenrodYellow"/>
+                        <SolidColorBrush x:Key="TabletBackColorBrush" Color="LightBlue"/>
+                        <SolidColorBrush x:Key="SyrupBackColorBrush" Color="LightGreen"/>
+                        <SolidColorBrush x:Key="NoDrugBackColorBrush" Color="White"/>
+                    </DockPanel.Resources>
+                    <Border BorderThickness="0,0,0,2" Background="White" BorderBrush="Gainsboro" MinHeight="50" DockPanel.Dock="Top" Height="50" >
+                        <Grid Name="StatusPanel"  >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="9*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Column="0" >
-                                <StackPanel.Resources>
-                                    <Style TargetType="{x:Type RadioButton}">
-                                        <Setter Property="Focusable" Value="False" />
-                                        <Setter Property="GroupName" Value="filter"/>
-                                        <Setter Property="IsTabStop" Value="False" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type RadioButton}">
-                                                    <ControlTemplate.Resources>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Doctor Fees:" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Medicine Fees:" VerticalAlignment="Center"/>
 
-                                                        <Style TargetType="{x:Type TextBlock}">
-                                                            <Setter Property="VerticalAlignment" Value="Stretch"/>
-                                                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                                                        </Style>
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                 Text="{Binding DoctorFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Center"
+                                 Text="{Binding DrugFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding CaseDate}" FontWeight="Bold" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
 
-                                                        <Style TargetType="{x:Type Label}">
-                                                            <Setter Property="Padding" Value="0"/>
-                                                        </Style>
-                                                    </ControlTemplate.Resources>
+                    <Border MinHeight="100" DockPanel.Dock="Bottom" Height="250" BorderThickness="0,2,0,0" Background="White" BorderBrush="Gainsboro">
+                        <Grid Name="MedicinePanel" DataContext="{Binding PatientPrescriptionViewModel }">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.Resources>
+                                <valueConverter:EnumDrugBooleanConverter x:Key="EnumDrugTypeConverter"/>
+                            </Grid.Resources>
 
-                                                    <Border x:Name="PART_border" CornerRadius="2" Padding="3px" Margin="2px" 
+                            <Grid>
+                                <Grid.Visibility>
+                                    <Binding Path= "IsDrugPanelVisible" Converter="{StaticResource VisibilityConverter}" UpdateSourceTrigger="PropertyChanged" FallbackValue="Visible" />
+                                </Grid.Visibility>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="9*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" >
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type RadioButton}">
+                                            <Setter Property="Focusable" Value="False" />
+                                            <Setter Property="GroupName" Value="filter"/>
+                                            <Setter Property="IsTabStop" Value="False" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                                                        <ControlTemplate.Resources>
+
+                                                            <Style TargetType="{x:Type TextBlock}">
+                                                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                                                <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                                                            </Style>
+
+                                                            <Style TargetType="{x:Type Label}">
+                                                                <Setter Property="Padding" Value="0"/>
+                                                            </Style>
+                                                        </ControlTemplate.Resources>
+
+                                                        <Border x:Name="PART_border" CornerRadius="2" Padding="3px" Margin="2px" 
                                                     BorderThickness="1" BorderBrush="{x:Static SystemColors.ControlDarkBrush}"
                                                     SnapsToDevicePixels="True" >
 
-                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                            <Image x:Name="PART_icon" />
-                                                            <ContentPresenter x:Name="PART_content" />
-                                                        </StackPanel>
-                                                    </Border>
+                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                                <Image x:Name="PART_icon" />
+                                                                <ContentPresenter x:Name="PART_content" />
+                                                            </StackPanel>
+                                                        </Border>
 
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsChecked" Value="True">
-                                                            <Setter TargetName="PART_content" Property="TextBlock.FontWeight" Value="Bold"/>
-                                                            <Setter TargetName="PART_border" Property="Background">
-                                                                <Setter.Value>
-                                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                                        <GradientStop Color="{x:Static SystemColors.ControlLightColor}" Offset="0"/>
-                                                                        <GradientStop Color="{x:Static SystemColors.ControlColor}"  Offset="1"/>
-                                                                    </LinearGradientBrush>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </StackPanel.Resources>
-                                <RadioButton Name="CapsuleRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter TargetName="PART_content" Property="TextBlock.FontWeight" Value="Bold"/>
+                                                                <Setter TargetName="PART_border" Property="Background">
+                                                                    <Setter.Value>
+                                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                                            <GradientStop Color="{x:Static SystemColors.ControlLightColor}" Offset="0"/>
+                                                                            <GradientStop Color="{x:Static SystemColors.ControlColor}"  Offset="1"/>
+                                                                        </LinearGradientBrush>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <RadioButton Name="CapsuleRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
                                              ToolTip="Show only Capsules" Width="60" 
                                              IsChecked="{Binding Path=SelectedDrugType ,Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Capsule}">
-                                    <Label  >Capsule</Label>
-                                    <RadioButton.LayoutTransform>
-                                        <RotateTransform  Angle="270"/>
-                                    </RadioButton.LayoutTransform>
-                                </RadioButton>
-                                <RadioButton Name="TabletRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
+                                        <Label  >Capsule</Label>
+                                        <RadioButton.LayoutTransform>
+                                            <RotateTransform  Angle="270"/>
+                                        </RadioButton.LayoutTransform>
+                                    </RadioButton>
+                                    <RadioButton Name="TabletRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
                                      ToolTip="Show only Tablet" Width="60"
                                      IsChecked="{Binding Path=SelectedDrugType, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Tablet}"
                                      >
-                                    <Label>Tablet</Label>
-                                    <RadioButton.LayoutTransform>
-                                        <RotateTransform  Angle="270"/>
-                                    </RadioButton.LayoutTransform>
-                                </RadioButton>
-                                <RadioButton Name="SyrupRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
+                                        <Label>Tablet</Label>
+                                        <RadioButton.LayoutTransform>
+                                            <RotateTransform  Angle="270"/>
+                                        </RadioButton.LayoutTransform>
+                                    </RadioButton>
+                                    <RadioButton Name="SyrupRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
                                      ToolTip="Show only Syrup" Width="60"
                                      IsChecked="{Binding Path=SelectedDrugType, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Syrup}"
                                      >
-                                    <Label>Syrup</Label>
-                                    <RadioButton.LayoutTransform>
-                                        <RotateTransform  Angle="270"/>
-                                    </RadioButton.LayoutTransform>
-                                </RadioButton>
-                                <RadioButton Name="NoneRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
+                                        <Label>Syrup</Label>
+                                        <RadioButton.LayoutTransform>
+                                            <RotateTransform  Angle="270"/>
+                                        </RadioButton.LayoutTransform>
+                                    </RadioButton>
+                                    <RadioButton Name="NoneRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
                                      ToolTip="Show only Syrup" Width="60" Visibility="Hidden"
-                                     IsChecked="{Binding Path=SelectedDrugType, Mode=OneWay, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=None}"
+                                     IsChecked="{Binding Path=SelectedDrugType, Mode=TwoWay, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=None}"
                                      >
-                                    <Label>Syrup</Label>
-                                    <RadioButton.LayoutTransform>
-                                        <RotateTransform  Angle="270"/>
-                                    </RadioButton.LayoutTransform>
-                                </RadioButton>
-                            </StackPanel>
+                                        <Label>Syrup</Label>
+                                        <RadioButton.LayoutTransform>
+                                            <RotateTransform  Angle="270"/>
+                                        </RadioButton.LayoutTransform>
+                                    </RadioButton>
+                                </StackPanel>
 
-                            <Grid Grid.Column="1" >
-                                <Grid.Style>
-                                    <Style TargetType="{x:Type Grid}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=CapsuleRadioButton, Path=IsChecked}" Value="True">
-                                                <Setter Property="Background" Value="{StaticResource CapsuleBackColorBrush}"></Setter>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding ElementName=SyrupRadioButton, Path=IsChecked}" Value="True">
-                                                <Setter Property="Background" Value="{StaticResource SyrupBackColorBrush}"></Setter>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding ElementName=TabletRadioButton, Path=IsChecked}" Value="True">
-                                                <Setter Property="Background" Value="{StaticResource TabletBackColorBrush}"></Setter>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding ElementName=NoneRadioButton, Path=IsChecked}" Value="True">
-                                                <Setter Property="Background" Value="{StaticResource NoDrugBackColorBrush}"></Setter>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Grid.Style>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition />
-                                    <RowDefinition Height="20"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="90" />
-                                    <ColumnDefinition Width="8*" />
-                                    <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="3*"  />
-                                    <ColumnDefinition Width="10" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="Select Drug" />
-                                <TextBlock Grid.Row="0" Grid.Column="4" Text="Prescription" />
-                                <TextBlock Grid.Row="2" Grid.Column="4" Text="Remarks" />
-                                <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                <Grid Grid.Column="1" Margin="5,0,5,0" >
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=CapsuleRadioButton, Path=IsChecked}" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource CapsuleBackColorBrush}"></Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=SyrupRadioButton, Path=IsChecked}" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource SyrupBackColorBrush}"></Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=TabletRadioButton, Path=IsChecked}" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource TabletBackColorBrush}"></Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=NoneRadioButton, Path=IsChecked}" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource NoDrugBackColorBrush}"></Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition />
+                                        <RowDefinition Height="5"/>
+
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="3*"  />
+                                        <ColumnDefinition Width="10" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Select Drug" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="4" Text="Prescription" FontSize="14" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="4" Text="Remarks" VerticalAlignment="Center" />
+                                    <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                  ItemsSource="{Binding SelectedTypeDrugList, Mode=TwoWay}"
                                  SelectedItem="{Binding SelectedDrug, Mode=TwoWay}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Width="150">
-                                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
-                                <ComboBox Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Width="150">
+                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                    </ListBox>
+                                    <ComboBox Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                                   ItemsSource="{Binding PrescriptionCollection}"
                                   SelectedItem="{Binding SelectedPrescriptionType}"
                                   />
-                                <TextBox Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True"
+                                    <TextBox Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True"
                                  Text="{Binding Path=SelectedRemark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        
-                        <DockPanel Grid.Column="2" HorizontalAlignment="Stretch" >
-                            <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Height="30">
-                                <Button Content="Add Drug" MinWidth="70" DockPanel.Dock="Left"
+
+                            <DockPanel Grid.Column="1" HorizontalAlignment="Stretch" >
+                                <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Height="30">
+                                    <Button Content="Add Drug" MinWidth="70" DockPanel.Dock="Left"
                                 Command="{Binding AddDrugCommand}"/>
-                                <Button Content="Delete Drug" MinWidth="70" DockPanel.Dock="Right"
+                                    <Button Content="Delete Drug" MinWidth="70" DockPanel.Dock="Right"
                                 Command="{Binding RemoveDrugCommand}"/>
 
-                            </DockPanel>
-                            <Grid Grid.Column="2" Grid.Row="1">
-                                <ListBox ScrollViewer.HorizontalScrollBarVisibility = "Disabled"
+                                </DockPanel>
+                                <Grid>
+                                    <ListBox ScrollViewer.HorizontalScrollBarVisibility = "Disabled"
                                  HorizontalContentAlignment="Stretch"
                                  ItemsSource="{Binding Path=PrescriptionFilter}"
                                  SelectedItem="{Binding SelectedPrescription, Mode=TwoWay}">
-                                    <ListBox.ItemContainerStyle>
-                                        <Style TargetType="{x:Type ListBoxItem}">
-                                            <Setter Property="LayoutTransform">
-                                                <Setter.Value>
-                                                    <ScaleTransform x:Name="transform" />
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Style.Triggers>
-                                                <EventTrigger RoutedEvent="Loaded">
-                                                    <EventTrigger.Actions>
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:2" />
-                                                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0" Duration="0:0:.2"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger.Actions>
-                                                </EventTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </ListBox.ItemContainerStyle>
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                    <ListBox.ItemTemplate>
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="{x:Type ListBoxItem}">
+                                                <Setter Property="LayoutTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform x:Name="transform" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <EventTrigger RoutedEvent="Loaded">
+                                                        <EventTrigger.Actions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:2" />
+                                                                    <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0" Duration="0:0:.2"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger.Actions>
+                                                    </EventTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                        <ListBox.ItemTemplate>
 
-                                        <DataTemplate>
-                                            <Border x:Name="BackgroundGrid" BorderThickness="2" BorderBrush="DarkMagenta" >
-                                                <Grid 
+                                            <DataTemplate>
+                                                <Border x:Name="BackgroundGrid" BorderThickness="2" BorderBrush="DarkMagenta" >
+                                                    <Grid 
                                           HorizontalAlignment="Stretch">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition />
-                                                        <RowDefinition />
-                                                    </Grid.RowDefinitions>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition />
-                                                        <ColumnDefinition />
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="18" Grid.Row="0" 
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="18" Grid.Row="0" 
                                                    Grid.ColumnSpan="2" />
-                                                    <TextBlock Text="{Binding PrescriptionType }" Grid.Row="1" Grid.Column="0"/>
-                                                    <TextBlock Text="{Binding DrugType}" Grid.Row="1" Grid.Column="1"/>
-                                                </Grid>
-                                            </Border>
-                                            <DataTemplate.Triggers>
-                                                <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Capsule}">
-                                                    <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource CapsuleBackColorBrush}"></Setter>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Syrup}">
-                                                    <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource SyrupBackColorBrush}"></Setter>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Tablet}">
-                                                    <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource TabletBackColorBrush}"></Setter>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.None}">
-                                                    <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource NoDrugBackColorBrush}"></Setter>
-                                                </DataTrigger>
-                                            </DataTemplate.Triggers>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
+                                                        <TextBlock Text="{Binding PrescriptionType }" Grid.Row="1" Grid.Column="0"/>
+                                                        <TextBlock Text="{Binding DrugType}" Grid.Row="1" Grid.Column="1"/>
+                                                    </Grid>
+                                                </Border>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Capsule}">
+                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource CapsuleBackColorBrush}"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Syrup}">
+                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource SyrupBackColorBrush}"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Tablet}">
+                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource TabletBackColorBrush}"></Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.None}">
+                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource NoDrugBackColorBrush}"></Setter>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
 
 
-                                </ListBox>
-                            </Grid>
-                        </DockPanel>
-                    </Grid>
-                </Border>
+                                    </ListBox>
+                                </Grid>
+                            </DockPanel>
+                        </Grid>
+                    </Border>
 
-                <Border BorderThickness="1" Background="White" BorderBrush="Gainsboro" d:DataContext="{d:DesignInstance patients:PatientVisitViewModel}">
-                    <Grid Name="DiagnosisPanel" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="130" />
-                            <ColumnDefinition Width="4*" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="130" />
-                            <ColumnDefinition Width="4*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0"  Margin="0,5">Complaints:</TextBlock>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,5">History:</TextBlock>
-                        <TextBlock Grid.Column="3" Grid.Row="0" Margin="0,5" >Principle Diagnosis:</TextBlock>
-                        <TextBlock Grid.Column="3" Grid.Row="1" Margin="0,5" >Secondary Diagnosis:</TextBlock>
-                        <TextBlock Grid.Column="3" Grid.Row="2" Margin="0,5">Observation:</TextBlock>
-                        <TextBlock Grid.Column="3" Grid.Row="5" Margin="0,5">Treatment:</TextBlock>
-                        <TextBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
+                    <Border BorderThickness="0" Background="White" BorderBrush="Gainsboro" d:DataContext="{d:DesignInstance patients:PatientVisitViewModel}">
+                        <Grid Name="DiagnosisPanel" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Grid.Row="0"  Margin="0,5">Complaints:</TextBlock>
+                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,5">History:</TextBlock>
+                            <TextBlock Grid.Column="3" Grid.Row="0" Margin="0,5" >Principle Diagnosis:</TextBlock>
+                            <TextBlock Grid.Column="3" Grid.Row="1" Margin="0,5" >Secondary Diagnosis:</TextBlock>
+                            <TextBlock Grid.Column="3" Grid.Row="2" Margin="0,5">Observation:</TextBlock>
+                            <TextBlock Grid.Column="3" Grid.Row="5" Margin="0,5">Treatment:</TextBlock>
+                            <TextBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
                              Text="{Binding Path=Complaints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
+                            <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
                             Text="{Binding Path=History, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <ComboBox x:Name="PrimaryDiagnosisComboBox" Grid.Row="0" Grid.Column="4" Width="200"
+                            <localControls:FilterDropDown x:Name="PrimaryDiagnosisComboBox" Grid.Row="0" Grid.Column="4" Width="200"
                                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                                 ItemsSource="{Binding Diagnoses}" SelectedItem="{Binding Path=PrimaryDiagnosis, Mode=TwoWay}" />
-                        <localControls:FilterDropDown Grid.Column="4" Grid.Row="1" Width="200" HorizontalAlignment="Left"
+                                 ItemsSource="{Binding DiagnosesItems}" SelectedItem="{Binding Path=PrimaryDiagnosis, Mode=TwoWay}" />
+                            <localControls:FilterDropDown Grid.Column="4" Grid.Row="1" Width="200" HorizontalAlignment="Left"
                                                       VerticalAlignment="Center"
                                                       ItemsSource="{Binding DiagnosesItems}" 
                                                       SelectedItem="{Binding SecondaryDiagnosis, Mode=TwoWay}"/>
-                        <!--<ComboBox x:Name="SecondaryDiagnosisComboBox" Grid.Row="1" Grid.Column="4" Width="200" 
+                            <!--<ComboBox x:Name="SecondaryDiagnosisComboBox" Grid.Row="1" Grid.Column="4" Width="200" 
                                   VerticalAlignment="Center" HorizontalAlignment="Left"
                                   ItemsSource="{Binding Diagnoses}" SelectedItem="{Binding Path=SecondaryDiagnosis, Mode=TwoWay}"  />-->
-                        <TextBox Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
+                            <TextBox Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
                             Text="{Binding Path=Observation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBox Grid.Column="4" Grid.Row="5" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
+                            <TextBox Grid.Column="4" Grid.Row="5" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
                             Text="{Binding Path=Treatment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-                </Border>
-            </DockPanel>
-        </DockPanel>
+                        </Grid>
+                    </Border>
+                </DockPanel>
+            </Border>
+        </Grid>
     </DockPanel>
 </UserControl>

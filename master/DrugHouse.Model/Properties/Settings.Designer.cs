@@ -25,19 +25,21 @@ namespace DrugHouse.Model.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DatabaseServer {
+        [global::System.Configuration.DefaultSettingValueAttribute("DEV")]
+        public string EnvironmentName {
             get {
-                return ((string)(this["DatabaseServer"]));
+                return ((string)(this["EnvironmentName"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DEV")]
-        public string EnvironmentName {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DEV-PC\\DEXLAB_SQLSERVER; Initial Catalog=DrugHouse; User Id=dev; Pass" +
+            "word=dev1234;")]
+        public string ApplicationConnectionString {
             get {
-                return ((string)(this["EnvironmentName"]));
+                return ((string)(this["ApplicationConnectionString"]));
             }
         }
         
@@ -54,23 +56,21 @@ namespace DrugHouse.Model.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DEV-PC\\DEXLAB_SQLSERVER; Initial Catalog=DrugHouse; User Id=dev; Pass" +
-            "word=dev1234;")]
-        public string Connectionstring {
+        [global::System.Configuration.DefaultSettingValueAttribute("DEV-PC\\DEXLAB_SQLSERVER")]
+        public string DatabaseServer {
             get {
-                return ((string)(this["Connectionstring"]));
+                return ((string)(this["DatabaseServer"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DEV-PC\\DEXLAB_SQLSERVER; Initial Catalog=DrugHouse; User Id=dev; Pass" +
-            "word=dev1234;")]
-        public string ApplicationConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=@DatabaseServer@; Initial Catalog=DrugHouse; User Id=dev; Password=de" +
+            "v1234;")]
+        public string PartialConnectionString {
             get {
-                return ((string)(this["ApplicationConnectionString"]));
+                return ((string)(this["PartialConnectionString"]));
             }
         }
     }

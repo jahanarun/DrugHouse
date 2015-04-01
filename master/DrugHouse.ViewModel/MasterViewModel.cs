@@ -60,9 +60,44 @@ namespace DrugHouse.ViewModel
 
         public static class Globals
         {
-            public static ICollection<Drug> Drugs { get; internal set; }
-            public static ICollection<SimpleEntity> Diagnoses { get; internal set; }
-            public static List<SimpleEntity> Locations { get; internal set; }
+            public static ICollection<Drug> Drugs(IDataAccess dataAccess = null)
+            {
+                List<Drug> result;
+                if (dataAccess == null)
+                    using (var data = DataAccess.GetInstance())
+                    {
+                        result = data.GetDrugs();
+                    }
+                else
+                    result = dataAccess.GetDrugs();
+                return result;
+            }
+
+            public static ICollection<SimpleEntity> Diagnoses(IDataAccess dataAccess = null)
+            {
+                List<SimpleEntity> result;
+                if (dataAccess == null)
+                    using (var data = DataAccess.GetInstance())
+                    {
+                        result = data.GetDiagnoses();
+                    }
+                else
+                    result = dataAccess.GetDiagnoses();
+                return result;
+            }
+
+            public static List<SimpleEntity> Locations(IDataAccess dataAccess = null)
+            {
+                List<SimpleEntity> result;
+                if (dataAccess == null)
+                    using (var data = DataAccess.GetInstance())
+                    {
+                        result = data.GetLocations();
+                    }
+                else
+                    result = dataAccess.GetLocations();
+                return result;
+            }
         }
         public class PropName
         {
@@ -107,7 +142,7 @@ namespace DrugHouse.ViewModel
             {
                 var task = InitializeAsync();
                 await task;
-                AddDefaultTab();
+                TabManager.AddTab(task.Result);
                 IsInitializing = false;
             }
             catch (Exception ex)
@@ -121,31 +156,30 @@ namespace DrugHouse.ViewModel
 
         #region PrivateMembers
 
-        static void RefreshGlobals()
+        void RefreshGlobals()
         {
-            using (var data = DataAccess.GetInstance())
-            {
-                Globals.Drugs = data.GetDrugs();
-                Globals.Diagnoses = data.GetDiagnoses();
-                Globals.Locations = data.GetLocations();
-            }
+            //using (var data = DataAccess.GetInstance())
+            //{
+            //    Globals.Drugs = data.GetDrugs();
+            //    Globals.Diagnoses = data.GetDiagnoses();
+            //    Globals.Locations = data.GetLocations();
+            //}
         }
 
         /// <summary>
         /// Adds the default tab on start of the Application
         /// </summary>
-        private void AddDefaultTab()
+        private TabViewModel GetDefaultTab()
         {
-            var patientmaster = new PatientMasterViewModel(this);
-            TabManager.AddTab(patientmaster);
+            return new PatientMasterViewModel(this);
         }
-        private static async Task<bool> InitializeAsync()
+        private async Task<TabViewModel> InitializeAsync()
         {
-            var result = false;
+            TabViewModel result = null;
             await Task.Run(() =>
             {
                 RefreshGlobals();
-                result = true;
+                result = GetDefaultTab();
             });
             return result;
         }

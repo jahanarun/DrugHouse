@@ -93,7 +93,7 @@ namespace DrugHouse.Model.Repositories
 
         public ModelBase SaveEntity(ModelBase item)
         {
-            item = SaveChaangesForEntity(item);
+            item = SaveUntrackedChanges(item);
 
             return item;
         }

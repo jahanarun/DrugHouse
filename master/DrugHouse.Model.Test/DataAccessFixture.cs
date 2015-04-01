@@ -24,7 +24,7 @@ namespace DrugHouse.Model.Test
             //Arrange
 
             //Act
-            var result = DataAccess.GetApplicationConnectionStringEncrypted();
+            var result = DataAccess.GetApplicationConnectionString();
 
             //Assert
             Assert.AreEqual(

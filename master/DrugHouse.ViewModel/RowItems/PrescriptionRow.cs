@@ -45,6 +45,7 @@ namespace DrugHouse.ViewModel.RowItems
                 DrugType = Prescription.Drug.DrugType;
                 OnPropertyChanged(PropName.Drug);
                 OnPropertyChanged(PropName.Name);
+                Prescription.DbStatus = RepositoryStatus.Edited;
             }
         }
 
@@ -72,6 +73,7 @@ namespace DrugHouse.ViewModel.RowItems
             {
                 Prescription.PrescriptionType = value;
                 OnPropertyChanged(PropName.PrescriptionType);
+                Prescription.DbStatus = RepositoryStatus.Edited;
             }
         }
 
@@ -82,6 +84,7 @@ namespace DrugHouse.ViewModel.RowItems
             {
                 Prescription.Remark = value;
                 OnPropertyChanged(PropName.Remark);
+                Prescription.DbStatus = RepositoryStatus.Edited;
             }
         }
 

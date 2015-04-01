@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using DrugHouse.Model.Enum;
 using DrugHouse.Model.Types;
 
@@ -65,7 +66,7 @@ namespace DrugHouse.Model.Repositories
             return item;
         }
 
-        public void SaveChanges()
+        public void SaveTrackedChanges()
         {
             SetChangeTrackerEntityState();
 
@@ -91,7 +92,7 @@ namespace DrugHouse.Model.Repositories
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        protected T SaveChaangesForEntity(T item) 
+        protected T SaveUntrackedChanges(T item)
         {
             SetChangeTrackerEntityState();
 
@@ -111,6 +112,7 @@ namespace DrugHouse.Model.Repositories
                 SetState((T)entity.Entity);
             }
         }
+
         private void ResetDbStatus()
         {
             foreach (var entity in DbContext.ChangeTracker.Entries())

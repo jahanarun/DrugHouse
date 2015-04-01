@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Data;
+using DrugHouse.Model;
 using DrugHouse.Model.Enum;
 using DrugHouse.Model.Types;
 using DrugHouse.Shared.Enumerations;
@@ -18,9 +19,11 @@ namespace DrugHouse.ViewModel.Patients
     {
         private bool Ignore = false;
         private DrugType LastDrugType = DrugType.None;
+        private readonly IDataAccess DataAccess;
 
-        public PatientPrescriptionViewModel(PatientVisit visit)
+        public PatientPrescriptionViewModel(PatientVisit visit, IDataAccess dataAccess)
         {
+            DataAccess = dataAccess;
             AddDrugCommand = new RelayCommand(AddDrug, CanAddDrug);
             RemoveDrugCommand = new RelayCommand(RemoveDrug, CanRemoveDrug);
             PrescriptionsValue = new ObservableCollection<PrescriptionRow>();
@@ -54,7 +57,7 @@ namespace DrugHouse.ViewModel.Patients
         #region Properties
         public ICollection<Drug> DrugList
         {
-            get { return MasterViewModel.Globals.Drugs; }
+            get { return MasterViewModel.Globals.Drugs(DataAccess); }
         }
 
         private List<Drug> SelectedTypeDrugListValue;

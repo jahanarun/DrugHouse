@@ -1,23 +1,25 @@
 ﻿/*  DrugHouse - An Hospital management software
     Copyright (C) {2015}  {Jahan Arun, J}     */
 
+using System.Linq;
+using DrugHouse.Model;
 using DrugHouse.Model.Types;
 using DrugHouse.ViewModel.RowItems;
+using DrugHouse.ViewModel.Tabs;
 
 namespace DrugHouse.ViewModel.Patients
 {
     public sealed class PatientVisitViewModel : PatientCaseViewModel
     {
 
-        public PatientVisitViewModel(PatientVisit visit)
-            :base(visit)
+        public PatientVisitViewModel(ICase visit, IDataAccess dataAccess)
+            : base(visit, dataAccess)
         {
-            PatientPrescriptionViewModelValue = new PatientPrescriptionViewModel(PatientVisit);
+            PatientPrescriptionViewModelValue = new PatientPrescriptionViewModel(PatientVisit, DataAccess);
             PatientPrescriptionViewModelValue.OnDirty += (sender, e) => RaiseDirty();
-            foreach (var item in DiagnosesItems)
+            foreach (var item in DiagnosesItems.Where(item => PatientVisit.SecondaryDiagnosis.Equals(item.Model)))
             {
-                if (PatientVisit.SecondaryDiagnosis.Equals(item.Model))
-                    SecondaryDiagnosis = item;
+                SecondaryDiagnosis = item;
             }
         }
 

@@ -9,7 +9,7 @@ namespace DrugHouse.Model.Repositories
     {
         public DrugHouseContext Create()
         {
-            return new DrugHouseContext(Decoder.Decrypt(DataAccess.GetApplicationConnectionStringEncrypted()));
+            return new DrugHouseContext(DataAccess.GetApplicationConnectionString());
         }
 
         public static DrugHouseContextFactory Instance = new DrugHouseContextFactory();

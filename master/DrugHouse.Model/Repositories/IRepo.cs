@@ -14,6 +14,6 @@ namespace DrugHouse.Model.Repositories
         T Update(T item);
         T Delete(T item);
         void Reset(T item);
-        void SaveChanges();
+        void SaveTrackedChanges();
     }
 }

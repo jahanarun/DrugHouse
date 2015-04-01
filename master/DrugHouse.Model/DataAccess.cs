@@ -65,12 +65,15 @@ namespace DrugHouse.Model
             }
         }
 
-        public static string GetApplicationConnectionStringEncrypted()
+        public static string GetApplicationConnectionString()
         {
             try
             {
                 var encryptedString = Settings.Default.ApplicationConnectionStringEncrypted;
-                return encryptedString.Length < 1 ? Settings.Default.ApplicationConnectionString : Settings.Default.ApplicationConnectionStringEncrypted;
+
+                return encryptedString.Length < 1 
+                    ? Settings.Default.ApplicationConnectionString 
+                    : Decoder.Decrypt(Settings.Default.ApplicationConnectionStringEncrypted);
             }
             catch (Exception ex)
             {
@@ -85,7 +88,7 @@ namespace DrugHouse.Model
         {
             try
             {
-                DrugHouseRepository.SaveChanges();
+                DrugHouseRepository.SaveTrackedChanges();
             }
             catch (Exception ex)
             {

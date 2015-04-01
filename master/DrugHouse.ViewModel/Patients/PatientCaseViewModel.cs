@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Timers;
+using DrugHouse.Model;
 using DrugHouse.Model.Enum;
 using DrugHouse.Model.Types;
 using DrugHouse.ViewModel.RowItems;
@@ -16,14 +17,21 @@ namespace DrugHouse.ViewModel.Patients
     public abstract class PatientCaseViewModel : DrugHouseViewModelBase
     {
         protected readonly ICase Case;
+        protected readonly IDataAccess DataAccess;
 
-        protected PatientCaseViewModel(ICase patientCase)
+
+        protected PatientCaseViewModel(ICase patientCase, IDataAccess dataAccess)
         {
             Case = patientCase;
+            DataAccess = dataAccess;
             if (Case.DbStatus == RepositoryStatus.New)
                 Timer();
 
-            DiagnosesItems = Diagnoses.Select(diagnosis => new ToggleButtonItem(diagnosis)).ToList();
+            DiagnosesItems = MasterViewModel.Globals.Diagnoses(DataAccess).Select(diagnosis => new ToggleButtonItem(diagnosis)).ToList();
+            foreach (var item in DiagnosesItems.Where(item => Case.PrimaryDiagnosis.Equals(item.Model)))
+            {
+                PrimaryDiagnosis = item;
+            }
         }
 
         public new class PropNameBase
@@ -37,20 +45,23 @@ namespace DrugHouse.ViewModel.Patients
         #region Properties
 
         public List<ToggleButtonItem> DiagnosesItems { get; private set; }
-        public ICollection<SimpleEntity> Diagnoses { get { return MasterViewModel.Globals.Diagnoses; } }
-        public SimpleEntity PrimaryDiagnosis
+        
+        private ToggleButtonItem PrimariDiagnosisValue;
+        public ToggleButtonItem PrimaryDiagnosis
         {
             get
             {
-                return Case.PrimaryDiagnosis;
+                return PrimariDiagnosisValue;
             }
             set
             {
-                Case.PrimaryDiagnosis = value;
+                if (value == null)
+                    return;
+                PrimariDiagnosisValue = value;
                 RaisePropertyChanged(PropNameBase.PrimaryDiagnosis);
+                Case.PrimaryDiagnosis = (SimpleEntity)PrimariDiagnosisValue.Model;
             }
         }
-
    
         public string CaseDate
         {
