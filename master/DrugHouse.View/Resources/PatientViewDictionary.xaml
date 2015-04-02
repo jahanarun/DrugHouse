@@ -8,37 +8,39 @@
                 <ControlTemplate TargetType="{x:Type TabControl}">
                     <Grid KeyboardNavigation.TabNavigation="Local" ShowGridLines="False">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Border BorderThickness="0,0,0,2" BorderBrush="Wheat" Grid.Column="0" Grid.Row="0" >
-                            <Grid Name="Header" Background="White" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="10"/>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="10"/>
-                                </Grid.RowDefinitions>
-                                <Border Grid.Column="1" Grid.Row="1" KeyboardNavigation.TabIndex="1" Margin="0" Panel.ZIndex="1">
-                                    <StackPanel Name="HeaderPanel" IsItemsHost="True" Orientation="Horizontal"/>
+                        <Grid Name="Header" Background="White" Grid.Row="0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="20"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="10"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Column="1" Grid.Row="1"
+                                    KeyboardNavigation.TabIndex="1" Margin="0" Panel.ZIndex="1">
+                                <StackPanel HorizontalAlignment="Center" Name="HeaderPanel" IsItemsHost="True" Orientation="Horizontal"/>
 
-                                </Border>
-                            </Grid>
-                            <!--<Border.BitmapEffect>
+                            </Border>
+                            <Border BorderThickness="0,0,0,2" BorderBrush="Wheat" Grid.Column="1" Grid.Row="2">
+
+                            </Border>
+                        </Grid>
+                        <!--<Border.BitmapEffect>
                                         <DropShadowBitmapEffect Color="#0047CC"
                                                         ShadowDepth="1"
                                                         Opacity="1"
                                                         Softness="1">
                                         </DropShadowBitmapEffect>
                                     </Border.BitmapEffect>-->
-                        </Border>
                         <ContentPresenter Grid.Row="1" ContentSource="SelectedContent" Margin="0"
                                         KeyboardNavigation.DirectionalNavigation="Contained"
                                         KeyboardNavigation.TabIndex="2"

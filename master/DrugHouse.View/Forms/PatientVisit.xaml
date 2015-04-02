@@ -10,7 +10,7 @@
              xmlns:patients="clr-namespace:DrugHouse.ViewModel.Patients;assembly=DrugHouse.Sticker"
              mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="671" 
              >
-    <DockPanel LastChildFill="True" >
+    <DockPanel LastChildFill="True" Margin="5,5,5,5">
         <DockPanel.Resources>
             <valueConverter:VisibilityConverter x:Key="VisibilityConverter"/>
         </DockPanel.Resources>
