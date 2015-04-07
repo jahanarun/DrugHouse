@@ -45,6 +45,7 @@
     <Compile Include="Enumerations\DrugType.cs" />
     <Compile Include="Enumerations\GenderType.cs" />
     <Compile Include="Enumerations\RelationshipType.cs" />
+    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserEmpty.cs" />

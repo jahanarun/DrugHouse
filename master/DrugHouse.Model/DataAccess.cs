@@ -9,6 +9,7 @@ using DrugHouse.Model.Exceptions;
 using DrugHouse.Model.Properties;
 using DrugHouse.Model.Repositories;
 using DrugHouse.Model.Types;
+using DrugHouse.Shared.Helpers;
 
 namespace DrugHouse.Model
 {
@@ -43,9 +44,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -58,9 +57,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -77,9 +74,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -92,9 +87,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -112,9 +105,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
 
@@ -131,9 +122,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -145,9 +134,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -160,9 +147,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -175,9 +160,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 if (innerEx.Message.Contains("DELETE statement conflicted with the REFERENCE constraint"))
                     throw new DeleteConstraintException("", innerEx);
                 throw new DataException(innerEx.Message, ex);
@@ -192,9 +175,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -207,9 +188,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -221,9 +200,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -235,9 +212,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -250,9 +225,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
@@ -265,9 +238,7 @@ namespace DrugHouse.Model
             }
             catch (Exception ex)
             {
-                var innerEx = ex;
-                while (innerEx.InnerException != null)
-                    innerEx = innerEx.InnerException;
+                var innerEx = Helper.GetInnerMostException(ex);
                 throw new DataException(innerEx.Message, ex);
             }
         }
