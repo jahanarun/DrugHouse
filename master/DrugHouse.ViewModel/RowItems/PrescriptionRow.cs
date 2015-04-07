@@ -26,8 +26,9 @@ namespace DrugHouse.ViewModel.RowItems
             public const string Drug = "Drug";
             public const string DrugType = "DrugType";
             public const string Remark = "Remark";
+            public const string DrugCount = "DrugCount";
             public const string Name = "Name";
-            public static string PrescriptionType = "PrescriptionType";
+            public static string Dosage = "Dosage";
         }
 
         private readonly Prescription PrescriptionValue;
@@ -66,13 +67,13 @@ namespace DrugHouse.ViewModel.RowItems
             }
         }
 
-        public string PrescriptionType
+        public string Dosage
         {
-            get { return Prescription.PrescriptionType; }
+            get { return Prescription.Dosage; }
             set
             {
-                Prescription.PrescriptionType = value;
-                OnPropertyChanged(PropName.PrescriptionType);
+                Prescription.Dosage = value;
+                OnPropertyChanged(PropName.Dosage);
                 Prescription.DbStatus = RepositoryStatus.Edited;
             }
         }
@@ -84,6 +85,17 @@ namespace DrugHouse.ViewModel.RowItems
             {
                 Prescription.Remark = value;
                 OnPropertyChanged(PropName.Remark);
+                Prescription.DbStatus = RepositoryStatus.Edited;
+            }
+        }
+
+        public int DrugCount
+        {
+            get { return Prescription.DrugCount; }
+            set
+            {
+                Prescription.DrugCount = value;
+                OnPropertyChanged(PropName.DrugCount);
                 Prescription.DbStatus = RepositoryStatus.Edited;
             }
         }

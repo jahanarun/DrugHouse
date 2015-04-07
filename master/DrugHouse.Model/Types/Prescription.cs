@@ -11,11 +11,12 @@ namespace DrugHouse.Model.Types
         public Prescription()
         {
             Drug = Drug.Empty;
-            PrescriptionType = string.Empty;
+            Dosage = string.Empty;
             Remark = string.Empty;
+            DrugCount = 0;
         }
 
-        public static ICollection<string> PrescriptionCollection = new Collection<string>()
+        public static ICollection<string> Dosages = new Collection<string>()
         {
             string.Empty,
             "0-0-1",
@@ -28,8 +29,9 @@ namespace DrugHouse.Model.Types
         public static Prescription Empty = new PrescriptionEmpty();
         public long Id { get; set; }
         public string Remark { get; set; }
+        public int DrugCount { get; set; }
         public virtual Drug Drug { get; set; }
-        public string  PrescriptionType { get; set; }
+        public string  Dosage { get; set; }
         public virtual PatientVisit PatientVisit { get; set; }
         public override object Clone()
         {
@@ -38,7 +40,7 @@ namespace DrugHouse.Model.Types
                 Id = Id,
                 Remark = Remark,
                 Drug = (Drug) Drug.Clone(),
-                PrescriptionType = PrescriptionType
+                Dosage = Dosage
             };
             return result;
         }

@@ -209,6 +209,8 @@
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="20"/>
                                         <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
                                         <RowDefinition />
                                         <RowDefinition Height="5"/>
 
@@ -223,10 +225,11 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Row="0" Grid.Column="1" Text="Select Drug" FontSize="14" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Row="0" Grid.Column="4" Text="Prescription" FontSize="14" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="4" Text="Remarks" VerticalAlignment="Center" />
-                                    <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" 
+                                    <TextBlock Grid.Row="2" Grid.Column="4" Text="Drug Count" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="4" Grid.Column="4" Text="Remarks" VerticalAlignment="Center" />
+                                    <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Grid.ColumnSpan="2" 
                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                             ItemsSource="{Binding SelectedTypeDrugList, Mode=TwoWay}" SelectedItem="{Binding SelectedDrug, Mode=TwoWay}">
+                                             ItemsSource="{Binding SelectedDrugCategoryList, Mode=TwoWay}" SelectedItem="{Binding SelectedDrug, Mode=TwoWay}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Width="150">
@@ -241,11 +244,12 @@
                                         </ListBox.ItemsPanel>
                                     </ListBox>
                                     <ComboBox Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                  ItemsSource="{Binding PrescriptionCollection}"
-                                  SelectedItem="{Binding SelectedPrescriptionType}"
-                                  />
-                                    <TextBox Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True"
-                                 Text="{Binding Path=SelectedRemark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                              ItemsSource="{Binding PrescriptionCollection}"
+                                              SelectedItem="{Binding SelectedDosage}"/>
+                                    <TextBox Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True" 
+                                             Text="{Binding Path=SelectedDrugCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBox Grid.Row="5" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True" 
+                                             Text="{Binding Path=SelectedRemark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
                             </Grid>
 
@@ -303,7 +307,7 @@
                                                         </Grid.ColumnDefinitions>
                                                         <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="18" Grid.Row="0" 
                                                    Grid.ColumnSpan="2" />
-                                                        <TextBlock Text="{Binding PrescriptionType }" Grid.Row="1" Grid.Column="0"/>
+                                                        <TextBlock Text="{Binding Dosage }" Grid.Row="1" Grid.Column="0"/>
                                                         <TextBlock Text="{Binding DrugType}" Grid.Row="1" Grid.Column="1"/>
                                                     </Grid>
                                                 </Border>

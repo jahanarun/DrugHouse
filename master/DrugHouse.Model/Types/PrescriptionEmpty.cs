@@ -9,7 +9,7 @@ namespace DrugHouse.Model.Types
         {
             Id = 0;
             Drug = Drug.Empty;
-            PrescriptionType = string.Empty;
+            Dosage = string.Empty;
             Remark = string.Empty;
 
         }

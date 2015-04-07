@@ -23,6 +23,7 @@ namespace DrugHouse.ViewModel.Patients
         public PatientPrescriptionViewModel(PatientVisit visit, IDataAccess dataAccess)
         {
             DataAccess = dataAccess;
+            SelectedDrugCategoryList = new ObservableCollection<Drug>();
             AddDrugCommand = new RelayCommand(AddDrug, CanAddDrug);
             RemoveDrugCommand = new RelayCommand(RemoveDrug, CanRemoveDrug);
             Prescriptions = new ObservableCollection<PrescriptionRow>();
@@ -43,12 +44,13 @@ namespace DrugHouse.ViewModel.Patients
 
         public class PropName
         {
+            public const string SelectedDrugCount = "SelectedDrugCount";
             public const string SelectedDrug = "SelectedDrug";
             public const string SelectedPrescription = "SelectedPrescription";
             public const string SelectedTypeDrugList = "SelectedTypeDrugList";
             public const string PrescriptionList = "PrescriptionList";
             public const string SelectedDrugType = "SelectedDrugType";
-            public const string SelectedPrescriptionType = "SelectedPrescriptionType";
+            public const string SelectedDosage = "SelectedDosage";
             public const string SelectedRemark = "SelectedRemark";
             public const string PrescriptionFilter = "PrescriptionFilter";
             public const string IsDrugPanelVisible = "IsDrugPanelVisible";
@@ -59,18 +61,8 @@ namespace DrugHouse.ViewModel.Patients
             get { return MasterViewModel.Globals.Drugs(DataAccess); }
         }
 
-        private List<Drug> SelectedTypeDrugListValue;
-        public List<Drug> SelectedTypeDrugList
-        {
-            get { return SelectedTypeDrugListValue; }
-            set
-            {
-                SelectedTypeDrugListValue = value;
-                SelectionChanged(PropName.SelectedTypeDrugList);
-            }
-        }
-
-
+        public ObservableCollection<Drug> SelectedDrugCategoryList { get; private set; }
+        
         public ObservableCollection<PrescriptionRow> Prescriptions { get; private set; }
 
         public bool IsDrugPanelVisible { get { return SelectedPrescription != null; } }
@@ -101,15 +93,18 @@ namespace DrugHouse.ViewModel.Patients
                 SelectionChanged(PropName.IsDrugPanelVisible);
                 if (value == null)
                     return;
+                UpdateDrugList(SelectedDrugTypeValue);
                 SelectedDrugValue = SelectedPrescriptionValue.Drug;
                 SelectedDrugTypeValue = SelectedPrescriptionValue.DrugType;
+                SelectedDrugCountValue = SelectedPrescriptionValue.DrugCount;
                 SelectedRemarkValue = SelectedPrescriptionValue.Remark;
+
                 SelectionChanged(PropName.SelectedDrug);
+                SelectionChanged(PropName.SelectedDrugCount);
                 SelectionChanged(PropName.SelectedPrescription);
                 SelectionChanged(PropName.SelectedDrugType);
-                SelectionChanged(PropName.SelectedPrescriptionType);
+                SelectionChanged(PropName.SelectedDosage);
                 SelectionChanged(PropName.SelectedRemark);
-                UpdateDrugList(SelectedDrugTypeValue);
 
                 Ignore = false;
             }
@@ -133,21 +128,21 @@ namespace DrugHouse.ViewModel.Patients
         {
             get
             {
-                return Prescription.PrescriptionCollection;
+                return Prescription.Dosages;
             } 
         }
-        public string  SelectedPrescriptionType
+        public string  SelectedDosage
         {
             get
             {
-                return SelectedPrescription!= null ? SelectedPrescription.PrescriptionType : string.Empty;
+                return SelectedPrescription!= null ? SelectedPrescription.Dosage : string.Empty;
             }
             set
             {
                 if (SelectedPrescription == null)
                     return;
-                SelectedPrescription.PrescriptionType = value;
-                RaisePropertyChanged(PropName.SelectedPrescriptionType);
+                SelectedPrescription.Dosage = value;
+                RaisePropertyChanged(PropName.SelectedDosage);
             }
         }
         private string SelectedRemarkValue;
@@ -161,6 +156,20 @@ namespace DrugHouse.ViewModel.Patients
                 SelectedRemarkValue = value;
                 SelectedPrescription.Remark = value;
                 RaisePropertyChanged(PropName.SelectedRemark);
+            }
+        }
+
+        private int SelectedDrugCountValue;
+        public int SelectedDrugCount
+        {
+            get { return SelectedDrugCountValue; }
+            set
+            {
+                if (SelectedPrescription == null)
+                    return;
+                SelectedDrugCountValue = value;
+                SelectedPrescription.DrugCount = value;
+                RaisePropertyChanged(PropName.SelectedDrugCount);
             }
         }
 
@@ -211,24 +220,28 @@ namespace DrugHouse.ViewModel.Patients
         {
             if (drugType == LastDrugType) return;
             LastDrugType = drugType;
+            var tempList = new List<Drug>();
             switch (drugType)
             {
                 case DrugType.Capsule:
-                    SelectedTypeDrugList = DrugList.Where(e => e.DrugType == DrugType.Capsule).ToList();
+                    tempList = DrugList.Where(e => e.DrugType == DrugType.Capsule).ToList();
                     break;
                 case DrugType.Tablet:
-                    SelectedTypeDrugList = DrugList.Where(e => e.DrugType == DrugType.Tablet).ToList();
+                    tempList = DrugList.Where(e => e.DrugType == DrugType.Tablet).ToList();
                     break;
                 case DrugType.Syrup:
-                    SelectedTypeDrugList = DrugList.Where(e => e.DrugType == DrugType.Syrup).ToList();
+                    tempList = DrugList.Where(e => e.DrugType == DrugType.Syrup).ToList();
                     break;
                 case DrugType.Syringe:
-                    SelectedTypeDrugList = DrugList.Where(e => e.DrugType == DrugType.Syringe).ToList();
-                    break;
-                case DrugType.None:
-                    SelectedTypeDrugList = new List<Drug>();
+                    tempList = DrugList.Where(e => e.DrugType == DrugType.Syringe).ToList();
                     break;
             }
+            SelectedDrugCategoryList.Clear();
+            foreach (var drug in tempList)
+            {
+                SelectedDrugCategoryList.Add(drug);
+            }
+
         }
 
         #endregion
