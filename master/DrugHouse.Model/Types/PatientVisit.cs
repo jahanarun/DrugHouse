@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using DrugHouse.Model.Enum;
 using DrugHouse.Model.PatientDetails;
 
 namespace DrugHouse.Model.Types
@@ -43,7 +42,7 @@ namespace DrugHouse.Model.Types
 
         public Prescription AddPrescription()
         {
-            var result = new Prescription {DbStatus = RepositoryStatus.New};
+            var result = new Prescription();
             Prescriptions.Add(result);
             return result;
         }

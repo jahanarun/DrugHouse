@@ -5,7 +5,6 @@
         Tablet,
         Syrup,
         Capsule,
-        Syringe,
         None
     }
 }

@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:DrugHouse.ViewModel;assembly=DrugHouse.Sticker"
-             xmlns:rowItem="clr-namespace:DrugHouse.ViewModel.RowItems;assembly=DrugHouse.Sticker"
              xmlns:localControls="clr-namespace:DrugHouse.View.Controls"
              xmlns:valueConverter="clr-namespace:DrugHouse.ViewModel.ValueConverter;assembly=DrugHouse.Sticker"
              xmlns:enumerations="clr-namespace:DrugHouse.Shared.Enumerations;assembly=DrugHouse.Shared"
@@ -25,7 +24,6 @@
                     <DockPanel.Resources>
                         <SolidColorBrush x:Key="CapsuleBackColorBrush" Color="LightGoldenrodYellow"/>
                         <SolidColorBrush x:Key="TabletBackColorBrush" Color="LightBlue"/>
-                        <SolidColorBrush x:Key="SyringeBackColorBrush" Color="LightCoral"/>
                         <SolidColorBrush x:Key="SyrupBackColorBrush" Color="LightGreen"/>
                         <SolidColorBrush x:Key="NoDrugBackColorBrush" Color="White"/>
                     </DockPanel.Resources>
@@ -84,17 +82,15 @@
 
                                                             <Style TargetType="{x:Type TextBlock}">
                                                                 <Setter Property="VerticalAlignment" Value="Stretch"/>
-                                                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                                <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
                                                             </Style>
 
                                                             <Style TargetType="{x:Type Label}">
-                                                                <Setter Property="VerticalAlignment" Value="Stretch"/>
-                                                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
                                                                 <Setter Property="Padding" Value="0"/>
                                                             </Style>
                                                         </ControlTemplate.Resources>
 
-                                                        <Border x:Name="PART_border" CornerRadius="2" Margin="2px" 
+                                                        <Border x:Name="PART_border" CornerRadius="2" Padding="3px" Margin="2px" 
                                                     BorderThickness="1" BorderBrush="{x:Static SystemColors.ControlDarkBrush}"
                                                     SnapsToDevicePixels="True" >
 
@@ -132,7 +128,8 @@
                                     </RadioButton>
                                     <RadioButton Name="TabletRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
                                      ToolTip="Show only Tablet" Width="60"
-                                     IsChecked="{Binding Path=SelectedDrugType, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Tablet}">
+                                     IsChecked="{Binding Path=SelectedDrugType, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Tablet}"
+                                     >
                                         <Label>Tablet</Label>
                                         <RadioButton.LayoutTransform>
                                             <RotateTransform  Angle="270"/>
@@ -140,43 +137,18 @@
                                     </RadioButton>
                                     <RadioButton Name="SyrupRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
                                      ToolTip="Show only Syrup" Width="60"
-                                     IsChecked="{Binding Path=SelectedDrugType, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Syrup}">
+                                     IsChecked="{Binding Path=SelectedDrugType, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Syrup}"
+                                     >
                                         <Label>Syrup</Label>
-                                        <!--<RadioButton.Template>
-                                            <ControlTemplate>
-                                                <Viewbox>
-                                                    <Border BorderBrush="Silver" CornerRadius="2,2,2,2" BorderThickness="1">
-                                                        <TextBlock Text="Syrup"/>
-                                                        <Border.Style>
-                                                            <Style TargetType="{x:Type Border}">
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=RadioButton}, Path=IsChecked}">
-                                                                        <Setter Property="Background" Value="Silver"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Border.Style>
-                                                    </Border>
-                                                </Viewbox>
-                                            </ControlTemplate>
-                                        </RadioButton.Template>-->
-                                        
-                                        <RadioButton.LayoutTransform>
-                                            <RotateTransform  Angle="270"/>
-                                        </RadioButton.LayoutTransform>
-                                    </RadioButton>
-                                    <RadioButton Name="SyringeRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
-                                     ToolTip="Show only Syringe" Width="60" 
-                                     IsChecked="{Binding Path=SelectedDrugType, Mode=TwoWay, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Syringe}">
-                                        <Label>Syringe</Label>
                                         <RadioButton.LayoutTransform>
                                             <RotateTransform  Angle="270"/>
                                         </RadioButton.LayoutTransform>
                                     </RadioButton>
                                     <RadioButton Name="NoneRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
                                      ToolTip="Show only Syrup" Width="60" Visibility="Hidden"
-                                     IsChecked="{Binding Path=SelectedDrugType, Mode=TwoWay, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=None}">
-                                        <Label></Label>
+                                     IsChecked="{Binding Path=SelectedDrugType, Mode=TwoWay, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=None}"
+                                     >
+                                        <Label>Syrup</Label>
                                         <RadioButton.LayoutTransform>
                                             <RotateTransform  Angle="270"/>
                                         </RadioButton.LayoutTransform>
@@ -188,19 +160,16 @@
                                         <Style TargetType="{x:Type Grid}">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding ElementName=CapsuleRadioButton, Path=IsChecked}" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource CapsuleBackColorBrush}"/>
+                                                    <Setter Property="Background" Value="{StaticResource CapsuleBackColorBrush}"></Setter>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding ElementName=SyrupRadioButton, Path=IsChecked}" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource SyrupBackColorBrush}"/>
+                                                    <Setter Property="Background" Value="{StaticResource SyrupBackColorBrush}"></Setter>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding ElementName=TabletRadioButton, Path=IsChecked}" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource TabletBackColorBrush}"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding ElementName=SyringeRadioButton, Path=IsChecked}" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource SyringeBackColorBrush}"/>
+                                                    <Setter Property="Background" Value="{StaticResource TabletBackColorBrush}"></Setter>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding ElementName=NoneRadioButton, Path=IsChecked}" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource NoDrugBackColorBrush}"/>
+                                                    <Setter Property="Background" Value="{StaticResource NoDrugBackColorBrush}"></Setter>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -224,13 +193,13 @@
                                     <TextBlock Grid.Row="0" Grid.Column="1" Text="Select Drug" FontSize="14" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Row="0" Grid.Column="4" Text="Prescription" FontSize="14" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Row="2" Grid.Column="4" Text="Remarks" VerticalAlignment="Center" />
-                                    <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" 
-                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                             ItemsSource="{Binding SelectedTypeDrugList, Mode=TwoWay}" SelectedItem="{Binding SelectedDrug, Mode=TwoWay}">
+                                    <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                 ItemsSource="{Binding SelectedTypeDrugList, Mode=TwoWay}"
+                                 SelectedItem="{Binding SelectedDrug, Mode=TwoWay}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Width="150">
-                                                    <TextBlock Text="{Binding Name}"/>
+                                                    <TextBlock Text="{Binding Name}"></TextBlock>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
@@ -260,7 +229,7 @@
                                 <Grid>
                                     <ListBox ScrollViewer.HorizontalScrollBarVisibility = "Disabled"
                                  HorizontalContentAlignment="Stretch"
-                                 ItemsSource="{Binding Path=Prescriptions}"
+                                 ItemsSource="{Binding Path=PrescriptionFilter}"
                                  SelectedItem="{Binding SelectedPrescription, Mode=TwoWay}">
                                         <ListBox.ItemContainerStyle>
                                             <Style TargetType="{x:Type ListBoxItem}">
@@ -290,9 +259,10 @@
                                         </ListBox.ItemsPanel>
                                         <ListBox.ItemTemplate>
 
-                                            <DataTemplate DataType="rowItem:PrescriptionRow">
-                                                <Border x:Name="BackgroundGrid" BorderThickness="2" BorderBrush="Silver" >
-                                                    <Grid HorizontalAlignment="Stretch">
+                                            <DataTemplate>
+                                                <Border x:Name="BackgroundGrid" BorderThickness="2" BorderBrush="DarkMagenta" >
+                                                    <Grid 
+                                          HorizontalAlignment="Stretch">
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition />
                                                             <RowDefinition />
@@ -316,9 +286,6 @@
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Tablet}">
                                                         <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource TabletBackColorBrush}"></Setter>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Syringe}">
-                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource SyringeBackColorBrush}"></Setter>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.None}">
                                                         <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource NoDrugBackColorBrush}"></Setter>

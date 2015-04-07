@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using DrugHouse.View.Annotations;
 using DrugHouse.ViewModel.RowItems;
 
@@ -23,7 +22,7 @@ namespace DrugHouse.View.Controls
             InitializeComponent();
             FilterText = string.Empty;
 
-            //SelectedItemEvent += (sender, args) => ClosePopupMenu();
+            SelectedItemEvent += (sender, args) => ClosePopupMenu();
             ItemSourceEvent += (sender, args) => FilterList();
         }
 
@@ -75,9 +74,9 @@ namespace DrugHouse.View.Controls
         }
         private void OpenPopupMenu()
         {
-            if (ListPopup.IsOpen) return;
             FilterText = string.Empty;
             ListPopup.IsOpen = true;
+            FilterTextBox.Focus();
         }
         private void ClosePopupMenu()
         {
@@ -133,46 +132,6 @@ namespace DrugHouse.View.Controls
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void FilterDropUserControl_GotFocus(object sender, RoutedEventArgs e)
-        {
-            OpenPopupMenu();
-        }
-
-        private void FilterTextBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Down)
-                if (ListPopup.IsOpen)
-                {
-                    //var lbi = ItemsListBox.ItemContainerGenerator.ContainerFromIndex(ItemsListBox.SelectedIndex) as ListBoxItem;
-                    //if (lbi != null)  lbi.Focus();
-
-                    ItemsListBox.Focus();
-                    
-                }
-        }
-
-        private void ListPopup_Opened(object sender, EventArgs e)
-        {
-            FilterTextBox.Focus();
-        }
-
-        private void ItemsListBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Enter)
-                ClosePopupMenu();
-        }
-
-        private void ItemsListBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            //ClosePopupMenu();
-        }
-
-        private void FilterDropUserControl_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape || e.Key == Key.Enter)
-                ClosePopupMenu();
         }
     }
 
