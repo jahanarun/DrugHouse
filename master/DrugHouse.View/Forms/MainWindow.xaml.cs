@@ -3,6 +3,7 @@
 
 using System;
 using System.Windows;
+using DrugHouse.Shared.Helpers;
 using DrugHouse.View.Properties;
 using DrugHouse.View.Services;
 using DrugHouse.ViewModel;
@@ -29,7 +30,7 @@ namespace DrugHouse.View.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(Helper.GetInnerMostException(ex).Message);
             }
         }
 
@@ -40,9 +41,9 @@ namespace DrugHouse.View.Forms
             Settings.Default.Save();
         }
 
-        private void RootWindow_Loaded(object sender, RoutedEventArgs e)
+        private void RootWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            e.Cancel = !ViewModel.PrepareClosing();
         }
     }
 }

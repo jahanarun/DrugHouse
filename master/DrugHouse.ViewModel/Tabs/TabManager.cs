@@ -52,7 +52,7 @@ namespace DrugHouse.ViewModel.Tabs
                 {
                     SaveTabCommand = SelectedTab.SaveCommand;
                     SelectionChanged(PropName.SaveTabCommand);
-                    SelectedTab.RefreshAfterSaveOperations();
+                    SelectedTab.Refresh();
                 }
             }
         }
@@ -62,6 +62,7 @@ namespace DrugHouse.ViewModel.Tabs
             {
                 TabItemsValue.Add(tab);
                 tabGuids.Add(tab.Guid, tab);
+                tab.OnSave += (o,e) => RefreshGuid();
             }
             SelectTabBasedOnGuid(tab.Guid);
         }

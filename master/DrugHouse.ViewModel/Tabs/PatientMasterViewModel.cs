@@ -97,13 +97,6 @@ namespace DrugHouse.ViewModel.Tabs
 
         #region Public Members
 
-        public override void RefreshAfterSaveOperations()
-        {                                
-            base.RefreshAfterSaveOperations();
-            RefreshInternalPatientList();
-            FilterPatientCommand.Execute(null);
-            SelectedPatient = (PatientListRow) PatientFilteredCollectionView.CurrentItem;
-        }
 
         private void RefreshInternalPatientList()
         {
@@ -125,7 +118,7 @@ namespace DrugHouse.ViewModel.Tabs
         private void ExecuteOpenPatient()
         {
             var vm = new PatientViewModel(SelectedPatient.Id, MasterWindow);
-            MasterWindow.TabManager.OpenTabCommand.Execute(vm);
+            MasterWindow.OpenTab(vm);
         }
 
         protected override bool CanExecuteClose()
@@ -199,7 +192,14 @@ namespace DrugHouse.ViewModel.Tabs
             {
                 data.SaveIEnumerable(InternalePatientList);
             }
-            RefreshAfterSaveOperations();
+        }
+
+        public override void Refresh()
+        {
+            base.Refresh();
+            RefreshInternalPatientList();
+            FilterPatientCommand.Execute(null);
+            SelectedPatient = (PatientListRow)PatientFilteredCollectionView.CurrentItem;
         }
     }
 }

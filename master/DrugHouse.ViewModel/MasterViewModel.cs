@@ -107,7 +107,8 @@ namespace DrugHouse.ViewModel
             public const string IsInitializing = "IsInitializing";
         }
 
-       public TabManager TabManager { get; private set; }
+
+        public TabManager TabManager { get; set; }
         public RelayCommand<ITabViewModel> CloseTabCommand { get { return TabManager.CloseTabCommand; } }
         public RelayCommand ExitCommand { get; set; }
         public RelayCommand<AdminScreenType> OpenAdminScreenCommand { get; private set; }
@@ -152,6 +153,16 @@ namespace DrugHouse.ViewModel
             }
         }
 
+        public bool PrepareClosing()
+        {
+            return TabManager.TryClosingAllTabs();
+        }
+
+        public void OpenTab(ITabViewModel vm)
+        {
+            TabManager.OpenTabCommand.Execute(vm);
+        }
+
         #endregion
 
         #region PrivateMembers
@@ -190,8 +201,7 @@ namespace DrugHouse.ViewModel
 
         private bool CanExecuteNewPatientCommand()
         {
-            return true;
-
+            return true; 
         }
         private void ExecuteNewPatientCommand()
         {
@@ -223,7 +233,7 @@ namespace DrugHouse.ViewModel
 
         private void ExecuteExitCommand()
         {
-            if (TabManager.TryClosingAllTabs())
+            if (PrepareClosing())
                 Application.Current.Shutdown();
         }
 

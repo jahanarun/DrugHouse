@@ -8,11 +8,12 @@ namespace DrugHouse.ViewModel.Tabs
 {
     public interface ITabViewModel
     {
+        event EventHandler OnSave;
+        void Refresh();
         void PrepareToClose();
         RelayCommand SaveCommand { get; }
         string TabName { get; }
         bool IsReadyToClose { get; }
-        void RefreshAfterSaveOperations();
         Guid Guid { get; }
         bool IsMultipleTabsAllowed { get; }
 

@@ -60,12 +60,6 @@ namespace DrugHouse.ViewModel.Tabs
         {
             IsSaveEnabled = true;
         }
-        public virtual void RefreshAfterSaveOperations()
-        {
-            MasterWindow.TabManager.RefreshGuid();
-            
-        }
-
         #endregion
 
         #region RelayCommand Methods
@@ -74,6 +68,11 @@ namespace DrugHouse.ViewModel.Tabs
         protected virtual bool CanExecuteClose()
         {
             return true;
+        }
+
+        public virtual void Refresh()
+        {
+            
         }
 
         public void PrepareToClose()
@@ -101,7 +100,7 @@ namespace DrugHouse.ViewModel.Tabs
             try
             {
                 SaveOperations();
-                RefreshAfterSaveOperations();
+                Refresh();
                 IsSaveEnabled = false;
                 if(OnSave !=null)
                     OnSave(this, EventArgs.Empty);
