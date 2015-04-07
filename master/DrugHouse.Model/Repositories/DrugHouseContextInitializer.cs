@@ -7,7 +7,8 @@ using DrugHouse.Shared.Enumerations;
 
 namespace DrugHouse.Model.Repositories
 {
-    public class DrugHouseContextInitializer : DropCreateDatabaseIfModelChanges<DrugHouseContext>
+    public class DrugHouseContextInitializer : CreateDatabaseIfNotExists<DrugHouseContext>
+//: DropCreateDatabaseIfModelChanges<DrugHouseContext>
     {
         protected override void Seed(DrugHouseContext context)
         {
@@ -21,6 +22,8 @@ namespace DrugHouse.Model.Repositories
             context.Drugs.Add(new Drug() {Name = "Drug2", DrugType = DrugType.Tablet});
             context.Drugs.Add(new Drug() {Name = "Drug3", DrugType = DrugType.Syrup});
             context.Drugs.Add(new Drug() {Name = "Drug4", DrugType = DrugType.Capsule});
+            context.Drugs.Add(new Drug() {Name = "Syringe1", DrugType = DrugType.Syringe});
+            context.Drugs.Add(new Drug() {Name = "Syringe2", DrugType = DrugType.Syringe});
 
             context.SimpleEntities.Add(new SimpleEntity(SimpleEntity.Markers.Diagnosis) { Name = "Diagnosis1" });
             context.SimpleEntities.Add(new SimpleEntity(SimpleEntity.Markers.Diagnosis) { Name = "Diagnosis2" });

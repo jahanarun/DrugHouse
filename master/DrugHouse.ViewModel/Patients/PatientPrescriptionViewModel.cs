@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Data;
 using DrugHouse.Model;
 using DrugHouse.Model.Enum;
 using DrugHouse.Model.Types;
@@ -26,21 +25,21 @@ namespace DrugHouse.ViewModel.Patients
             DataAccess = dataAccess;
             AddDrugCommand = new RelayCommand(AddDrug, CanAddDrug);
             RemoveDrugCommand = new RelayCommand(RemoveDrug, CanRemoveDrug);
-            PrescriptionsValue = new ObservableCollection<PrescriptionRow>();
+            Prescriptions = new ObservableCollection<PrescriptionRow>();
             Visit = visit;
             visit.Prescriptions = visit.Prescriptions ?? new Collection<Prescription>();
             SelectedDrugTypeValue = DrugType.None;
-            foreach (var prescription in PrescriptionList)
+
+            foreach (var p in PrescriptionList.Where(p=> p.DbStatus != RepositoryStatus.Deleted 
+                                                         && p.DbStatus!= RepositoryStatus.Disregard)
+                                              .Select(prescription => new PrescriptionRow(prescription)))
             {
-                var p = new PrescriptionRow(prescription);
-                PrescriptionsValue.Add(p);
+                Prescriptions.Add(p);
             }
-            FilterPrescription();
-            PrescriptionsValue.CollectionChanged += PrescriptionsValueCollectionChanged;
         }
 
         private readonly PatientVisit Visit;
-        private ICollection<Prescription> PrescriptionList{get { return Visit.Prescriptions; }}
+        private IList<Prescription> PrescriptionList{get { return Visit.Prescriptions; }}
 
         public class PropName
         {
@@ -71,23 +70,9 @@ namespace DrugHouse.ViewModel.Patients
             }
         }
 
-        private ListCollectionView PrescriptionFilterValue;
-        public CollectionView PrescriptionFilter
-        {
-            get { return PrescriptionFilterValue; }
-        }
 
-        private ObservableCollection<PrescriptionRow> PrescriptionsValue;
-        public ObservableCollection<PrescriptionRow> Prescriptions
-        {
-            get { return PrescriptionsValue; }
-            set
-            {
-                PrescriptionsValue = value;
-                FilterPrescription();
+        public ObservableCollection<PrescriptionRow> Prescriptions { get; private set; }
 
-            }
-        }
         public bool IsDrugPanelVisible { get { return SelectedPrescription != null; } }
 
         private Drug SelectedDrugValue;
@@ -112,13 +97,13 @@ namespace DrugHouse.ViewModel.Patients
             set
             {
                 Ignore = true;
+                SelectedPrescriptionValue = value;
+                SelectionChanged(PropName.IsDrugPanelVisible);
                 if (value == null)
                     return;
-                SelectedPrescriptionValue = value;
                 SelectedDrugValue = SelectedPrescriptionValue.Drug;
                 SelectedDrugTypeValue = SelectedPrescriptionValue.DrugType;
                 SelectedRemarkValue = SelectedPrescriptionValue.Remark;
-                SelectionChanged(PropName.IsDrugPanelVisible);
                 SelectionChanged(PropName.SelectedDrug);
                 SelectionChanged(PropName.SelectedPrescription);
                 SelectionChanged(PropName.SelectedDrugType);
@@ -182,19 +167,7 @@ namespace DrugHouse.ViewModel.Patients
         #endregion
 
         #region PrivateProperties
-        private List<Drug> CapsuleList
-        {
-            get { return DrugList.Where(e => e.DrugType == DrugType.Capsule).ToList(); }
-        }
 
-        private List<Drug> TabletList
-        {
-            get { return DrugList.Where(e => e.DrugType == DrugType.Tablet).ToList(); }
-        }
-        private List<Drug> SyrupList
-        {
-            get { return DrugList.Where(e => e.DrugType == DrugType.Syrup).ToList(); }
-        }
 
         #endregion
 
@@ -208,12 +181,10 @@ namespace DrugHouse.ViewModel.Patients
         }
         private void AddDrug()
         {
-            var prescription = new PrescriptionRow();
-            //prescription.PropertyChanged += prescription_PropertyChanged;
+            var prescription = new PrescriptionRow(Visit.AddPrescription());
+            prescription.PropertyChanged += (o,e) => RaiseDirty();
             Prescriptions.Add(prescription);
-            FilterPrescription();
             SelectedPrescription = prescription;
-            SelectionChanged(PropName.PrescriptionList);
             RaiseDirty();
         }
         private bool CanRemoveDrug()
@@ -226,9 +197,10 @@ namespace DrugHouse.ViewModel.Patients
 
         private void RemoveDrug()
         {
-            SelectedPrescription.Delete();
-            Visit.Prescriptions.Remove(SelectedPrescription.Prescription);
-            FilterPrescription();
+            var row = SelectedPrescription;
+            row.Delete();
+            Prescriptions.Remove(row);
+            SelectedPrescription = null;
             RaiseDirty();
         }
         #endregion
@@ -242,44 +214,29 @@ namespace DrugHouse.ViewModel.Patients
             switch (drugType)
             {
                 case DrugType.Capsule:
-                    SelectedTypeDrugList = CapsuleList;
+                    SelectedTypeDrugList = DrugList.Where(e => e.DrugType == DrugType.Capsule).ToList();
                     break;
                 case DrugType.Tablet:
-                    SelectedTypeDrugList = TabletList;
+                    SelectedTypeDrugList = DrugList.Where(e => e.DrugType == DrugType.Tablet).ToList();
                     break;
                 case DrugType.Syrup:
-                    SelectedTypeDrugList = SyrupList;
+                    SelectedTypeDrugList = DrugList.Where(e => e.DrugType == DrugType.Syrup).ToList();
+                    break;
+                case DrugType.Syringe:
+                    SelectedTypeDrugList = DrugList.Where(e => e.DrugType == DrugType.Syringe).ToList();
                     break;
                 case DrugType.None:
                     SelectedTypeDrugList = new List<Drug>();
                     break;
             }
         }
-        private void FilterPrescription()
-        {
-            PrescriptionFilterValue = new ListCollectionView(Prescriptions);
-            PrescriptionFilterValue.Filter += NonDeletePredicate;
-            SelectionChanged(PropName.PrescriptionFilter);
-        }
-        private bool NonDeletePredicate(object obj)
-        {
-            var p = obj as PrescriptionRow;
-            return (p.Prescription.DbStatus != RepositoryStatus.Deleted);
-        }
+
         #endregion
 
         public List<Prescription> GetList()
         {
             return Prescriptions.Select(prescriptionRow => prescriptionRow.Prescription).ToList();
         }
-        void PrescriptionsValueCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            PrescriptionList.Clear();
-            foreach (var prescriptionRow in PrescriptionsValue)
-            {
-                PrescriptionList.Add(prescriptionRow.Prescription);
-            }
-            RaiseDirty();
-        }
+
     }
 }
