@@ -12,24 +12,24 @@
 		 This Color will be used to draw a border around the TabControl, on 
 		 the bottom of the TabItemPanel and on the bottom of unselected TabItems.
 	  -->
-	<Color x:Key="BorderColor_Base">#888</Color>
+	<Color x:Key="BorderColorBase">#888</Color>
 
 	<!-- 
 		 This Color will be used to draw the (outer) background of TabPages and
 		 the selected TabItem.
 	  -->
-	<Color x:Key="TabControl_BackgroundColor_Base">#EEF7FF</Color>
+	<Color x:Key="TabControlBackgroundColorBase">#EEF7FF</Color>
 
-	<Color x:Key="TabItem_ForegroundColor_Base">#4971A3</Color>
+	<Color x:Key="TabItemForegroundColorBase">#4971A3</Color>
 
 	<!-- Brushes used for styling the TabControl -->
-	<SolidColorBrush x:Key="TabControl_BackgroundBrush_Base" 
-					   Color="{StaticResource TabControl_BackgroundColor_Base}"/>
+	<SolidColorBrush x:Key="TabControlBackgroundBrushBase" 
+					   Color="{StaticResource TabControlBackgroundColorBase}"/>
 
 	<!-- Brushes for drawing the outer and inner borders on TabPages -->
-	<SolidColorBrush x:Key="TabPage_InnerBorderBrushDark" 
+	<SolidColorBrush x:Key="TabPageInnerBorderBrushDark" 
 					   Color="#FF8DB2E3"/>
-	<LinearGradientBrush x:Key="TabPage_InnerBorderBrushBright" 
+	<LinearGradientBrush x:Key="TabPageInnerBorderBrushBright" 
 						   StartPoint="0,0" EndPoint="1,1">
 		<LinearGradientBrush.GradientStops>
 			<GradientStop Offset="0" Color="Transparent"/>
@@ -48,17 +48,17 @@
 		 We'll achieve this effect by using a gradient that finishes with the
 		 border-Color, but only for the last .01%.
 	  -->
-	<LinearGradientBrush x:Key="TabItemPanel_BackgroundBrush" 
+	<LinearGradientBrush x:Key="TabItemPanelBackgroundBrush" 
 						   StartPoint="0,0" EndPoint="0,1">
 		<LinearGradientBrush.GradientStops>
 			<GradientStop Offset="0.98" Color="Transparent"/>
 			<GradientStop Offset="0.99" 
-			   Color="{StaticResource BorderColor_Base}"/>
+			   Color="{StaticResource BorderColorBase}"/>
 		</LinearGradientBrush.GradientStops>
 	</LinearGradientBrush>
 
 	<!-- Brushes used for styling TabItems (Background) -->
-	<LinearGradientBrush x:Key="TabItem_BackgroundBrush_Disabled" 
+	<LinearGradientBrush x:Key="TabItemBackgroundBrushDisabled" 
 						   StartPoint="0,0" EndPoint="0,1">
 		<LinearGradientBrush.GradientStops>
 			<GradientStop Color="#EEE" Offset="0"/>
@@ -66,22 +66,22 @@
 			<!-- 
 			   This is the same trick as with the TabItemPanel_BackgroundBrush (see there).
 			-->
-			<GradientStop Color="{StaticResource BorderColor_Base}" 
+			<GradientStop Color="{StaticResource BorderColorBase}" 
 						  Offset="0.99"/>
 		</LinearGradientBrush.GradientStops>
 	</LinearGradientBrush>
-	<LinearGradientBrush x:Key="TabItem_BackgroundBrush_Selected" 
+	<LinearGradientBrush x:Key="TabItemBackgroundBrushSelected" 
 						   StartPoint="0,0" EndPoint="0,1">
 		<LinearGradientBrush.GradientStops>
 			<GradientStop Color="#FFFFC14A" Offset="0.1" />
-			<GradientStop Color="{StaticResource TabControl_BackgroundColor_Base}" 
+			<GradientStop Color="{StaticResource TabControlBackgroundColorBase}" 
 						  Offset="0.15"/>
 			<GradientStop Color="#C5DBF6" Offset="0.8"/>
-			<GradientStop Color="{StaticResource TabControl_BackgroundColor_Base}" 
+			<GradientStop Color="{StaticResource TabControlBackgroundColorBase}" 
 						  Offset="1.0"/>
 		</LinearGradientBrush.GradientStops>
 	</LinearGradientBrush>
-	<LinearGradientBrush x:Key="TabItem_BackgroundBrush_Unselected" 
+	<LinearGradientBrush x:Key="TabItemBackgroundBrushUnselected" 
 						   StartPoint="0,0" EndPoint="0,1">
 		<LinearGradientBrush.GradientStops>
 			<GradientStop Color="#E8F2FF" Offset="0.0"/>
@@ -89,11 +89,11 @@
 			<GradientStop Color="#C7D8EE" Offset="0.7"/>
 			<GradientStop Color="#B9CADE" Offset="0.98"/>
 			<!-- See the TabItemPanel_BackgroundBrush comment. -->
-			<GradientStop Color="{StaticResource BorderColor_Base}" 
+			<GradientStop Color="{StaticResource BorderColorBase}" 
 						  Offset="0.99"/>
 		</LinearGradientBrush.GradientStops>
 	</LinearGradientBrush>
-	<LinearGradientBrush x:Key="TabItem_HoverBackgroundBrush" 
+	<LinearGradientBrush x:Key="TabItemHoverBackgroundBrush" 
 						   EndPoint="0.5,1" StartPoint="0.5,0">
 		<GradientStop Color="#FFFFD5A0" Offset="0.3" />
 		<GradientStop Color="#FFFFA335" Offset="0.51" />
@@ -101,10 +101,10 @@
 	</LinearGradientBrush>
 
 	<!-- Brushes used for styling TabItems (Foreground/Text) -->
-	<SolidColorBrush x:Key="TabItem_TextBrush_Unselected" Color="#4971A3" />
-	<SolidColorBrush x:Key="TabItem_TextBrush_Disabled" Color="#888" />
-	<SolidColorBrush x:Key="TabItem_TextBrush_Hover" Color="Indigo" />
-	<SolidColorBrush x:Key="TabItem_TextBrush_Selected" Color="DarkBlue" />
+	<SolidColorBrush x:Key="TabItemTextBrushUnselected" Color="#4971A3" />
+	<SolidColorBrush x:Key="TabItemTextBrushDisabled" Color="#888" />
+	<SolidColorBrush x:Key="TabItemTextBrushHover" Color="Indigo" />
+	<SolidColorBrush x:Key="TabItemTextBrushSelected" Color="DarkBlue" />
 
 	<!-- Brushes used for styling TabItems (Borders) -->
 	<!-- 
@@ -123,75 +123,75 @@
 		 You'll probably have to zoom in to see the effect. 
 	  -->
 	<!--<SolidColorBrush x:Key="TabItem_DisabledBorderBrush" Color="#CCC" />-->
-	<LinearGradientBrush x:Key="TabItem_DisabledBorderBrush" 
+	<LinearGradientBrush x:Key="TabItemDisabledBorderBrush" 
 						   StartPoint="0,0" EndPoint="0,1">
 		<GradientStop Color="#CCC" Offset="0"/>
-		<GradientStop Color="{StaticResource BorderColor_Base}" 
+		<GradientStop Color="{StaticResource BorderColorBase}" 
 					   Offset="0.8"/>
 	</LinearGradientBrush>
-	<SolidColorBrush x:Key="TabItem_BorderBrush_Selected" 
-					   Color="{StaticResource BorderColor_Base}" />
+	<SolidColorBrush x:Key="TabItemBorderBrushSelected" 
+					   Color="{StaticResource BorderColorBase}" />
 	<!-- See the comment regarding the TabItem_DisabledBorderBrush above. -->
-	<LinearGradientBrush x:Key="TabItem_Border_Unselected" 
+	<LinearGradientBrush x:Key="TabItemBorderUnselected" 
 						   StartPoint="0,0" EndPoint="0,1">
 		<GradientStop Color="#AAA" Offset="0"/>
-		<GradientStop Color="{StaticResource BorderColor_Base}" 
+		<GradientStop Color="{StaticResource BorderColorBase}" 
 					   Offset="0.8"/>
 	</LinearGradientBrush>
-	<LinearGradientBrush x:Key="TabItem_HoverBorderBrush" StartPoint="0,0" 
+	<LinearGradientBrush x:Key="TabItemHoverBorderBrush" StartPoint="0,0" 
 						   EndPoint="0,1">
 		<LinearGradientBrush.GradientStops>
 			<GradientStop Offset="0.98" Color="DarkOrange"/>
 			<!-- See the TabItemPanel_BackgroundBrush comment. -->
 			<GradientStop Offset="0.99" 
-						  Color="{StaticResource BorderColor_Base}"/>
+						  Color="{StaticResource BorderColorBase}"/>
 		</LinearGradientBrush.GradientStops>
 	</LinearGradientBrush>
 
 	<!-- 
 		 Margins for TabItems - these will be set in the respective triggers.
 	  -->
-	<Thickness x:Key="TabItemMargin_Base">0,8,-4,0</Thickness>
-	<Thickness x:Key="TabItemMargin_Selected">-4,0,-4,0</Thickness>
-	<Thickness x:Key="TabItemMargin_Hover">0,4,-4,0</Thickness>
-	<Thickness x:Key="TabItemPanel_Padding">4,0,0,0</Thickness>
+	<Thickness x:Key="TabItemMarginBase">0,8,-4,0</Thickness>
+	<Thickness x:Key="TabItemMarginSelected">-4,0,-4,0</Thickness>
+	<Thickness x:Key="TabItemMarginHover">0,4,-4,0</Thickness>
+	<Thickness x:Key="TabItemPanelPadding">4,0,0,0</Thickness>
 
 
 	<!--<Thickness x:Key="TabItemMargin_Hover">0,4,-4,0</Thickness>-->
-	<Thickness x:Key="TabItemMargin_Hover_Start">0,2,0,0</Thickness>
-	<Thickness x:Key="TabItemMargin_Hover_Final">0,4,0,0</Thickness>
+	<Thickness x:Key="TabItemMarginHoverStart">0,2,0,0</Thickness>
+	<Thickness x:Key="TabItemMarginHoverFinal">0,4,0,0</Thickness>
 
 	<!-- This will run when a TabItem enters the "Unselected" state -->
-	<Storyboard x:Key="TabItemStoryBoard_Unselected">
+	<Storyboard x:Key="TabItemStoryBoardUnselected">
 		<ThicknessAnimation Storyboard.TargetName="Border" 
 							 Storyboard.TargetProperty="Margin"
-							 To="{StaticResource TabItemMargin_Base}"
+							 To="{StaticResource TabItemMarginBase}"
 							 FillBehavior="HoldEnd"
 							 Duration="0:0:0.1"/>
 	</Storyboard>
 	<!-- This will run when a TabItem enters the "Selected" state -->
-	<Storyboard x:Key="TabItemStoryBoard_Selected">
+	<Storyboard x:Key="TabItemStoryBoardSelected">
 		<ThicknessAnimation Storyboard.TargetName="Border" 
 							 Storyboard.TargetProperty="Margin"
-							 To="{StaticResource TabItemMargin_Selected}" 
+							 To="{StaticResource TabItemMarginSelected}" 
 							 FillBehavior="HoldEnd"
 							 Duration="0:0:0.1"/>
 	</Storyboard>
 	<!-- This will run when a TabItem enters the "Hover" state -->
-	<Storyboard x:Key="TabItemStoryBoard_Hover">
+	<Storyboard x:Key="TabItemStoryBoardHover">
 		<ThicknessAnimationUsingKeyFrames Storyboard.TargetName="Border" 
 										   Storyboard.TargetProperty="Margin"
 										   FillBehavior="HoldEnd">
 			<SplineThicknessKeyFrame KeyTime="0:0:0.1"
-									 Value="{StaticResource TabItemMargin_Hover_Start}"/>
+									 Value="{StaticResource TabItemMarginHoverStart}"/>
 			<SplineThicknessKeyFrame KeyTime="0:0:0.2"
-									 Value="{StaticResource TabItemMargin_Hover_Final}"/>
+									 Value="{StaticResource TabItemMarginHoverFinal}"/>
 		</ThicknessAnimationUsingKeyFrames>
 	</Storyboard>
 
 	<!--******** Stuff for the TabItemCloseButton (added in part IV) -> ************-->
 	<SolidColorBrush x:Key="TabItemCloseButtonNormalForegroundBrush"
-					   Color="{StaticResource TabItem_ForegroundColor_Base}"/>
+					   Color="{StaticResource TabItemForegroundColorBase}"/>
 	<SolidColorBrush x:Key="TabItemCloseButtonHoverForegroundBrush"
 					   Color="White"/>
 	<SolidColorBrush x:Key="TabItemCloseButtonPressedForegroundBrush"
@@ -346,8 +346,8 @@
 						TabItem. Also, since the TabItem, when selected, applies a left
 						Margin of 4px, we need to add these here as Padding.
 					 -->
-						<Border Background="{StaticResource TabItemPanel_BackgroundBrush}" 
-							 Padding="{StaticResource TabItemPanel_Padding}">
+						<Border Background="{StaticResource TabItemPanelBackgroundBrush}" 
+							 Padding="{StaticResource TabItemPanelPadding}">
 							<!-- This is the area in which TabItems (the strips) will be drawn. -->
 							<TabPanel IsItemsHost="True"/>
 						</Border>
@@ -361,11 +361,11 @@
 					 -->
 						<Border BorderThickness="1,0,1,1" 
 							 Grid.Row="1" 
-							 BorderBrush="{StaticResource TabItem_BorderBrush_Selected}" 
-							 Background="{StaticResource TabControl_BackgroundBrush_Base}">
+							 BorderBrush="{StaticResource TabItemBorderBrushSelected}" 
+							 Background="{StaticResource TabControlBackgroundBrushBase}">
 							<!-- This is the first/outer Border drawn on the TabPage -->
 							<Border BorderThickness="1" 
-								BorderBrush="{StaticResource TabPage_InnerBorderBrushDark}" 
+								BorderBrush="{StaticResource TabPageInnerBorderBrushDark}" 
 								CornerRadius="3" 
 								Margin="8">
 								<!-- 
@@ -374,7 +374,7 @@
 							  on the left which produces the fading effect.
 						   -->
 								<Border BorderThickness="1" 
-								   BorderBrush="{StaticResource TabPage_InnerBorderBrushBright}" 
+								   BorderBrush="{StaticResource TabPageInnerBorderBrushBright}" 
 								   CornerRadius="2" 
 								   Margin="0" 
 								   Padding="2,2,3,3"
@@ -406,9 +406,9 @@
 
 					 -->
 						<Border Name="Border"
-							 Background="{StaticResource TabItem_BackgroundBrush_Unselected}"
-							 BorderBrush="{StaticResource TabItem_BorderBrush_Selected}" 
-							 Margin="{StaticResource TabItemMargin_Selected}" 
+							 Background="{StaticResource TabItemBackgroundBrushUnselected}"
+							 BorderBrush="{StaticResource TabItemBorderBrushSelected}" 
+							 Margin="{StaticResource TabItemMarginSelected}" 
 							 BorderThickness="2,1,1,0" 
 							 CornerRadius="3,3,0,0" 
 							 >
@@ -444,21 +444,21 @@
 							<!-- The Triggers required to animate the TabItem when it enters/leaves the "Unselected" state (added in part two) -->
 							<MultiTrigger.EnterActions>
 								<BeginStoryboard x:Name="sbUnselected"
-											Storyboard="{StaticResource TabItemStoryBoard_Unselected}"/>
+											Storyboard="{StaticResource TabItemStoryBoardUnselected}"/>
 							</MultiTrigger.EnterActions>
 							<MultiTrigger.ExitActions>
 								<StopStoryboard BeginStoryboardName="sbUnselected"/>
 							</MultiTrigger.ExitActions>
 							<Setter Property="Panel.ZIndex" Value="90" />
 							<Setter TargetName="Border" Property="Background" 
-								Value="{StaticResource TabItem_BackgroundBrush_Unselected}" />
+								Value="{StaticResource TabItemBackgroundBrushUnselected}" />
 							<Setter TargetName="Border" Property="BorderBrush" 
-								Value="{StaticResource TabItem_Border_Unselected}" />
+								Value="{StaticResource TabItemBorderUnselected}" />
 							<Setter Property="Foreground" 
-								Value="{StaticResource TabItem_TextBrush_Unselected}" />
+								Value="{StaticResource TabItemTextBrushUnselected}" />
 							<!-- Except for the selected TabItem, tabs are to appear smaller in height. -->
 							<Setter TargetName="Border" Property="Margin" 
-								Value="{StaticResource TabItemMargin_Base}"/>
+								Value="{StaticResource TabItemMarginBase}"/>
 						</MultiTrigger>
 
 						<!-- 
@@ -468,13 +468,13 @@
 						<Trigger Property="IsEnabled" Value="False">
 							<Setter Property="Panel.ZIndex" Value="80" />
 							<Setter TargetName="Border" Property="BorderBrush"
-								Value="{StaticResource TabItem_DisabledBorderBrush}" />
+								Value="{StaticResource TabItemDisabledBorderBrush}" />
 							<Setter TargetName="Border" Property="Background" 
-								Value="{StaticResource TabItem_BackgroundBrush_Disabled}" />
+								Value="{StaticResource TabItemBackgroundBrushDisabled}" />
 							<Setter Property="Foreground" 
-								Value="{StaticResource TabItem_TextBrush_Disabled}" />
+								Value="{StaticResource TabItemTextBrushDisabled}" />
 							<Setter TargetName="Border" Property="Margin" 
-								Value="{StaticResource TabItemMargin_Base}"/>
+								Value="{StaticResource TabItemMarginBase}"/>
 						</Trigger>
 
 						<!-- The appearance of a TabItem when the mouse hovers over it -->
@@ -487,25 +487,25 @@
 							<MultiTrigger.EnterActions>
 								<StopStoryboard BeginStoryboardName="sbUnselected_Hover_Exit"/>
 								<BeginStoryboard x:Name="sbHover"
-											Storyboard="{StaticResource TabItemStoryBoard_Hover}"/>
+											Storyboard="{StaticResource TabItemStoryBoardHover}"/>
 							</MultiTrigger.EnterActions>
 							<MultiTrigger.ExitActions>
-								<BeginStoryboard x:Name="sbUnselected_Hover_Exit" Storyboard="{StaticResource TabItemStoryBoard_Unselected}"/>
+								<BeginStoryboard x:Name="sbUnselected_Hover_Exit" Storyboard="{StaticResource TabItemStoryBoardUnselected}"/>
 							</MultiTrigger.ExitActions>
 							<Setter Property="Panel.ZIndex" Value="99" />
-							<Setter Property="Foreground" Value="{StaticResource TabItem_TextBrush_Hover}" />
+							<Setter Property="Foreground" Value="{StaticResource TabItemTextBrushHover}" />
 							<Setter Property="BorderBrush" 
 								TargetName="Border" 
-								Value="{StaticResource TabItem_HoverBorderBrush}" />
+								Value="{StaticResource TabItemHoverBorderBrush}" />
 							<Setter TargetName="Border" Property="BorderThickness" Value="2,1,1,1" />
 							<Setter Property="Background" TargetName="Border"
-								Value="{StaticResource TabItem_HoverBackgroundBrush}"/>
+								Value="{StaticResource TabItemHoverBackgroundBrush}"/>
 							<!-- 
 						   To further increase the hover-effect, extend the TabItem's height a little
 						   more compared to unselected TabItems.
 						-->
 							<Setter TargetName="Border" Property="Margin" 
-								Value="{StaticResource TabItemMargin_Hover_Final}"/>
+								Value="{StaticResource TabItemMarginHoverFinal}"/>
 							<!--
 						   At runtime, we want a transition when changing between the regular/hover/regular
 						   states.
@@ -518,22 +518,22 @@
 							<Trigger.EnterActions>
 								<StopStoryboard BeginStoryboardName="sbUnselected_Selected_Exit"/>
 								<BeginStoryboard x:Name="sbSelected"
-											Storyboard="{StaticResource TabItemStoryBoard_Selected}"/>
+											Storyboard="{StaticResource TabItemStoryBoardSelected}"/>
 							</Trigger.EnterActions>
 							<Trigger.ExitActions>
-								<BeginStoryboard x:Name="sbUnselected_Selected_Exit" Storyboard="{StaticResource TabItemStoryBoard_Unselected}"/>
+								<BeginStoryboard x:Name="sbUnselected_Selected_Exit" Storyboard="{StaticResource TabItemStoryBoardUnselected}"/>
 							</Trigger.ExitActions>
 							<!-- We want the selected TabItem to always be on top. -->
 							<Setter Property="Panel.ZIndex" Value="100" />
 							<Setter TargetName="Border" Property="BorderBrush" 
-								Value="{StaticResource TabItem_BorderBrush_Selected}" />
+								Value="{StaticResource TabItemBorderBrushSelected}" />
 							<Setter TargetName="Border" Property="Background" 
-								Value="{StaticResource TabItem_BackgroundBrush_Selected}" />
+								Value="{StaticResource TabItemBackgroundBrushSelected}" />
 							<Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
 							<Setter Property="Foreground" 
-								Value="{StaticResource TabItem_TextBrush_Selected}"/>
+								Value="{StaticResource TabItemTextBrushSelected}"/>
 							<Setter TargetName="Border" Property="Margin" 
-								Value="{StaticResource TabItemMargin_Selected}"/>
+								Value="{StaticResource TabItemMarginSelected}"/>
 						</Trigger>
 					</ControlTemplate.Triggers>
 
