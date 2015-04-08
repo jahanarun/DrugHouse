@@ -104,9 +104,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\ClickToEditTextboxControl.xaml.cs">
-      <DependentUpon>ClickToEditTextboxControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DictionaryTextbox.xaml.cs">
       <DependentUpon>DictionaryTextbox.xaml</DependentUpon>
     </Compile>
@@ -134,8 +131,6 @@
     <Compile Include="Forms\DrugAdmin.xaml.cs">
       <DependentUpon>DrugAdmin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EditableComboBox.cs" />
-    <Compile Include="Controls\FilteredComboBox.cs" />
     <Compile Include="Forms\AdminScreen.xaml.cs">
       <DependentUpon>AdminScreen.xaml</DependentUpon>
     </Compile>
@@ -150,10 +145,6 @@
     <Compile Include="Forms\PatientVisit.xaml.cs">
       <DependentUpon>PatientVisit.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\ClickToEditTextboxControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\DictionaryTextbox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,10 +190,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\PatientViewDictionary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\_TabControlStyleDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
