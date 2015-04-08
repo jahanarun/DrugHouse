@@ -130,9 +130,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Reports\Templates\Medical Certificate.docx">
+    <Content Include="Reports\Templates\Medical Certificate.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503251259593_InitialCreate.resx">

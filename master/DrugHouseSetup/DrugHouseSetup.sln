@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DrugHouseSetup", "DrugHouseSetup\DrugHouseSetup.vdproj", "{999E91E6-5DA9-4B3F-86B2-3CD617472E23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{999E91E6-5DA9-4B3F-86B2-3CD617472E23}.Debug|Default.ActiveCfg = Debug
+		{999E91E6-5DA9-4B3F-86B2-3CD617472E23}.Debug|Default.Build.0 = Debug
+		{999E91E6-5DA9-4B3F-86B2-3CD617472E23}.Release|Default.ActiveCfg = Release
+		{999E91E6-5DA9-4B3F-86B2-3CD617472E23}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
