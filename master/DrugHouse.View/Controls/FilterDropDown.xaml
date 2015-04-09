@@ -6,7 +6,8 @@
 			 xmlns:system="clr-namespace:System;assembly=mscorlib"
 			 mc:Ignorable="d" 
              x:Name="FilterDropUserControl"
-			 d:DesignHeight="300" d:DesignWidth="300" GotFocus="FilterDropUserControl_GotFocus" PreviewKeyDown="FilterDropUserControl_PreviewKeyDown">
+			 d:DesignHeight="300" d:DesignWidth="300" GotFocus="FilterDropUserControl_GotFocus" 
+             PreviewKeyDown="FilterDropUserControl_PreviewKeyDown">
     <UserControl.Resources>
         <system:Double x:Key="PopupWidth">210</system:Double>
         <system:Double x:Key="PopupHeight">260</system:Double>

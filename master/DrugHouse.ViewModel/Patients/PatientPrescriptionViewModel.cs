@@ -93,11 +93,11 @@ namespace DrugHouse.ViewModel.Patients
                 SelectionChanged(PropName.IsDrugPanelVisible);
                 if (value == null)
                     return;
-                UpdateDrugList(SelectedDrugTypeValue);
                 SelectedDrugValue = SelectedPrescriptionValue.Drug;
                 SelectedDrugTypeValue = SelectedPrescriptionValue.DrugType;
                 SelectedDrugCountValue = SelectedPrescriptionValue.DrugCount;
                 SelectedRemarkValue = SelectedPrescriptionValue.Remark;
+                UpdateDrugList(SelectedDrugTypeValue);
 
                 SelectionChanged(PropName.SelectedDrug);
                 SelectionChanged(PropName.SelectedDrugCount);
