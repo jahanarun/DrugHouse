@@ -7,7 +7,7 @@ namespace DrugHouse.Shared
     {
         public const string Company = "";
         public const string Product = "DrugHouse";
-        public const string Version = "0.0.1.1000";
+        public const string Version = "0.0.1001";
         public const string Copyright = "©2015 JahanArun";
         public const string DoctorName = "Dr. Jagan Mohan";
     }
