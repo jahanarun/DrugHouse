@@ -4,7 +4,7 @@
     {
 
         public const string ConnectionString =
-            @"Data Source=DEV-PC\DEXLAB_SQLSERVER; Initial Catalog=DrugHouse; User Id=dev; Password=dev1234;";
+            @"Data Source=JJ-SERVER\DRUGHOUSESERVER; Initial Catalog=DrugHouse; Integrated Security=SSPI";
 
         public const string SqlText = @"
 DECLARE @CurrentMigration [nvarchar](max)

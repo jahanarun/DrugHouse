@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
+using DrugHouse.Shared.Helpers;
 
 namespace DbUpdateDelivery
 {
@@ -6,15 +8,24 @@ namespace DbUpdateDelivery
     {
         static void Main(string[] args)
         {
-            
-            using (var conn = new SqlConnection(Module.ConnectionString))
+            try
             {
-                conn.Open();
-                var cmd = new SqlCommand(Module.SqlText, conn);
-                cmd.ExecuteNonQuery();  
-                conn.Close();
-                
+                using (var conn = new SqlConnection(Module.ConnectionString))
+                {
+                    conn.Open();
+                    var cmd = new SqlCommand(Module.SqlText, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+
+                }
+
             }
+            catch (Exception ex)
+            {      
+                Console.WriteLine("There are some error(s):");                                       
+                Console.WriteLine(Helper.GetInnerMostException(ex).Message);
+                Console.ReadKey(true);
+            } 
         }
     }
 }

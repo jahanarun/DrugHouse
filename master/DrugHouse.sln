@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbUpdateDelivery", "DbUpdateDelivery\DbUpdateDelivery.csproj", "{3A82B552-F7AC-4BD7-88D4-3C272AFB2C13}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DrugHouseSetup", "DrugHouseSetup\DrugHouseSetup.vdproj", "{E96556D0-5BA8-476D-80F4-04BD9C87D40E}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DrugHouse.Setup", "DrugHouse.Setup\DrugHouse.Setup.vdproj", "{C5C3EBED-F21C-4A1D-B9D3-524ADABCF8EE}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -69,9 +69,9 @@ Global
 		SccProjectUniqueName8 = DbUpdateDelivery\\DbUpdateDelivery.csproj
 		SccProjectName8 = DbUpdateDelivery
 		SccLocalPath8 = DbUpdateDelivery
-		SccProjectUniqueName9 = DrugHouseSetup\\DrugHouseSetup.vdproj
-		SccProjectName9 = DrugHouseSetup
-		SccLocalPath9 = DrugHouseSetup
+		SccProjectUniqueName9 = DrugHouse.Setup\\DrugHouse.Setup.vdproj
+		SccProjectName9 = DrugHouse.Setup
+		SccLocalPath9 = DrugHouse.Setup
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,8 +105,8 @@ Global
 		{3A82B552-F7AC-4BD7-88D4-3C272AFB2C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A82B552-F7AC-4BD7-88D4-3C272AFB2C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A82B552-F7AC-4BD7-88D4-3C272AFB2C13}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E96556D0-5BA8-476D-80F4-04BD9C87D40E}.Debug|Any CPU.ActiveCfg = Debug
-		{E96556D0-5BA8-476D-80F4-04BD9C87D40E}.Release|Any CPU.ActiveCfg = Release
+		{C5C3EBED-F21C-4A1D-B9D3-524ADABCF8EE}.Debug|Any CPU.ActiveCfg = Debug
+		{C5C3EBED-F21C-4A1D-B9D3-524ADABCF8EE}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
