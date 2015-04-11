@@ -32,6 +32,7 @@ namespace DrugHouse.Model
         List<SimpleEntity> GetDiagnoses();                 
         List<Drug> GetDrugs(Func<Drug, bool> condition);   
         List<SimpleEntity> GetLocations();
+        List<SimpleEntity> GetDictionaryItems(); 
 
         #endregion
     }

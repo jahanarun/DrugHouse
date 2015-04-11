@@ -152,6 +152,19 @@ namespace DrugHouse.Model
             }
         }
 
+        public List<SimpleEntity> GetDictionaryItems()
+        {
+            try
+            {
+                return DrugHouseRepository.GetDictionaryItems();
+            }
+            catch (Exception ex)
+            {
+                var innerEx = Helper.GetInnerMostException(ex);
+                throw new DataException(innerEx.Message, ex);
+            }
+        }
+
         public void SaveIEnumerable(IEnumerable<ModelBase> items)
         {
             try

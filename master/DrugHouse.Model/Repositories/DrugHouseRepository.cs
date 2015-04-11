@@ -44,6 +44,14 @@ namespace DrugHouse.Model.Repositories
             result.Insert(0, SimpleEntity.Empty);
             return result;
         }
+
+        public List<SimpleEntity> GetDictionaryItems()
+        {
+            var result = Select<SimpleEntity>().Where(x => x.Marker == SimpleEntity.Markers.Dictionary)
+                                                .ToList();
+            result.Insert(0, SimpleEntity.Empty);
+            return result;
+        }
         public Patient GetPatientDetails(long id)
         {
             var result = Select<Patient>().Include(p => p.Visits.Select(v => v.Prescriptions.Select(u => u.Drug)))

@@ -85,6 +85,18 @@ namespace DrugHouse.ViewModel
                     result = dataAccess.GetDiagnoses();
                 return result;
             }
+            public static ICollection<SimpleEntity> DictionaryCollection(IDataAccess dataAccess = null)
+            {
+                List<SimpleEntity> result;
+                if (dataAccess == null)
+                    using (var data = DataAccess.GetInstance())
+                    {
+                        result = data.GetDictionaryItems();
+                    }
+                else
+                    result = dataAccess.GetDictionaryItems();
+                return result;
+            }
 
             public static List<SimpleEntity> Locations(IDataAccess dataAccess = null)
             {

@@ -23,6 +23,7 @@ namespace DrugHouse.Model.Types
         {
             public const string Location = "Location";
             public const string Diagnosis = "Diagnosis";
+            public const string Dictionary = "Dictionary";
             public const string Default = "Default";
         }
         public long Id { get; set; }
