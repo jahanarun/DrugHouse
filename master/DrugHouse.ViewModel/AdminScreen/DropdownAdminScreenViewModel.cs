@@ -1,9 +1,13 @@
 ﻿/*  DrugHouse - An Hospital management software
     Copyright (C) {2015}  {Jahan Arun, J}     */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Dexuse.ICommand;
 using DrugHouse.Model.Types;
+using DrugHouse.ViewModel.Common;
 using DrugHouse.ViewModel.RowItems;
 using DrugHouse.ViewModel.Tabs;
 using GalaSoft.MvvmLight.Command;
@@ -15,7 +19,7 @@ namespace DrugHouse.ViewModel.AdminScreen
         : AdminScreenBase
     {
 
-        public RelayCommand AddItemCommand { get; private set; }
+        public ObservableCommand AddItemCommand { get; private set; }
         public RelayCommand RemoveItemCommand { get; private set; }
 
         private DropdownViewModel DropdownViewModel { get; set; }
@@ -24,7 +28,7 @@ namespace DrugHouse.ViewModel.AdminScreen
             : base(vm)
         {
             Initialize();
-            AddItemCommand = new RelayCommand(ExecuteAddItem, () => true);
+            AddItemCommand = new ExecutedCommand(ExecuteAddItem, () => SelectedDropdownItem != null);
             RemoveItemCommand = new RelayCommand(ExecuteRemoveItem, CanExecuteRemoveItem);
         }
 
@@ -36,6 +40,13 @@ namespace DrugHouse.ViewModel.AdminScreen
             public const string EntityCollection = "EntityCollection";
             public const string IsSelectedEntityItemTextEnabled = "IsSelectedEntityItemTextEnabled";
             
+        }
+
+        public class AdminScreen
+        {
+            public const string Dictionary = "Dictionary";
+            public const string Location = "Location";
+            public const string Diagnosis = "Diagnosis";
         }
 
         private ObservableCollection<DropdownItem> EntityCollectionValue = new ObservableCollection<DropdownItem>();
@@ -88,6 +99,7 @@ namespace DrugHouse.ViewModel.AdminScreen
             {
                 SelectedDropdownItemValue = value; 
                 SelectionChanged(PropName.SelectedDropdownItem);
+                AddItemCommand.RaiseCanExecuteChanged();
                 RefreshEntityCollection();
             }
         }
@@ -97,11 +109,14 @@ namespace DrugHouse.ViewModel.AdminScreen
             EntityCollectionValue.Clear();
             switch (SelectedDropdownItem)
             {
-                case "Diagnosis":
+                case AdminScreen.Diagnosis:
                     DropdownViewModel = new DropdownViewModel(AdminScreenMaster.Diagnoses, SimpleEntity.Markers.Diagnosis); 
                     break;
-                case "Location":
+                case AdminScreen.Location:
                     DropdownViewModel = new DropdownViewModel(AdminScreenMaster.Locations, SimpleEntity.Markers.Location);
+                    break;
+                case AdminScreen.Dictionary:
+                    DropdownViewModel = new DropdownViewModel(AdminScreenMaster.Dictionary, SimpleEntity.Markers.Dictionary);
                     break;
             }
 
@@ -109,9 +124,15 @@ namespace DrugHouse.ViewModel.AdminScreen
             DropdownViewModel.OnDirty += (o, e) => RaiseDirty();
         }
 
-        private void Initialize()        
-        {             
-            DropdownSelectionItems = new List<string> {"Diagnosis", "Location"};
+        private void Initialize()
+        {
+            var result = new List<string>
+            {
+                AdminScreen.Diagnosis,
+                AdminScreen.Location,
+                AdminScreen.Dictionary
+            };
+            DropdownSelectionItems = result.OrderBy(s => s).ToList();
         }
 
         private void ExecuteAddItem()

@@ -28,16 +28,16 @@
                   ItemsSource="{Binding DropdownSelectionItems}" SelectedItem="{Binding SelectedDropdownItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="_Add" VerticalAlignment="Center" Height="30"
-                    Command="{Binding AddItemCommand}"/>
-                <Button Grid.Column="2" Content="_Remove" VerticalAlignment="Center" Height="30"
+                <Button x:Name="AddButton" Grid.Column="0" Content="_Add New Item" VerticalAlignment="Center" Height="30"
+                    Command="{Binding AddItemCommand}" Click="AddButton_OnClick" />
+                <Button Grid.Column="2" Content="_Remove Selected Item" VerticalAlignment="Center" Height="30"
                     Command="{Binding RemoveItemCommand}"/>
             </Grid>
-            <TextBox Grid.Row="4" VerticalAlignment="Center" Height="25"
+            <TextBox x:Name="NewItemTextBox" Grid.Row="4" VerticalAlignment="Center" Height="25"
                      Text="{Binding SelectedEntityItemText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      IsEnabled="{Binding IsSelectedEntityItemTextEnabled}"/>
             <ListView Grid.Row="5"
