@@ -14,11 +14,11 @@
     </UserControl.Resources>
 
     <Grid DataContext="{Binding ElementName=DictionaryUserControl}">
-            <TextBox x:Name="MainTextBox" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="MainTextBox" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                      PreviewKeyDown="MainTextBox_OnPreviewKeyDown" PreviewKeyUp="MainTextBox_OnPreviewKeyUp" 
                      AcceptsReturn="True" TextWrapping="Wrap">
 
-            </TextBox>
+        </TextBox>
 
         <Popup Name="ListPopup"   AllowsTransparency="True"  Width="{StaticResource PopupWidth}"
                Height="{StaticResource PopupHeight}"
@@ -28,8 +28,9 @@
                      Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5">
                 <ListBox x:Name="ItemsListBox" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Stretch" Background="AntiqueWhite"
 						  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                         SelectedItem="{Binding SelectedItem}" 
-						 ItemsSource="{Binding MatchedItems}" KeyDown="ItemsListBox_OnKeyDown" PreviewKeyDown="ItemsListBox_OnKeyDown">
+                         SelectedItem="{Binding SelectedItem}"  ItemsSource="{Binding MatchedItems}" 
+                         KeyDown="ItemsListBox_OnKeyDown" PreviewKeyDown="ItemsListBox_OnKeyDown"
+                         PreviewMouseUp="ItemsListBox_OnPreviewMouseUp">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid d:DataContext="{d:DesignData ToggleButtonItem}">

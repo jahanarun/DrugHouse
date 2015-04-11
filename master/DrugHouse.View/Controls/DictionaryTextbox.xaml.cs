@@ -41,7 +41,7 @@ namespace DrugHouse.View.Controls
 
         static event PropertyChangedEventHandler ItemSourceEvent;
 
-        #endregion 
+        #endregion
 
         #region Properties
 
@@ -54,7 +54,8 @@ namespace DrugHouse.View.Controls
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
-            set { 
+            set
+            {
                 SetValue(TextProperty, value);
                 OnPropertyChanged();
             }
@@ -259,6 +260,35 @@ namespace DrugHouse.View.Controls
             return false;
         }
 
+        private void ReplaceTextWithOneSpace()
+        {
+            ReplaceText();
+            MainTextBox.SelectedText = " ";
+            MainTextBox.CaretIndex = MainTextBox.CaretIndex + 1;
+            ClosePopupMenu();
+        }
+
+        private bool TrySelectionKeys(Key key)
+        {
+            switch (key)
+            {
+                case Key.Enter:
+                    ReplaceText();
+                    ClosePopupMenu();
+                    return true;
+
+                case Key.Space:
+                    ReplaceTextWithOneSpace();
+                    return true;
+
+                case Key.Tab:
+                    ReplaceText();
+                    ClosePopupMenu();
+                    return true;
+            }
+            return false;
+        }
+
         #endregion
 
         #region Event Handlers
@@ -290,35 +320,19 @@ namespace DrugHouse.View.Controls
                         break;
 
                 }
-                switch (e.Key)
-                {
-                    case Key.Enter:
-                        ReplaceText();
-                        ClosePopupMenu();
-                        e.Handled = true;
-                        break;
-
-                    case Key.Space:
-                        ReplaceText();
-                        MainTextBox.SelectedText = " ";
-                        MainTextBox.CaretIndex = MainTextBox.CaretIndex + 1;
-                        ClosePopupMenu();
-                        e.Handled = true;
-                        break;
-
-                }
+                if (TrySelectionKeys(e.Key))
+                    e.Handled = true;
             }
 
         }
         private void ItemsListBox_OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter || e.Key == Key.Space)
+            if (TrySelectionKeys(e.Key))
             {
-                ReplaceText();
-                ClosePopupMenu();
                 e.Handled = true;
+                return;
             }
-            if (e.Key != Key.Up && e.Key != Key.Down)
+            if (!IsNavigationalKey(e.Key))
                 MainTextBox.Focus();
 
         }
@@ -343,6 +357,12 @@ namespace DrugHouse.View.Controls
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        #endregion     
+        #endregion
+
+        private void ItemsListBox_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ReplaceText();
+            ClosePopupMenu();
+        }
     }
 }
