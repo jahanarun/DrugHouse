@@ -79,6 +79,11 @@ namespace DrugHouse.ViewModel.Tabs
         {
             get { return LocationsValue ?? (LocationsValue = Data.GetLocations()); }
         }
+        private List<SimpleEntity> DictionaryValue;
+        public List<SimpleEntity> Dictionary
+        {
+            get { return DictionaryValue ?? (DictionaryValue = Data.GetDictionaryItems()); }
+        }
 
         #endregion
 
@@ -111,6 +116,7 @@ namespace DrugHouse.ViewModel.Tabs
             Data.SaveIEnumerable(Drugs);
             Data.SaveIEnumerable(Diagnoses);
             Data.SaveIEnumerable(Locations);
+            Data.SaveIEnumerable(Dictionary);
         }
 
         
