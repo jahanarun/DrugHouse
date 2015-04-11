@@ -365,24 +365,23 @@
                             <TextBlock Grid.Column="3" Grid.Row="1" Margin="0,5" >Secondary Diagnosis:</TextBlock>
                             <TextBlock Grid.Column="3" Grid.Row="2" Margin="0,5">Observation:</TextBlock>
                             <TextBlock Grid.Column="3" Grid.Row="5" Margin="0,5">Treatment:</TextBlock>
-                            <TextBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
-                             Text="{Binding Path=Complaints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
-                            Text="{Binding Path=History, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <localControls:DictionaryTextbox Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="0,5,0,10"
+                                                             DictionaryItems="{Binding DictionaryItems}" 
+                                                             Text="{Binding Path=Complaints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <localControls:DictionaryTextbox  Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" Margin="0,5,0,10"
+                                                              DictionaryItems="{Binding DictionaryItems}" 
+                                                              Text="{Binding Path=History, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <localControls:FilterDropDown x:Name="PrimaryDiagnosisComboBox" Grid.Row="0" Grid.Column="4" Width="200"
-                                  HorizontalAlignment="Left" VerticalAlignment="Center"
-                                 ItemsSource="{Binding DiagnosesItems}" SelectedItem="{Binding Path=PrimaryDiagnosis, Mode=TwoWay}" />
-                            <localControls:FilterDropDown Grid.Column="4" Grid.Row="1" Width="200" HorizontalAlignment="Left"
-                                                      VerticalAlignment="Center"
-                                                      ItemsSource="{Binding DiagnosesItems}" 
-                                                      SelectedItem="{Binding SecondaryDiagnosis, Mode=TwoWay}"/>
-                            <!--<ComboBox x:Name="SecondaryDiagnosisComboBox" Grid.Row="1" Grid.Column="4" Width="200" 
-                                  VerticalAlignment="Center" HorizontalAlignment="Left"
-                                  ItemsSource="{Binding Diagnoses}" SelectedItem="{Binding Path=SecondaryDiagnosis, Mode=TwoWay}"  />-->
-                            <TextBox Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
-                            Text="{Binding Path=Observation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox Grid.Column="4" Grid.Row="5" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10"
-                            Text="{Binding Path=Treatment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                          HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                          ItemsSource="{Binding DiagnosesItems}" SelectedItem="{Binding Path=PrimaryDiagnosis, Mode=TwoWay}" />
+                            <localControls:FilterDropDown Grid.Column="4" Grid.Row="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                          ItemsSource="{Binding DiagnosesItems}" SelectedItem="{Binding SecondaryDiagnosis, Mode=TwoWay}"/>
+                            <localControls:DictionaryTextbox Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" Margin="0,5,0,10"
+                                                             DictionaryItems="{Binding DictionaryItems}" 
+                                                             Text="{Binding Path=Observation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <localControls:DictionaryTextbox Grid.Column="4" Grid.Row="5" Grid.RowSpan="3"  Margin="0,5,0,10"
+                                                             DictionaryItems="{Binding DictionaryItems}" 
+                                                             Text="{Binding Path=Treatment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </Border>
                 </DockPanel>
