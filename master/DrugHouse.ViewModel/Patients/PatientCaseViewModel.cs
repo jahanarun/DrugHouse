@@ -28,9 +28,11 @@ namespace DrugHouse.ViewModel.Patients
                 Timer();
 
             DiagnosesItems = MasterViewModel.Globals.Diagnoses(DataAccess).Select(diagnosis => new ToggleButtonItem(diagnosis)).ToList();
+            DictionaryItems = MasterViewModel.Globals.DictionaryCollection(DataAccess).Select(d => d.Name).ToList();
+
             foreach (var item in DiagnosesItems.Where(item => Case.PrimaryDiagnosis.Equals(item.Model)))
             {
-                PrimaryDiagnosis = item;
+                PrimariDiagnosisValue = item;
             }
         }
 
@@ -45,6 +47,8 @@ namespace DrugHouse.ViewModel.Patients
         #region Properties
 
         public List<ToggleButtonItem> DiagnosesItems { get; private set; }
+               
+        public List<string> DictionaryItems { get; private set; }
         
         private ToggleButtonItem PrimariDiagnosisValue;
         public ToggleButtonItem PrimaryDiagnosis
@@ -97,5 +101,10 @@ namespace DrugHouse.ViewModel.Patients
             timer.Start();
         }
 
+        protected override void RaisePropertyChanged(string propertyName)
+        {
+            base.RaisePropertyChanged(propertyName);
+            Case.DbStatus = RepositoryStatus.Edited;
+        }
     }
 }

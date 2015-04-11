@@ -3,9 +3,9 @@
 
 using System.Linq;
 using DrugHouse.Model;
+using DrugHouse.Model.Enum;
 using DrugHouse.Model.Types;
 using DrugHouse.ViewModel.RowItems;
-using DrugHouse.ViewModel.Tabs;
 
 namespace DrugHouse.ViewModel.Patients
 {
@@ -19,7 +19,7 @@ namespace DrugHouse.ViewModel.Patients
             PatientPrescriptionViewModelValue.OnDirty += (sender, e) => RaiseDirty();
             foreach (var item in DiagnosesItems.Where(item => PatientVisit.SecondaryDiagnosis.Equals(item.Model)))
             {
-                SecondaryDiagnosis = item;
+                SecondaryDiagnosisValue = item;
             }
         }
 
@@ -130,6 +130,6 @@ namespace DrugHouse.ViewModel.Patients
             }
         }
         #endregion
-       
+
     }
 }
