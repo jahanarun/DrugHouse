@@ -6,7 +6,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              x:Name="DictionaryUserControl"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="500">
 
     <UserControl.Resources>
         <system:Double x:Key="PopupWidth">210</system:Double>
@@ -14,57 +14,31 @@
     </UserControl.Resources>
 
     <Grid DataContext="{Binding ElementName=DictionaryUserControl}">
-        <TextBox>
-            
-        </TextBox>
+            <TextBox x:Name="MainTextBox" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     PreviewKeyDown="MainTextBox_OnPreviewKeyDown" PreviewKeyUp="MainTextBox_OnPreviewKeyUp" 
+                     AcceptsReturn="True" TextWrapping="Wrap">
+
+            </TextBox>
+
         <Popup Name="ListPopup"   AllowsTransparency="True"  Width="{StaticResource PopupWidth}"
                Height="{StaticResource PopupHeight}"
-			   PlacementTarget="{Binding ElementName=ToggleButton}"
-			   StaysOpen="False">
-            <Border  Background="WhiteSmoke" BorderThickness="1" BorderBrush="Silver" 
-                     Height="240" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Grid Margin="5,5,5,5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBox x:Name="FilterTextBox" Grid.Row="0" Margin="0,5,0,5" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <TextBox.Style>
-                            <Style TargetType="TextBox">
-                                <Style.Resources>
-                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None" >
-                                        <VisualBrush.Visual>
-                                            <Label Content="Filter" Foreground="LightGray" Background="White" Width="{StaticResource PopupWidth}" />
-                                        </VisualBrush.Visual>
-                                    </VisualBrush>
-                                </Style.Resources>
-                                <Style.Triggers>
-                                    <Trigger Property="Text" Value="{x:Static system:String.Empty}">
-                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                    </Trigger>
-                                    <Trigger Property="Text" Value="{x:Null}">
-                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                    </Trigger>
-                                    <Trigger Property="IsKeyboardFocused" Value="True">
-                                        <Setter Property="Background" Value="White" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
-                    </TextBox>
-                    <ListBox x:Name="ItemsListBox" Grid.Row="1"  ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Stretch"
+			   PlacementTarget="{Binding ElementName=MainTextBox}" Placement="Top"
+			   StaysOpen="False" MaxHeight="240">
+            <Border  Background="WhiteSmoke" BorderThickness="1" BorderBrush="Silver" MaxHeight="220"  
+                     Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5">
+                <ListBox x:Name="ItemsListBox" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Stretch" Background="AntiqueWhite"
 						  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-						 SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid d:DataContext="{d:DesignData ToggleButtonItem}">
-                                    <TextBlock Text="{Binding}" />
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
+                         SelectedItem="{Binding SelectedItem}" 
+						 ItemsSource="{Binding MatchedItems}" KeyDown="ItemsListBox_OnKeyDown" PreviewKeyDown="ItemsListBox_OnKeyDown">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid d:DataContext="{d:DesignData ToggleButtonItem}">
+                                <TextBlock Text="{Binding}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
 
-                    </ListBox>
-                </Grid>
+                </ListBox>
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="3"/>
                 </Border.Effect>
