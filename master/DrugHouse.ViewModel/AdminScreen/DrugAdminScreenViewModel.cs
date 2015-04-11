@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Dexuse.ICommand;
 using DrugHouse.Model.Enum;
 using DrugHouse.Model.Types;
 using DrugHouse.Shared.Enumerations;
+using DrugHouse.ViewModel.Common;
 using DrugHouse.ViewModel.RowItems;
 using DrugHouse.ViewModel.Tabs;
 using GalaSoft.MvvmLight.Command;
@@ -17,7 +19,7 @@ namespace DrugHouse.ViewModel.AdminScreen
     [Screen("Drugs")]
     public class DrugAdminScreenViewModel : AdminScreenBase
     {
-        public RelayCommand AddDrugCommand { get; private set; }
+        public ObservableCommand AddDrugCommand { get; private set; }
         public RelayCommand RemoveDrugCommand { get; private set; }
         public RelayCommand FilterDrugCommand { get; private set; }
 
@@ -28,7 +30,7 @@ namespace DrugHouse.ViewModel.AdminScreen
         internal DrugAdminScreenViewModel(AdminScreenMasterViewModel vm)
             :base(vm)
         {
-            AddDrugCommand = new RelayCommand(ExecuteAddDrugCommand, CanExecuteAddDrugCommand);
+            AddDrugCommand = new ExecutedCommand(ExecuteAddDrugCommand, CanExecuteAddDrugCommand);
             RemoveDrugCommand = new RelayCommand(ExecuteRemoveDrugCommand, CanExecuteRemoveDrugCommand);
             FilterDrugCommand = new RelayCommand(ExecuteFilterDrug, () => true);
             Initialize();

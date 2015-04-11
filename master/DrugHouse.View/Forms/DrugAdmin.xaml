@@ -130,10 +130,11 @@
                 <CheckBox Content="Syringe" Grid.Column="3" IsChecked="{Binding IsSyringe, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
             <StackPanel Grid.Row="4" Orientation="Horizontal">
-                <Button  Width="60" Height="30" HorizontalAlignment="Left" Command="{Binding AddDrugCommand}" Content="Add"/>
+                <Button x:Name="AddDrugButton"  Width="100" Height="30" HorizontalAlignment="Left" Content="Add New Drug"
+                        Command="{Binding AddDrugCommand}" Click="AddDrugButton_OnClick" />
                 <Border Width="10"/>
-                <Button  Width="60" Height="30" HorizontalAlignment="Left"  SnapsToDevicePixels="True" Command="{Binding RemoveDrugCommand}" 
-                         Content="Remove"/>
+                <Button  Width="140" Height="30" HorizontalAlignment="Left"  SnapsToDevicePixels="True" Command="{Binding RemoveDrugCommand}" 
+                         Content="Remove Selected Drug"/>
             </StackPanel>
             <ListBox Grid.Row="5" ItemsSource="{Binding DrugItemsList}" SelectedItem="{Binding SelectedDrugItem, Mode=TwoWay}" >
                 <ListBox.ItemTemplate>
@@ -161,7 +162,7 @@
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="1" Text="Name:"/>
-            <TextBox Grid.Row="1"  Grid.Column="1" Height="20" Width="200" HorizontalAlignment="Left"
+            <TextBox x:Name="DrugNameTextBox" Grid.Row="1"  Grid.Column="1" Height="20" Width="200" HorizontalAlignment="Left"
                      Text="{Binding DrugName}"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Drug Type:"/>
             <ComboBox Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" Width="200" IsTextSearchEnabled="True"  VerticalAlignment="Center"
