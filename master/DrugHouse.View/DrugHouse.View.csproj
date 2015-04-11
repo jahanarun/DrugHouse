@@ -253,6 +253,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dexuse\Dexuse.csproj">
+      <Project>{80B6F46A-B4C1-4C6E-82B0-AAC1D30F34D5}</Project>
+      <Name>Dexuse</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DrugHouse.Shared\DrugHouse.Shared.csproj">
       <Project>{3e617a61-e3c2-44e7-b2d0-e20ebfdbfc89}</Project>
       <Name>DrugHouse.Shared</Name>

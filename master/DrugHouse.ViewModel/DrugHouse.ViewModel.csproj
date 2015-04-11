@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="AdminScreen\AdminScreenFactory.cs" />
     <Compile Include="AdminScreen\DropdownViewModel.cs" />
+    <Compile Include="Common\ExecutedCommand.cs" />
     <Compile Include="ReportScreen\IReportScreen.cs" />
     <Compile Include="ReportScreen\MedicalCertificateViewModel.cs" />
     <Compile Include="ReportScreen\ReportScreenFactory.cs" />
@@ -101,6 +102,10 @@
     <Compile Include="Patients\PatientVisitViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dexuse\Dexuse.csproj">
+      <Project>{80B6F46A-B4C1-4C6E-82B0-AAC1D30F34D5}</Project>
+      <Name>Dexuse</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DrugHouse.Model\DrugHouse.Model.csproj">
       <Project>{27966903-5e6a-4c33-ac98-7370c8760615}</Project>
       <Name>DrugHouse.Model</Name>
