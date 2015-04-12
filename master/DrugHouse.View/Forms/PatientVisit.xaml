@@ -26,7 +26,7 @@
                     <DockPanel.Resources>
                         <SolidColorBrush x:Key="CapsuleBackColorBrush" Color="LightGoldenrodYellow"/>
                         <SolidColorBrush x:Key="TabletBackColorBrush" Color="LightBlue"/>
-                        <SolidColorBrush x:Key="InjectionBackColorBrush" Color="LightCoral"/>
+                        <SolidColorBrush x:Key="InjectionBackColorBrush" Color="LightPink"/>
                         <SolidColorBrush x:Key="SyrupBackColorBrush" Color="LightGreen"/>
                         <SolidColorBrush x:Key="NoDrugBackColorBrush" Color="White"/>
                     </DockPanel.Resources>
@@ -56,8 +56,8 @@
                     <Border MinHeight="100" DockPanel.Dock="Bottom" Height="250" BorderThickness="0,2,0,0" Background="White" BorderBrush="Gainsboro">
                         <Grid Name="MedicinePanel" DataContext="{Binding PatientPrescriptionViewModel }">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="200"/>
                             </Grid.ColumnDefinitions>
                             <Grid.Resources>
                                 <!--<valueConverter:EnumDrugBooleanConverter x:Key="EnumDrugTypeConverter"/>-->
@@ -163,7 +163,7 @@
                                     </RadioButton>
                                 </StackPanel>-->
 
-                                <Grid Grid.Column="1" Margin="5,0,5,0" >
+                                <Grid Margin="5,0,5,0" >
                                     <!--<Grid.Style>
                                         <Style TargetType="{x:Type Grid}">
                                             <Style.Triggers>
@@ -198,9 +198,9 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="10" />
                                         <ColumnDefinition Width="90" />
-                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="10" />
-                                        <ColumnDefinition Width="3*"  />
+                                        <ColumnDefinition Width="200"  />
                                         <ColumnDefinition Width="10" />
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Row="0" Grid.Column="1" Text="Select Drug" FontSize="14" VerticalAlignment="Center"/>
@@ -257,10 +257,8 @@
 
                                 </DockPanel>
                                 <Grid>
-                                    <ListBox ScrollViewer.HorizontalScrollBarVisibility = "Disabled"
-                                 HorizontalContentAlignment="Stretch"
-                                 ItemsSource="{Binding Path=Prescriptions}"
-                                 SelectedItem="{Binding SelectedPrescription, Mode=TwoWay}">
+                                    <ListBox ScrollViewer.HorizontalScrollBarVisibility = "Disabled" HorizontalContentAlignment="Stretch"
+                                             ItemsSource="{Binding Path=Prescriptions}" SelectedItem="{Binding SelectedPrescription, Mode=TwoWay}">
                                         <ListBox.ItemContainerStyle>
                                             <Style TargetType="{x:Type ListBoxItem}">
                                                 <Setter Property="LayoutTransform">
@@ -299,11 +297,13 @@
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition />
                                                             <ColumnDefinition />
+                                                            <ColumnDefinition />
                                                         </Grid.ColumnDefinitions>
-                                                        <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="18" Grid.Row="0" 
-                                                   Grid.ColumnSpan="2" />
+                                                        <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="18" Grid.Row="0"
+                                                                   Grid.ColumnSpan="2" />
                                                         <TextBlock Text="{Binding Dosage }" Grid.Row="1" Grid.Column="0"/>
-                                                        <TextBlock Text="{Binding DrugType}" Grid.Row="1" Grid.Column="1"/>
+                                                        <TextBlock Text="{Binding DrugCount }" Grid.Row="1" Grid.Column="1"/>
+                                                        <TextBlock Text="{Binding DrugType}" Grid.Row="1" Grid.Column="2"/>
                                                     </Grid>
                                                 </Border>
                                                 <DataTemplate.Triggers>
