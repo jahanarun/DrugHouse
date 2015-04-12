@@ -70,20 +70,23 @@ namespace DrugHouse.Model.Repositories
         {
             SetChangeTrackerEntityState();
 
+            SaveChanges();
+
+        }
+
+        public void SaveChanges()
+        {
             DbContext.SaveChanges();
 
             ResetDbStatus();
         }
 
-        public void SaveIEnumerable(IEnumerable<T> items)
+        public void SetStateForIEnumerable(IEnumerable<T> items)
         {
             foreach (var item in items)
             {
                 SetState(item);
             }
-            DbContext.SaveChanges();
-
-            ResetDbStatus();
         }
 
         /// <summary>
@@ -98,9 +101,7 @@ namespace DrugHouse.Model.Repositories
 
             item = SetState(item);
 
-            DbContext.SaveChanges();
-
-            ResetDbStatus();
+            SaveChanges();
 
             return item;
         }

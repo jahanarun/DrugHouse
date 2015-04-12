@@ -20,7 +20,7 @@ namespace DrugHouse.ViewModel.AdminScreen
             RefreshEntities();
         }
 
-        protected List<SimpleEntity> InternaList;
+        protected readonly List<SimpleEntity> InternaList;
         public ObservableCollection<DropdownItem> Entities = new ObservableCollection<DropdownItem>();
         private readonly string Marker;
 

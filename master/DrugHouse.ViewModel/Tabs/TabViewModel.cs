@@ -114,7 +114,7 @@ namespace DrugHouse.ViewModel.Tabs
 
         protected virtual void SaveOperations()
         {
-            Data.SaveChanges();   
+            Data.SaveTrackedChanges();   
         }
 
         protected bool CanExecuteSave()

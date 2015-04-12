@@ -113,10 +113,12 @@ namespace DrugHouse.ViewModel.Tabs
 
         protected override void SaveOperations()
         {
-            Data.SaveIEnumerable(Drugs);
-            Data.SaveIEnumerable(Diagnoses);
-            Data.SaveIEnumerable(Locations);
-            Data.SaveIEnumerable(Dictionary);
+            Data.SetStateForIEnumerable(Drugs);
+            Data.SetStateForIEnumerable(Diagnoses);
+            Data.SetStateForIEnumerable(Locations);
+            Data.SetStateForIEnumerable(Dictionary);
+
+            Data.SaveChanges();
         }
 
         

@@ -190,7 +190,7 @@ namespace DrugHouse.ViewModel.Tabs
         {
             using (var data = Data)
             {
-                data.SaveIEnumerable(InternalePatientList);
+                data.SetStateForIEnumerable(InternalePatientList);
             }
         }
 

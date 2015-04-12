@@ -15,6 +15,7 @@ namespace DrugHouse.Model
 
         #region PatientRepository
 
+        void SaveTrackedChanges();
         void SaveChanges();
         Patient SavePatient(Patient patient);
         ICollection<Patient> GetAllPatientPartialDetails();
@@ -28,7 +29,7 @@ namespace DrugHouse.Model
         #region POCO Repositories
 
         List<Drug> GetDrugs();
-        void SaveIEnumerable(IEnumerable<ModelBase> items);
+        void SetStateForIEnumerable(IEnumerable<ModelBase> items);
         List<SimpleEntity> GetDiagnoses();                 
         List<Drug> GetDrugs(Func<Drug, bool> condition);   
         List<SimpleEntity> GetLocations();

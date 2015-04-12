@@ -79,11 +79,23 @@ namespace DrugHouse.Model
             }
         }
 
-        public void SaveChanges()
+        public void SaveTrackedChanges()
         {
             try
             {
                 DrugHouseRepository.SaveTrackedChanges();
+            }
+            catch (Exception ex)
+            {
+                var innerEx = Helper.GetInnerMostException(ex);
+                throw new DataException(innerEx.Message, ex);
+            }
+        }
+        public void SaveChanges()
+        {
+            try
+            {
+                DrugHouseRepository.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -165,11 +177,11 @@ namespace DrugHouse.Model
             }
         }
 
-        public void SaveIEnumerable(IEnumerable<ModelBase> items)
+        public void SetStateForIEnumerable(IEnumerable<ModelBase> items)
         {
             try
             {
-                DrugHouseRepository.SaveIEnumerable(items);
+                DrugHouseRepository.SetStateForIEnumerable(items);
             }
             catch (Exception ex)
             {
