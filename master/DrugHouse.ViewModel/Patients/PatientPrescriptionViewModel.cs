@@ -23,7 +23,6 @@ namespace DrugHouse.ViewModel.Patients
         public PatientPrescriptionViewModel(PatientVisit visit, IDataAccess dataAccess)
         {
             DataAccess = dataAccess;
-            SelectedDrugCategoryList = new ObservableCollection<Drug>();
             AddDrugCommand = new RelayCommand(AddDrug, CanAddDrug);
             RemoveDrugCommand = new RelayCommand(RemoveDrug, CanRemoveDrug);
             Prescriptions = new ObservableCollection<PrescriptionRow>();
@@ -58,10 +57,9 @@ namespace DrugHouse.ViewModel.Patients
         #region Properties
         public ICollection<Drug> DrugList
         {
-            get { return MasterViewModel.Globals.Drugs(DataAccess); }
+            get { return MasterViewModel.Globals.Drugs(DataAccess).OrderBy(d => d.Name).ToList(); }
         }
 
-        public ObservableCollection<Drug> SelectedDrugCategoryList { get; private set; }
         
         public ObservableCollection<PrescriptionRow> Prescriptions { get; private set; }
 
@@ -97,7 +95,6 @@ namespace DrugHouse.ViewModel.Patients
                 SelectedDrugTypeValue = SelectedPrescriptionValue.DrugType;
                 SelectedDrugCountValue = SelectedPrescriptionValue.DrugCount;
                 SelectedRemarkValue = SelectedPrescriptionValue.Remark;
-                UpdateDrugList(SelectedDrugTypeValue);
 
                 SelectionChanged(PropName.SelectedDrug);
                 SelectionChanged(PropName.SelectedDrugCount);
@@ -121,7 +118,6 @@ namespace DrugHouse.ViewModel.Patients
                 if (Ignore) return;
                 SelectedDrugTypeValue = value;
                 SelectionChanged(PropName.SelectedDrugType);
-                UpdateDrugList(SelectedDrugTypeValue);
             }
         }
         public ICollection<string> PrescriptionCollection
@@ -216,33 +212,6 @@ namespace DrugHouse.ViewModel.Patients
 
         #region PrivateMethods
 
-        private void UpdateDrugList(DrugType drugType)
-        {
-            if (drugType == LastDrugType) return;
-            LastDrugType = drugType;
-            var tempList = new List<Drug>();
-            switch (drugType)
-            {
-                case DrugType.Capsule:
-                    tempList = DrugList.Where(e => e.DrugType == DrugType.Capsule).ToList();
-                    break;
-                case DrugType.Tablet:
-                    tempList = DrugList.Where(e => e.DrugType == DrugType.Tablet).ToList();
-                    break;
-                case DrugType.Syrup:
-                    tempList = DrugList.Where(e => e.DrugType == DrugType.Syrup).ToList();
-                    break;
-                case DrugType.Injection:
-                    tempList = DrugList.Where(e => e.DrugType == DrugType.Injection).ToList();
-                    break;
-            }
-            SelectedDrugCategoryList.Clear();
-            foreach (var drug in tempList)
-            {
-                SelectedDrugCategoryList.Add(drug);
-            }
-
-        }
 
         #endregion
 

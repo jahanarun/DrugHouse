@@ -9,6 +9,7 @@
              xmlns:valueConverter="clr-namespace:DrugHouse.ViewModel.ValueConverter;assembly=DrugHouse.Sticker"
              xmlns:enumerations="clr-namespace:DrugHouse.Shared.Enumerations;assembly=DrugHouse.Shared"
              xmlns:patients="clr-namespace:DrugHouse.ViewModel.Patients;assembly=DrugHouse.Sticker"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="671" 
              >
     <DockPanel LastChildFill="True" Margin="5,5,5,5">
@@ -59,19 +60,16 @@
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.Resources>
-                                <valueConverter:EnumDrugBooleanConverter x:Key="EnumDrugTypeConverter"/>
+                                <!--<valueConverter:EnumDrugBooleanConverter x:Key="EnumDrugTypeConverter"/>-->
+                                <valueConverter:DrugTypeConverter x:Key="DrugTypeConverter" />
                             </Grid.Resources>
 
                             <Grid>
                                 <Grid.Visibility>
                                     <Binding Path= "IsDrugPanelVisible" Converter="{StaticResource VisibilityConverter}" UpdateSourceTrigger="PropertyChanged" FallbackValue="Visible" />
                                 </Grid.Visibility>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="9*"/>
-                                </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" >
+                                <!--<StackPanel Grid.Column="0" >
                                     <StackPanel.Resources>
                                         <Style TargetType="{x:Type RadioButton}">
                                             <Setter Property="Focusable" Value="False" />
@@ -142,24 +140,6 @@
                                      ToolTip="Show only Syrup" Width="60"
                                      IsChecked="{Binding Path=SelectedDrugType, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Syrup}">
                                         <Label>Syrup</Label>
-                                        <!--<RadioButton.Template>
-                                            <ControlTemplate>
-                                                <Viewbox>
-                                                    <Border BorderBrush="Silver" CornerRadius="2,2,2,2" BorderThickness="1">
-                                                        <TextBlock Text="Syrup"/>
-                                                        <Border.Style>
-                                                            <Style TargetType="{x:Type Border}">
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=RadioButton}, Path=IsChecked}">
-                                                                        <Setter Property="Background" Value="Silver"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Border.Style>
-                                                    </Border>
-                                                </Viewbox>
-                                            </ControlTemplate>
-                                        </RadioButton.Template>-->
                                         
                                         <RadioButton.LayoutTransform>
                                             <RotateTransform  Angle="270"/>
@@ -181,10 +161,10 @@
                                             <RotateTransform  Angle="270"/>
                                         </RadioButton.LayoutTransform>
                                     </RadioButton>
-                                </StackPanel>
+                                </StackPanel>-->
 
                                 <Grid Grid.Column="1" Margin="5,0,5,0" >
-                                    <Grid.Style>
+                                    <!--<Grid.Style>
                                         <Style TargetType="{x:Type Grid}">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding ElementName=CapsuleRadioButton, Path=IsChecked}" Value="True">
@@ -204,7 +184,7 @@
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </Grid.Style>
+                                    </Grid.Style>-->
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="20"/>
@@ -229,12 +209,27 @@
                                     <TextBlock Grid.Row="4" Grid.Column="4" Text="Remarks" VerticalAlignment="Center" />
                                     <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Grid.ColumnSpan="2" 
                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                             ItemsSource="{Binding SelectedDrugCategoryList, Mode=TwoWay}" SelectedItem="{Binding SelectedDrug, Mode=TwoWay}">
+                                             ItemsSource="{Binding DrugList}" SelectedItem="{Binding SelectedDrug, Mode=TwoWay}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel Width="150">
+                                                <StackPanel x:Name="DrugItemPanel" Width="150">
                                                     <TextBlock Text="{Binding Name}"/>
                                                 </StackPanel>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Capsule">
+                                                        <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource CapsuleBackColorBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Tablet">
+                                                        <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource TabletBackColorBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Syrup">
+                                                        <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource SyrupBackColorBrush}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Injection">
+                                                        <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource InjectionBackColorBrush}"/>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                                
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                         <ListBox.ItemsPanel>
