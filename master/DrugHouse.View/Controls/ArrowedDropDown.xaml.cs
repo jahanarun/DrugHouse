@@ -125,6 +125,7 @@ namespace DrugHouse.View.Controls
         private void OpenPopup()
         {
             ListPopup.IsOpen = true;
+            MainTextBox.Text = "";
         }
         private void ClosePopupMenu()
         {
