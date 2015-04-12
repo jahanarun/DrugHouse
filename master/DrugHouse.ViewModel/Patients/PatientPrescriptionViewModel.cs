@@ -232,8 +232,8 @@ namespace DrugHouse.ViewModel.Patients
                 case DrugType.Syrup:
                     tempList = DrugList.Where(e => e.DrugType == DrugType.Syrup).ToList();
                     break;
-                case DrugType.Syringe:
-                    tempList = DrugList.Where(e => e.DrugType == DrugType.Syringe).ToList();
+                case DrugType.Injection:
+                    tempList = DrugList.Where(e => e.DrugType == DrugType.Injection).ToList();
                     break;
             }
             SelectedDrugCategoryList.Clear();

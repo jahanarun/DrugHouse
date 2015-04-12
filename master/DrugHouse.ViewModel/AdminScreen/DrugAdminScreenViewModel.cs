@@ -107,14 +107,14 @@ namespace DrugHouse.ViewModel.AdminScreen
             }
         }
 
-        private bool IsSyringeValue;
+        private bool IsInjectionValue;
 
-        public bool IsSyringe
+        public bool IsInjection
         {
-            get { return IsSyringeValue; }
+            get { return IsInjectionValue; }
             set
             {
-                IsSyringeValue = value;
+                IsInjectionValue = value;
                 FilterDrugCommand.Execute(null);
             }
         }
@@ -213,43 +213,43 @@ namespace DrugHouse.ViewModel.AdminScreen
             var result = Drugs.Where(condition).ToList();
 
             // Inefficient coding - to be replaced after understanding dynamic LINQ
-            if (IsCapsule && !IsSyrup && !IsTablet && !IsSyringe)
+            if (IsCapsule && !IsSyrup && !IsTablet && !IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Capsule).ToList();
-            else if (!IsCapsule && IsSyrup && !IsTablet && !IsSyringe)
+            else if (!IsCapsule && IsSyrup && !IsTablet && !IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Syrup).ToList();
-            else if (!IsCapsule && !IsSyrup && IsTablet && !IsSyringe)
+            else if (!IsCapsule && !IsSyrup && IsTablet && !IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Tablet).ToList();
-            else if (!IsCapsule && !IsSyrup && !IsTablet && IsSyringe)
-                result = result.Where(d => d.DrugType == DrugType.Syringe).ToList();
+            else if (!IsCapsule && !IsSyrup && !IsTablet && IsInjection)
+                result = result.Where(d => d.DrugType == DrugType.Injection).ToList();
 
-            else if (IsCapsule && IsSyrup && !IsTablet && !IsSyringe)
+            else if (IsCapsule && IsSyrup && !IsTablet && !IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Capsule || d.DrugType == DrugType.Syrup).ToList();
-            else if (IsCapsule && !IsSyrup && IsTablet && !IsSyringe)
+            else if (IsCapsule && !IsSyrup && IsTablet && !IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Capsule || d.DrugType == DrugType.Tablet).ToList();
-            else if (IsCapsule && !IsSyrup && !IsTablet && IsSyringe)
-                result = result.Where(d => d.DrugType == DrugType.Capsule || d.DrugType == DrugType.Syringe).ToList();
+            else if (IsCapsule && !IsSyrup && !IsTablet && IsInjection)
+                result = result.Where(d => d.DrugType == DrugType.Capsule || d.DrugType == DrugType.Injection).ToList();
 
-            else if (!IsCapsule && IsSyrup && IsTablet && !IsSyringe)
+            else if (!IsCapsule && IsSyrup && IsTablet && !IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Tablet || d.DrugType == DrugType.Syrup).ToList();
-            else if (!IsCapsule && IsSyrup && !IsTablet && IsSyringe)
-                result = result.Where(d => d.DrugType == DrugType.Syrup || d.DrugType == DrugType.Syringe).ToList();
+            else if (!IsCapsule && IsSyrup && !IsTablet && IsInjection)
+                result = result.Where(d => d.DrugType == DrugType.Syrup || d.DrugType == DrugType.Injection).ToList();
 
-            else if (!IsCapsule && !IsSyrup && IsTablet && IsSyringe)
-                result = result.Where(d => d.DrugType == DrugType.Tablet || d.DrugType == DrugType.Syringe).ToList();
+            else if (!IsCapsule && !IsSyrup && IsTablet && IsInjection)
+                result = result.Where(d => d.DrugType == DrugType.Tablet || d.DrugType == DrugType.Injection).ToList();
 
-            else if (!IsCapsule && IsSyrup && IsTablet && IsSyringe)
+            else if (!IsCapsule && IsSyrup && IsTablet && IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Syrup 
-                                        || d.DrugType == DrugType.Syringe 
+                                        || d.DrugType == DrugType.Injection 
                                         || d.DrugType == DrugType.Tablet).ToList();
-            else if (IsCapsule && !IsSyrup && IsTablet && IsSyringe)
+            else if (IsCapsule && !IsSyrup && IsTablet && IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Capsule 
                                         || d.DrugType == DrugType.Tablet 
-                                        || d.DrugType == DrugType.Syringe).ToList();
-            else if (IsCapsule && IsSyrup && !IsTablet && IsSyringe)
+                                        || d.DrugType == DrugType.Injection).ToList();
+            else if (IsCapsule && IsSyrup && !IsTablet && IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Syrup 
-                                        || d.DrugType == DrugType.Syringe 
+                                        || d.DrugType == DrugType.Injection 
                                         || d.DrugType == DrugType.Capsule).ToList();
-            else if (IsCapsule && IsSyrup && IsTablet && !IsSyringe)
+            else if (IsCapsule && IsSyrup && IsTablet && !IsInjection)
                 result = result.Where(d => d.DrugType == DrugType.Capsule 
                                         || d.DrugType == DrugType.Syrup 
                                         || d.DrugType == DrugType.Tablet).ToList();

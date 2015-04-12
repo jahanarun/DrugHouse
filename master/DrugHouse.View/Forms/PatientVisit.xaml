@@ -25,7 +25,7 @@
                     <DockPanel.Resources>
                         <SolidColorBrush x:Key="CapsuleBackColorBrush" Color="LightGoldenrodYellow"/>
                         <SolidColorBrush x:Key="TabletBackColorBrush" Color="LightBlue"/>
-                        <SolidColorBrush x:Key="SyringeBackColorBrush" Color="LightCoral"/>
+                        <SolidColorBrush x:Key="InjectionBackColorBrush" Color="LightCoral"/>
                         <SolidColorBrush x:Key="SyrupBackColorBrush" Color="LightGreen"/>
                         <SolidColorBrush x:Key="NoDrugBackColorBrush" Color="White"/>
                     </DockPanel.Resources>
@@ -165,10 +165,10 @@
                                             <RotateTransform  Angle="270"/>
                                         </RadioButton.LayoutTransform>
                                     </RadioButton>
-                                    <RadioButton Name="SyringeRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
-                                     ToolTip="Show only Syringe" Width="60" 
-                                     IsChecked="{Binding Path=SelectedDrugType, Mode=TwoWay, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Syringe}">
-                                        <Label>Syringe</Label>
+                                    <RadioButton Name="InjectionRadioButton" Height="30" HorizontalAlignment="Left" GroupName="DrugSelector"
+                                     ToolTip="Show only Injection" Width="60" 
+                                     IsChecked="{Binding Path=SelectedDrugType, Mode=TwoWay, Converter={StaticResource EnumDrugTypeConverter}, ConverterParameter=Injection}">
+                                        <Label>Injection</Label>
                                         <RadioButton.LayoutTransform>
                                             <RotateTransform  Angle="270"/>
                                         </RadioButton.LayoutTransform>
@@ -196,8 +196,8 @@
                                                 <DataTrigger Binding="{Binding ElementName=TabletRadioButton, Path=IsChecked}" Value="True">
                                                     <Setter Property="Background" Value="{StaticResource TabletBackColorBrush}"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding ElementName=SyringeRadioButton, Path=IsChecked}" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource SyringeBackColorBrush}"/>
+                                                <DataTrigger Binding="{Binding ElementName=InjectionRadioButton, Path=IsChecked}" Value="True">
+                                                    <Setter Property="Background" Value="{StaticResource InjectionBackColorBrush}"/>
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding ElementName=NoneRadioButton, Path=IsChecked}" Value="True">
                                                     <Setter Property="Background" Value="{StaticResource NoDrugBackColorBrush}"/>
@@ -321,8 +321,8 @@
                                                     <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Tablet}">
                                                         <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource TabletBackColorBrush}"></Setter>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Syringe}">
-                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource SyringeBackColorBrush}"></Setter>
+                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Injection}">
+                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource InjectionBackColorBrush}"></Setter>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.None}">
                                                         <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource NoDrugBackColorBrush}"></Setter>

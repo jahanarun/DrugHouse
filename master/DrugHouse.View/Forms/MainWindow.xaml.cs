@@ -55,7 +55,7 @@ namespace DrugHouse.View.Forms
             {
                 child.RowDefinitions[0].Height = new GridLength(0);
             }
-            Ribbon.Height = 70;
+            Ribbon.Height = 80;
         }
     }
 }

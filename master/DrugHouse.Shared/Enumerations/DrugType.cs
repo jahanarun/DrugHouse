@@ -5,7 +5,7 @@
         Tablet,
         Syrup,
         Capsule,
-        Syringe,
+        Injection,
         None
     }
 }

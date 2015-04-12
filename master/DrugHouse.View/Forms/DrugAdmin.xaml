@@ -127,7 +127,7 @@
                 <CheckBox Content="Tablet" Grid.Column="0" IsChecked="{Binding IsTablet, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
                 <CheckBox Content="Syrup" Grid.Column="1" IsChecked="{Binding IsSyrup, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
                 <CheckBox Content="Capsule" Grid.Column="2" IsChecked="{Binding IsCapsule, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-                <CheckBox Content="Syringe" Grid.Column="3" IsChecked="{Binding IsSyringe, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                <CheckBox Content="Injection" Grid.Column="3" IsChecked="{Binding IsInjection, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
             <StackPanel Grid.Row="4" Orientation="Horizontal">
                 <Button x:Name="AddDrugButton"  Width="100" Height="30" HorizontalAlignment="Left" Content="Add New Drug"

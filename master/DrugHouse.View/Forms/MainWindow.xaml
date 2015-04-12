@@ -98,7 +98,7 @@
                 </RibbonApplicationMenu>
 
             </Ribbon.ApplicationMenu>
-            <RibbonTab>
+            <RibbonTab Header="Home">
                 <RibbonGroup>
                     <RibbonButton x:Name="RibbonSaveButton" LargeImageSource="../Resources/Images/System-Save-icon.png"  Label="Save"
 								  DataContext="{Binding TabManager}"
