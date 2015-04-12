@@ -3,6 +3,8 @@
 
 using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using DrugHouse.Shared.Helpers;
 using DrugHouse.View.Properties;
 using DrugHouse.View.Services;
@@ -44,6 +46,16 @@ namespace DrugHouse.View.Forms
         private void RootWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = !ViewModel.PrepareClosing();
+        }
+
+        private void Ribbon_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var child = VisualTreeHelper.GetChild((DependencyObject)sender, 0) as Grid;
+            if (child != null)
+            {
+                child.RowDefinitions[0].Height = new GridLength(0);
+            }
+            Ribbon.Height = 70;
         }
     }
 }

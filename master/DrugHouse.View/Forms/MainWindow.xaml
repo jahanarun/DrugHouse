@@ -18,71 +18,64 @@
 		MinHeight="700" MinWidth="1000"
 		Height="800" Width="1200"
 		Closed="MainWindow_Closed" Closing="RootWindow_Closing">
-	<Window.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="../Resources/MasterTabControlDictionary.xaml"/>
-			</ResourceDictionary.MergedDictionaries>
-			<valueConverter:VisibilityConverter x:Key="VisibilityConverter"/>
-		</ResourceDictionary>
-	</Window.Resources>
-	<Window.DataContext>
-		<Binding Path="MasterWindowViewModel" Source="{StaticResource Locator}"/>
-	</Window.DataContext>
-	<Grid d:DataContext="{d:DesignInstance vm:MasterViewModel}" Background="LightGray">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="46"/>
-			<RowDefinition />
-		</Grid.RowDefinitions>
-		
-		<!--<Grid Grid.Row="0" ZIndex="1" Grid.RowSpan="2" Background="{StaticResource TransparentBrush}" >
-			<Grid.Visibility>
-				<Binding Path="IsInitializing" Converter="{StaticResource VisibilityConverter}" UpdateSourceTrigger="PropertyChanged" FallbackValue="Visible" />
-			</Grid.Visibility>
-			<TextBlock FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center">
-				Please wait while trying to establish connection
-			</TextBlock>
-		</Grid>-->
-		
-		<Ribbon Title="" Grid.Row="0" VerticalAlignment="Top" Background="LightGray" 
-				d:DataContext="{d:DesignInstance vm:MasterViewModel}" >
-			<Ribbon.ApplicationMenu>
-				<RibbonApplicationMenu Label=""
-							   VerticalAlignment="Top" HorizontalAlignment="Left" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/MasterTabControlDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <valueConverter:VisibilityConverter x:Key="VisibilityConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Path="MasterWindowViewModel" Source="{StaticResource Locator}"/>
+    </Window.DataContext>
+    <Grid d:DataContext="{d:DesignInstance vm:MasterViewModel}" Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <Ribbon x:Name="Ribbon" Title="" Grid.Row="0" VerticalAlignment="Top" Background="LightGray" Height="100" 
+				d:DataContext="{d:DesignInstance vm:MasterViewModel}" Loaded="Ribbon_OnLoaded">
+
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu Label=""   
+							   HorizontalAlignment="Left" >
                     <RibbonApplicationMenuItem Header="Patient" KeyTip="P" ImageSource="../Resources/Images/People-Patient-Male-icon.png" SnapsToDevicePixels="False">
-						<RibbonApplicationMenuItem Header="Create Patient" KeyTip="N" ImageSource="../Resources/Images/add.png" SnapsToDevicePixels="False"
+                        <RibbonApplicationMenuItem Header="Create Patient" KeyTip="N" ImageSource="../Resources/Images/add.png" SnapsToDevicePixels="False"
 												   Command="{Binding NewPatientCommand}"/>
                         <RibbonApplicationMenuItem Header="Search Patient" KeyTip="S" ImageSource="../Resources/Images/search.png" SnapsToDevicePixels="False"
 												   Command="{Binding SearchPatientCommand}"/>
-					</RibbonApplicationMenuItem>
+                    </RibbonApplicationMenuItem>
                     <RibbonApplicationMenuItem Header="Administration" KeyTip="A" ImageSource="../Resources/Images/settings-icon (2).png" SnapsToDevicePixels="False">
                         <RibbonApplicationMenuItem Header="Drug" KeyTip="D" ImageSource="../Resources/Images/medical_pot_pills.png" SnapsToDevicePixels="False"
 												   Command="{Binding OpenAdminScreenCommand}" CommandParameter="{x:Static adminScreen:AdminScreenType.DrugAdmin}"/>
                         <RibbonApplicationMenuItem Header="Other Fields" KeyTip="F" ImageSource="../Resources/Images/equalizer-512.png" SnapsToDevicePixels="False"
 												   Command="{Binding OpenAdminScreenCommand}" CommandParameter="{x:Static adminScreen:AdminScreenType.DropdownAdmin}"/>
-					</RibbonApplicationMenuItem>
-					<RibbonSeparator/>
+                    </RibbonApplicationMenuItem>
+                    <RibbonSeparator/>
                     <RibbonApplicationSplitMenuItem Header="Reports" KeyTip="R" ImageSource="../Resources/Images/reports-icon.png" SnapsToDevicePixels="False"
 											   Command="{Binding OpenReportCommand}"/>
-					<RibbonApplicationMenu.FooterPaneContent>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0">
-								<RibbonButton Content="My Music" />
-								<RibbonButton Content="Web Folders"  />
-								<RibbonButton Content="Settings" />
-							</StackPanel>
-							<RibbonButton  Label="Exit" HorizontalAlignment="Right" Grid.Column="2" Command="{Binding ExitCommand}"  />
-						</Grid>
-					</RibbonApplicationMenu.FooterPaneContent>
+                    <RibbonApplicationMenu.FooterPaneContent>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0">
+                                <RibbonButton Content="My Music" />
+                                <RibbonButton Content="Web Folders"  />
+                                <RibbonButton Content="Settings" />
+                            </StackPanel>
+                            <RibbonButton  Label="Exit" HorizontalAlignment="Right" Grid.Column="2" Command="{Binding ExitCommand}"  />
+                        </Grid>
+                    </RibbonApplicationMenu.FooterPaneContent>
 
-					<!--<RibbonApplicationMenu.Template>
+                    <!--<RibbonApplicationMenu.Template>
 				-->
-					<!--<ControlTemplate>
+                    <!--<ControlTemplate>
 					<RibbonToggleButton>
 						<RibbonToggleButton.Template>
 							<ControlTemplate>
@@ -99,50 +92,59 @@
 						</RibbonToggleButton.Template>
 					</RibbonToggleButton>
 				</ControlTemplate>-->
-					<!--
+                    <!--
 			</RibbonApplicationMenu.Template>-->
 
-				</RibbonApplicationMenu>
-			</Ribbon.ApplicationMenu>
-			<Ribbon.QuickAccessToolBar>
-				<RibbonQuickAccessToolBar>
-					<RibbonButton x:Name="RibbonSaveButton" SmallImageSource="../Resources/Images/System-Save-icon.png" 
+                </RibbonApplicationMenu>
+
+            </Ribbon.ApplicationMenu>
+            <RibbonTab>
+                <RibbonGroup>
+                    <RibbonButton x:Name="RibbonSaveButton" LargeImageSource="../Resources/Images/System-Save-icon.png"  Label="Save"
 								  DataContext="{Binding TabManager}"
 								  Command="{Binding SaveTabCommand}"/>
-				</RibbonQuickAccessToolBar>
-			</Ribbon.QuickAccessToolBar>
-		</Ribbon>
 
-        <Grid Grid.Row="1" DataContext="{Binding TabManager}" >  
-		    <TabControl Style="{StaticResource TabControlStyle}" 
+                </RibbonGroup>
+            </RibbonTab>
+            <!--<Ribbon.QuickAccessToolBar>
+                <RibbonQuickAccessToolBar>
+                    <RibbonButton x:Name="RibbonSaveButton" SmallImageSource="../Resources/Images/System-Save-icon.png" 
+								  DataContext="{Binding TabManager}"
+								  Command="{Binding SaveTabCommand}"/>
+                </RibbonQuickAccessToolBar>
+            </Ribbon.QuickAccessToolBar>-->
+        </Ribbon>
+
+        <Grid Grid.Row="1" DataContext="{Binding TabManager}" >
+            <TabControl Style="{StaticResource TabControlStyle}" 
 					ItemContainerStyle="{StaticResource TabItemStyle}" ItemsSource="{Binding TabItems}" 
 					SelectedItem="{Binding SelectedTab, Mode=TwoWay}">
-			<TabControl.Resources>
-				<DataTemplate DataType="{x:Type tabs:PatientMasterViewModel}">
-					<forms:PatientListView/>
-				</DataTemplate>
-				<DataTemplate DataType="{x:Type tabs:PatientViewModel}">
-					<forms:PatientView />
-				</DataTemplate>
-				<DataTemplate DataType="{x:Type tabs:AdminScreenMasterViewModel}">
-					<forms:AdminScreen />
-				</DataTemplate>
-				<DataTemplate DataType="{x:Type tabs:ReportScreenViewModel}">
-					<forms:ReportScreen/>
-				</DataTemplate>          
-			</TabControl.Resources>
-		</TabControl>
+                <TabControl.Resources>
+                    <DataTemplate DataType="{x:Type tabs:PatientMasterViewModel}">
+                        <forms:PatientListView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type tabs:PatientViewModel}">
+                        <forms:PatientView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type tabs:AdminScreenMasterViewModel}">
+                        <forms:AdminScreen />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type tabs:ReportScreenViewModel}">
+                        <forms:ReportScreen/>
+                    </DataTemplate>
+                </TabControl.Resources>
+            </TabControl>
 
         </Grid>
 
         <controls:LoadingOverlay Grid.Row="1" TextProperty="Please wait while trying to establish connection"
 								 ZIndex="0" DataContext="{Binding ElementName=RootWindow, Path=DataContext}">
-			<controls:LoadingOverlay.Visibility>
-				<Binding Path="IsInitializing" Converter="{StaticResource VisibilityConverter}" UpdateSourceTrigger="PropertyChanged" FallbackValue="Visible" />
-			</controls:LoadingOverlay.Visibility>
+            <controls:LoadingOverlay.Visibility>
+                <Binding Path="IsInitializing" Converter="{StaticResource VisibilityConverter}" UpdateSourceTrigger="PropertyChanged" FallbackValue="Visible" />
+            </controls:LoadingOverlay.Visibility>
 
-		</controls:LoadingOverlay>
+        </controls:LoadingOverlay>
 
 
-	</Grid>
+    </Grid>
 </Window>
