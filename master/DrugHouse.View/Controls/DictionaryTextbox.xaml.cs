@@ -141,7 +141,7 @@ namespace DrugHouse.View.Controls
 
         private bool TryFindingWordMatch(string word, out List<string> result)
         {
-            var matching = DictionaryItems.Where(p => p.ToUpper().Contains(word.ToUpper())).OrderBy(s => s);
+            var matching = DictionaryItems.Where(p => p.ToUpper().StartsWith(word.ToUpper())).OrderBy(s => s);
             if (matching.Any())
             {
                 result = matching.ToList();

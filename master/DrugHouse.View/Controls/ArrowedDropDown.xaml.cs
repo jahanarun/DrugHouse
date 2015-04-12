@@ -155,7 +155,7 @@ namespace DrugHouse.View.Controls
             if (word.Length < 1)
                 condition = (p) => true;
             else
-                condition = (item) => item.ToString().ToUpper().Contains(word.ToUpper());
+                condition = (item) => item.ToString().ToUpper().StartsWith(word.ToUpper());
 
             result = DictionaryItems.Where(condition).OrderBy(s => s).ToList();
         }
