@@ -67,12 +67,12 @@ namespace DrugHouse.ViewModel.Patients
             }
         }
    
-        public string CaseDate
+        public DateTime CaseDate
         {
-            get { return Case.Date.ToString(CultureInfo.InvariantCulture); }
+            get { return Case.Date; }
             set
             {
-                Case.Date = DateTime.ParseExact(value, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                Case.Date = value;
                 SelectionChanged(PropNameBase.CaseDate);
             }
         }
@@ -94,7 +94,7 @@ namespace DrugHouse.ViewModel.Patients
             var timer = new Timer {Interval = 1000};
             timer.Elapsed += (sender, e) =>
             {
-                CaseDate = DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss");
+                CaseDate = DateTime.Now;
                 if (Case.DbStatus != RepositoryStatus.New)
                     timer.Stop();
             };
