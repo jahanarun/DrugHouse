@@ -104,11 +104,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ArrowedDropDown.xaml.cs">
+      <DependentUpon>ArrowedDropDown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DictionaryTextbox.xaml.cs">
       <DependentUpon>DictionaryTextbox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FilterDropDown.xaml.cs">
-      <DependentUpon>FilterDropDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LoadingOverlay.xaml.cs">
       <DependentUpon>LoadingOverlay.xaml</DependentUpon>
@@ -145,11 +145,11 @@
     <Compile Include="Forms\PatientVisit.xaml.cs">
       <DependentUpon>PatientVisit.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\DictionaryTextbox.xaml">
+    <Page Include="Controls\ArrowedDropDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\FilterDropDown.xaml">
+    <Page Include="Controls\DictionaryTextbox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

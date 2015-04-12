@@ -371,11 +371,11 @@
                             <localControls:DictionaryTextbox  Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" Margin="0,5,0,10"
                                                               DictionaryItems="{Binding DictionaryItems}" 
                                                               Text="{Binding Path=History, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <localControls:FilterDropDown x:Name="PrimaryDiagnosisComboBox" Grid.Row="0" Grid.Column="4" Width="200"
+                            <localControls:ArrowedDropDown x:Name="PrimaryDiagnosisComboBox" Grid.Row="0" Grid.Column="4" Width="200"
                                                           HorizontalAlignment="Left" VerticalAlignment="Center"
-                                                          ItemsSource="{Binding DiagnosesItems}" SelectedItem="{Binding Path=PrimaryDiagnosis, Mode=TwoWay}" />
-                            <localControls:FilterDropDown Grid.Column="4" Grid.Row="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                                          ItemsSource="{Binding DiagnosesItems}" SelectedItem="{Binding SecondaryDiagnosis, Mode=TwoWay}"/>
+                                                          DictionaryItems="{Binding DiagnosesItems}" SelectedItem="{Binding Path=PrimaryDiagnosis, Mode=TwoWay}" />
+                            <localControls:ArrowedDropDown Grid.Column="4" Grid.Row="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                          DictionaryItems="{Binding DiagnosesItems}" SelectedItem="{Binding SecondaryDiagnosis, Mode=TwoWay}"/>
                             <localControls:DictionaryTextbox Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" Margin="0,5,0,10"
                                                              DictionaryItems="{Binding DictionaryItems}" 
                                                              Text="{Binding Path=Observation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
