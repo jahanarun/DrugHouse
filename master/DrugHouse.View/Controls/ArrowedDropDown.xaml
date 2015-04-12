@@ -52,7 +52,7 @@
         <Popup Name="ListPopup"   AllowsTransparency="True"  Width="{StaticResource PopupWidth}"
                Height="{StaticResource PopupHeight}"
 			   PlacementTarget="{Binding ElementName=ArrowButton}"
-			   StaysOpen="False" Opened="ListPopup_OnOpened">
+			   StaysOpen="False" Opened="ListPopup_OnOpened" Closed="ListPopup_OnClosed">
             <Border  Background="WhiteSmoke" BorderThickness="1" BorderBrush="Silver" Height="220"  
                      Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5">
                 <Grid Margin="5,5,5,5">
@@ -60,7 +60,7 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBox x:Name="MainTextBox" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    <TextBox x:Name="MainTextBox" Text="{Binding Text, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
                              Grid.Row="0"
                              PreviewKeyDown="MainTextBox_OnPreviewKeyDown" PreviewKeyUp="MainTextBox_OnPreviewKeyUp" >
 
@@ -68,7 +68,7 @@
                     <ListBox x:Name="ItemsListBox" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Stretch" Background="AntiqueWhite"
                              Grid.Row="1"
 						  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                         SelectedItem="{Binding SelectedItem}"  ItemsSource="{Binding MatchedItems}" 
+                         SelectedItem="{Binding PopupSelectedItem}"  ItemsSource="{Binding MatchedItems}" 
                          KeyDown="ItemsListBox_OnKeyDown" PreviewKeyDown="ItemsListBox_OnKeyDown"
                          PreviewMouseUp="ItemsListBox_OnPreviewMouseUp">
                         <ListBox.ItemTemplate>

@@ -20,6 +20,8 @@ namespace DrugHouse.View.Controls
         #region Constructor
         public ArrowedDropDown()
         {
+            //DictionaryItems = new List<ToggleButtonItem>();
+            MatchedItems = new ObservableCollection<ToggleButtonItem>();
             InitializeComponent();
             ItemSourceEvent += (o, e) => InitializeList();
         }
@@ -75,6 +77,8 @@ namespace DrugHouse.View.Controls
             }
         }
 
+        public ToggleButtonItem PopupSelectedItem { get; set; }
+
         private ObservableCollection<ToggleButtonItem> MatchedItemsValue;
         private string TextValue;
 
@@ -93,6 +97,9 @@ namespace DrugHouse.View.Controls
             get { return TextValue; }
             set
             {
+                if (value == TextValue)
+                    return;
+
                 TextValue = value;
                 Filter();
             }
@@ -106,6 +113,7 @@ namespace DrugHouse.View.Controls
             if (DictionaryItems == null)
                 return;
             MatchedItems = new ObservableCollection<ToggleButtonItem>(DictionaryItems);
+            Filter();
         }
 
         private void RefreshDictionaryList(string word)
@@ -124,8 +132,11 @@ namespace DrugHouse.View.Controls
 
         private void OpenPopup()
         {
-            ListPopup.IsOpen = true;
-            MainTextBox.Text = "";
+            if (!ListPopup.IsOpen)
+            {
+                ListPopup.IsOpen = true;
+                MainTextBox.Text = "";
+            }
         }
         private void ClosePopupMenu()
         {
@@ -134,6 +145,12 @@ namespace DrugHouse.View.Controls
 
         private void GetMatchedItems(string word, out List<ToggleButtonItem> result)
         {
+            if (DictionaryItems == null)
+            {
+                result = new List<ToggleButtonItem>();
+                return;
+            }
+
             Func<ToggleButtonItem, bool> condition;
             if (word.Length < 1)
                 condition = (p) => true;
@@ -178,7 +195,7 @@ namespace DrugHouse.View.Controls
             return false;
         }
 
-        private bool TrySelectionKeys(Key key)
+        private bool TryCommitKeys(Key key)
         {
             switch (key)
             {
@@ -205,7 +222,7 @@ namespace DrugHouse.View.Controls
         {
             if (IsNavigationalKey(e.Key))
                 return;
-            Filter();
+            //Filter();
 
         }
         private void MainTextBox_OnPreviewKeyDown(object sender, KeyEventArgs e)
@@ -238,7 +255,7 @@ namespace DrugHouse.View.Controls
                     return;
 
             }
-            if (TrySelectionKeys(e.Key))
+            if (TryCommitKeys(e.Key))
                 e.Handled = true;
 
         }
@@ -249,7 +266,7 @@ namespace DrugHouse.View.Controls
                 ClosePopupMenu();
                 return;
             }
-            if (TrySelectionKeys(e.Key))
+            if (TryCommitKeys(e.Key))
             {
                 e.Handled = true;
                 return;
@@ -298,6 +315,10 @@ namespace DrugHouse.View.Controls
 
         #endregion
 
-
+        private void ListPopup_OnClosed(object sender, EventArgs e)
+        {
+            SelectedItem = PopupSelectedItem;
+        }
     }
+
 }
