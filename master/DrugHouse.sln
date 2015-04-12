@@ -108,6 +108,7 @@ Global
 		{3A82B552-F7AC-4BD7-88D4-3C272AFB2C13}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C5C3EBED-F21C-4A1D-B9D3-524ADABCF8EE}.Debug|Any CPU.ActiveCfg = Debug
 		{C5C3EBED-F21C-4A1D-B9D3-524ADABCF8EE}.Release|Any CPU.ActiveCfg = Release
+		{C5C3EBED-F21C-4A1D-B9D3-524ADABCF8EE}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -319,6 +319,10 @@ namespace DrugHouse.View.Controls
                             listBoxItem.Focus();
                         break;
 
+                    case Key.Escape:
+                        ClosePopupMenu();
+                        return;
+
                 }
                 if (TrySelectionKeys(e.Key))
                     e.Handled = true;
@@ -327,6 +331,11 @@ namespace DrugHouse.View.Controls
         }
         private void ItemsListBox_OnKeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.Escape)
+            {
+                ClosePopupMenu();
+                return;
+            }
             if (TrySelectionKeys(e.Key))
             {
                 e.Handled = true;
