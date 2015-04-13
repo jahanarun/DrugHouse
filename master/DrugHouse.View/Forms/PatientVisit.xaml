@@ -11,6 +11,7 @@
              xmlns:patients="clr-namespace:DrugHouse.ViewModel.Patients;assembly=DrugHouse.Sticker"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="671" 
+             GotFocus="PatientVisit_OnGotFocus"
              >
     <DockPanel LastChildFill="True" Margin="5,5,5,5">
         <DockPanel.Resources>
@@ -360,7 +361,7 @@
                             <TextBlock Grid.Column="3" Grid.Row="1" Margin="0,5" >Secondary Diagnosis:</TextBlock>
                             <TextBlock Grid.Column="3" Grid.Row="2" Margin="0,5">Observation:</TextBlock>
                             <TextBlock Grid.Column="3" Grid.Row="5" Margin="0,5">Treatment:</TextBlock>
-                            <localControls:DictionaryTextbox Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="0,5,0,10"
+                            <localControls:DictionaryTextbox x:Name="ComplaintTextbox" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="0,5,0,10"
                                                              DictionaryItems="{Binding DictionaryItems}" 
                                                              Text="{Binding Path=Complaints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <localControls:DictionaryTextbox  Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" Margin="0,5,0,10"

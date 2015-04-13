@@ -98,6 +98,7 @@
     <Compile Include="RowItems\PatientListRow.cs" />
     <Compile Include="ValueConverter\DrugTypeConverter.cs" />
     <Compile Include="ValueConverter\EnumDrugBooleanConverter.cs" />
+    <Compile Include="ValueConverter\SelecteTabConverter.cs" />
     <Compile Include="ValueConverter\VisibilityConverter.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Patients\PatientVisitViewModel.cs" />

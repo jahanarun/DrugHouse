@@ -12,21 +12,30 @@ namespace DrugHouse.ViewModel.Tabs
     [TabAttribute("9DC11748-A992-4758-AA24-2862B75D30CB")]
     public class ReportScreenViewModel:TabViewModel
     {
-        public ReportScreenViewModel(MasterViewModel vm) : base(vm)
+        public RelayCommand GenerateReportCommand { get; private set; }
+        public ReportScreenViewModel(MasterViewModel vm)
+            : base(vm)
         {
             ReportScreenCollection = ReportScreenFactory.GetReportTypeRows();
             GenerateReportCommand = new RelayCommand(ExecuteGenerateCommand, CanExecuteGenerateCommand);
         }
 
+ 
+        public class CommandMarker
+        {
+            public const string GenerateReport = "GenerateReport";
+        }
+
+        #region Properties
         public class PropName
         {
             public const string SelectedReport = "SelectedReport";
             public const string TabName = "TabName";
         }
 
-        public RelayCommand GenerateReportCommand { get; private set; }
         public ICollection<TypeRow> ReportScreenCollection { get; private set; }
 
+        private TypeRow SelectedReportScreenTypeValue;
         public TypeRow SelectedReportScreenType
         {
             get { return SelectedReportScreenTypeValue; }
@@ -38,7 +47,6 @@ namespace DrugHouse.ViewModel.Tabs
             }
         }
 
-        private TypeRow SelectedReportScreenTypeValue;
         private IReportScreen SelectedReportValue;
 
         public IReportScreen SelectedReport
@@ -59,6 +67,10 @@ namespace DrugHouse.ViewModel.Tabs
             get { return "Report"; }
         }
 
+        #endregion
+
+        #region Private Members
+
         private static IReportScreen GetReportScreen(Type type)
         {
             var result = ReportScreenFactory.GetReportScreen(type);
@@ -73,6 +85,12 @@ namespace DrugHouse.ViewModel.Tabs
         {
             SelectedReport.GenerateReportAsync();
         }
+        #endregion
+
+        #region Overridden Members
+
+        #endregion
+
 
     }
 }

@@ -36,8 +36,12 @@
         </Grid.RowDefinitions>
 
 
-        <Ribbon x:Name="Ribbon" Title="" Grid.Row="0" VerticalAlignment="Top" Background="LightGray" Height="100" 
+        <Ribbon x:Name="Ribbon" Title="" Grid.Row="0" VerticalAlignment="Top" Background="LightGray" 
 				d:DataContext="{d:DesignInstance vm:MasterViewModel}" Loaded="Ribbon_OnLoaded">
+            
+            <Ribbon.Resources>
+                <valueConverter:SelecteTabConverter x:Key="SelectedTabConverter" />
+            </Ribbon.Resources>
 
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu Label=""   
@@ -105,6 +109,41 @@
 								  Command="{Binding SaveTabCommand}"/>
 
                 </RibbonGroup>
+                
+                <RibbonGroup x:Name="ReportGroup" Visibility="{Binding Path=TabManager.SelectedTab
+                                                               , Converter={StaticResource SelectedTabConverter}
+                                                               , ConverterParameter=ReportScreenViewModel}">
+                    <RibbonButton x:Name="GenerateReportButton" LargeImageSource="../Resources/Images/reload.png" Label="Generate Report"
+                                  Command="{Binding GenerateReportCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    
+                </RibbonGroup>
+                <RibbonGroup x:Name="PatientMasterRibbonGroup" Visibility="{Binding Path=TabManager.SelectedTab
+                                                               , Converter={StaticResource SelectedTabConverter}
+                                                               , ConverterParameter=PatientMasterViewModel}">
+                    <RibbonButton x:Name="NewPatientButton" LargeImageSource="../Resources/Images/add.png" Label="New Patient"
+                                  Command="{Binding NewPatientCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/> 
+                    <RibbonButton x:Name="OpenPatientButton" LargeImageSource="../Resources/Images/circle_orange.png" Label="Open Patient"
+                                  Command="{Binding OpenPatientCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <RibbonButton x:Name="DeletePatientButton" LargeImageSource="../Resources/Images/trash.png" Label="Delete Patient"
+                                  Command="{Binding DeletePatientCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    
+                    <!--<RibbonSplitButton LargeImageSource="../Resources/Images/circle_grey.png">
+                        <RibbonSplitButton.Resources>
+                            <Style TargetType="{x:Type RibbonMenuItem}">
+                                <Setter Property="Header" Value="{Binding Path=Name}" />
+                                <Setter Property="Command" Value="{Binding Path=cmd}" />
+                                <Setter Property="ImageSource" Value="{Binding Icon}" />
+                            </Style>
+                        </RibbonSplitButton.Resources>
+                    </RibbonSplitButton>-->
+                </RibbonGroup>
+                <RibbonGroup x:Name="PatientGroup" Visibility="{Binding Path=TabManager.SelectedTab
+                                                               , Converter={StaticResource SelectedTabConverter}
+                                                               , ConverterParameter=PatientViewModel}">
+                    <RibbonButton x:Name="AddVisitButton" LargeImageSource="../Resources/Images/add-button.png" Label="Add Visit"
+                                  Command="{Binding AddVisitCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                </RibbonGroup>
             </RibbonTab>
             <!--<Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
@@ -116,14 +155,14 @@
         </Ribbon>
 
         <Grid Grid.Row="1" DataContext="{Binding TabManager}" >
-            <TabControl Style="{StaticResource TabControlStyle}" 
+            <TabControl x:Name="TabControl" Style="{StaticResource TabControlStyle}" 
 					ItemContainerStyle="{StaticResource TabItemStyle}" ItemsSource="{Binding TabItems}" 
 					SelectedItem="{Binding SelectedTab, Mode=TwoWay}">
                 <TabControl.Resources>
                     <DataTemplate DataType="{x:Type tabs:PatientMasterViewModel}">
                         <forms:PatientListView/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type tabs:PatientViewModel}">
+                    <DataTemplate DataType="{x:Type tabs:PatientViewModel}" >
                         <forms:PatientView />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type tabs:AdminScreenMasterViewModel}">

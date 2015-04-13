@@ -44,8 +44,6 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Generate Report"
-                        Command="{Binding GenerateReportCommand}"/>
             </Grid>
             <ContentPresenter Grid.Row="1" Content="{Binding SelectedReport, Mode=OneWay}">
                 <ContentPresenter.Resources>

@@ -3,6 +3,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows;
 using DrugHouse.Model;
@@ -17,6 +19,18 @@ namespace DrugHouse.ViewModel
 {
     public class MasterViewModel : DrugHouseViewModelBase
     {
+        #region Relay Commands
+        public TabManager TabManager { get; set; }
+        public RelayCommand<ITabViewModel> CloseTabCommand { get { return TabManager.CloseTabCommand; } }
+        public RelayCommand ExitCommand { get; set; }
+        public RelayCommand<AdminScreenType> OpenAdminScreenCommand { get; private set; }
+        public RelayCommand SearchPatientCommand { get; private set; }
+        public RelayCommand NewPatientCommand { get; private set; }
+        public RelayCommand OpenReportCommand { get; private set; }
+
+
+        #endregion
+
         #region Constructors
         [PreferredConstructor]
         public MasterViewModel()//IMessageService messageService)
@@ -35,6 +49,7 @@ namespace DrugHouse.ViewModel
                 IsInitializing = true;
                 UserIdValue = Environment.UserName.ToUpper().Trim();
                 TabManager = new TabManager(this);
+                TabManager.PropertyChanged += TabManagerOnPropertyChanged;
 
                 NewPatientCommand = new RelayCommand(ExecuteNewPatientCommand, CanExecuteNewPatientCommand);
                 SearchPatientCommand = new RelayCommand(() => TabManager.AddTab(new PatientMasterViewModel(this)),
@@ -55,7 +70,21 @@ namespace DrugHouse.ViewModel
         }
 
         #endregion
+        public class PropName
+        {
+            public const string HasMessage = "HasMessage";
+            public const string SaveTabCommand = "SaveTabCommand";
+            public const string IsInitializing = "IsInitializing";
+            public const string SelectedTabChanged = "SelectedTabChanged";
+        }
 
+        public class RelayCommandPropName
+        {
+            public const string GenerateReportCommand = "GenerateReportCommand";
+            public const string OpenPatientCommand = "OpenPatientCommand";
+            public const string DeletePatientCommand = "DeletePatientCommand";
+            public const string AddVisitCommand = "AddVisitCommand";
+        }
         #region Properties
 
         public static class Globals
@@ -111,23 +140,6 @@ namespace DrugHouse.ViewModel
                 return result;
             }
         }
-        public class PropName
-        {
-            public const string SelectedTabViewModel = "SelectedTabViewModel";
-            public const string HasMessage = "HasMessage";
-            public const string SaveTabCommand = "SaveTabCommand";
-            public const string IsInitializing = "IsInitializing";
-        }
-
-
-        public TabManager TabManager { get; set; }
-        public RelayCommand<ITabViewModel> CloseTabCommand { get { return TabManager.CloseTabCommand; } }
-        public RelayCommand ExitCommand { get; set; }
-        public RelayCommand<AdminScreenType> OpenAdminScreenCommand { get; private set; }
-        public RelayCommand SearchPatientCommand { get; private set; }
-        public RelayCommand NewPatientCommand { get; private set; }
-        public RelayCommand OpenReportCommand { get; private set; }
-
         private bool IsInitializingValue;
         public bool IsInitializing
         {
@@ -206,8 +218,58 @@ namespace DrugHouse.ViewModel
             });
             return result;
         }
+
+        private void SetRelayCommands()
+        {
+            var type = TabManager.SelectedTab.GetType();
+
+            if (type == typeof (ReportScreenViewModel))
+            {
+                GenerateReportCommand = ((ReportScreenViewModel) TabManager.SelectedTab).GenerateReportCommand;
+            }
+            else if (type == typeof (PatientMasterViewModel))
+            {
+                OpenPatientCommand = ((PatientMasterViewModel)TabManager.SelectedTab).OpenPatientCommand;
+                DeletePatientCommand = ((PatientMasterViewModel) TabManager.SelectedTab).DeletePatientCommand;
+            }
+            else if (type == typeof(PatientViewModel))
+            {
+                AddVisitCommand = ((PatientViewModel)TabManager.SelectedTab).AddVisitCommand;
+            }
+        }
         #endregion
 
+
+        #region Event Handlers
+
+        private void TabManagerOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+
+            switch (e.PropertyName)
+            {
+                case TabManager.PropName.SelectedTab:
+                    if ((TabViewModel)TabManager.SelectedTab != null)
+                    {
+                        ((TabViewModel)TabManager.SelectedTab).PropertyChanged += OnSelecteTabPropertyChanged;
+                        SetRelayCommands();
+                        RaisePropertyChanged(PropName.SelectedTabChanged);
+                    }
+                    break;
+
+            }
+        }
+
+        private void OnSelecteTabPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            switch(propertyChangedEventArgs.PropertyName)
+            {
+                case TabViewModel.EventPropName.RelayCommandUpdated:
+                    SetRelayCommands();
+                    break;
+            }
+        }
+
+        #endregion
         #region Relay Command Methods
 
 
@@ -248,6 +310,62 @@ namespace DrugHouse.ViewModel
             if (PrepareClosing())
                 Application.Current.Shutdown();
         }
+
+        #endregion
+
+        #region Tabs' Relay Commands
+
+        #region ReportScreen
+
+        private RelayCommand GenerateReportCommandValue;
+        public RelayCommand GenerateReportCommand
+        {
+            get { return GenerateReportCommandValue; }
+            private set
+            {
+                GenerateReportCommandValue = value; 
+                RaisePropertyChanged(RelayCommandPropName.GenerateReportCommand);
+            }
+        }
+        #endregion
+
+        #region PatientMaster
+
+        private RelayCommand OpenPatientCommandValue;
+        public RelayCommand OpenPatientCommand  
+        {
+            get { return OpenPatientCommandValue; }
+            private set
+            {
+                OpenPatientCommandValue = value;
+                RaisePropertyChanged(RelayCommandPropName.OpenPatientCommand);
+            }
+        }
+
+        private RelayCommand DeletePatientCommandValue;
+        public RelayCommand DeletePatientCommand
+        {
+            get { return DeletePatientCommandValue; }
+            private set
+            {
+                DeletePatientCommandValue = value;
+                RaisePropertyChanged(RelayCommandPropName.DeletePatientCommand);
+            }
+        }
+        #endregion
+
+        #region Patient
+        private RelayCommand AddVisitCommandValue;
+        public RelayCommand AddVisitCommand
+        {
+            get { return AddVisitCommandValue; }
+            private set
+            {
+                AddVisitCommandValue = value;
+                RaisePropertyChanged(RelayCommandPropName.AddVisitCommand);
+            }
+        }
+        #endregion
 
         #endregion
 

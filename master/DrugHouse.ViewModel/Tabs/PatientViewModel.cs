@@ -73,6 +73,12 @@ namespace DrugHouse.ViewModel.Tabs
             
         }
 
+        public class FocusElement
+        {
+            public const string Case = "Case";
+            public const string DrugSelection = "DrugSelection";
+        }
+
 
         private DrugHouseViewModelBase PatientVisitViewModelValue;
         public DrugHouseViewModelBase PatientVisitViewModel
@@ -254,6 +260,7 @@ namespace DrugHouse.ViewModel.Tabs
         private void AddVisit()
         {
             AddCase(typeof (PatientVisit));
+            ChangeFoucs(FocusElement.Case);
         }
 
         private void AddAdmittance()

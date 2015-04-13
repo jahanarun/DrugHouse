@@ -2,6 +2,7 @@
     Copyright (C) {2015}  {Jahan Arun, J}     */
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,14 +14,9 @@ using DrugHouse.ViewModel.Tabs;
 
 namespace DrugHouse.View.Forms
 {
-    /// <summary>
-    /// Description for MainWindow.
-    /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow : Window
     {
-        /// <summary>
-        /// Initializes a new instance of the TestView class.
-        /// </summary>
+        private readonly MasterViewModel ViewModel;
         public MainWindow()
         {
             try
@@ -28,6 +24,7 @@ namespace DrugHouse.View.Forms
                 InitializeComponent();
                 ViewModel = (MasterViewModel) DataContext;
                 DrugHouseViewModelBase.MessageService = MessageServiceBoxService.Instance;
+                ViewModel.PropertyChanged += MasterViewModelPropertyChanged;
                 ViewModel.OnViewLoaded();
             }
             catch (Exception ex)
@@ -36,14 +33,21 @@ namespace DrugHouse.View.Forms
             }
         }
 
+        private void MasterViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case MasterViewModel.PropName.SelectedTabChanged:
+                    break;
+            }
+        }
 
-        private readonly MasterViewModel ViewModel;
         private void MainWindow_Closed(object sender, EventArgs e)
         {
             Settings.Default.Save();
         }
 
-        private void RootWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void RootWindow_Closing(object sender, CancelEventArgs e)
         {
             e.Cancel = !ViewModel.PrepareClosing();
         }
@@ -55,7 +59,7 @@ namespace DrugHouse.View.Forms
             {
                 child.RowDefinitions[0].Height = new GridLength(0);
             }
-            Ribbon.Height = 80;
+            Ribbon.Height = 100;
         }
     }
 }

@@ -13,6 +13,7 @@
 			 xmlns:patients="clr-namespace:DrugHouse.ViewModel.Patients;assembly=DrugHouse.Sticker"
 			 xmlns:tabs="clr-namespace:DrugHouse.ViewModel.Tabs;assembly=DrugHouse.Sticker"
 			 x:Name="Root"
+             DataContextChanged="PatientView_OnDataContextChanged"
 			  Background="{DynamicResource PatientTabBrush}"
 			 >
     <UserControl.Resources>
@@ -42,7 +43,7 @@
 
         <Grid Grid.Row="1" Background="White" >
 
-            <TabControl Style="{StaticResource SimpleTabControlStyle}">
+            <TabControl x:Name="TabControl" Style="{StaticResource SimpleTabControlStyle}">
                 <TabControl.Resources>
                     <Style TargetType="{x:Type TabItem}">
                         <Setter Property="Template">
@@ -254,7 +255,7 @@
                             </ListBox>
                         </DockPanel>
 
-                        <ContentPresenter Content="{Binding PatientVisitViewModel, Mode=OneWay}">
+                        <ContentPresenter x:Name="CaseContentPresenter" Content="{Binding PatientVisitViewModel, Mode=OneWay}">
                             <ContentPresenter.Resources>
                                 <DataTemplate DataType="{x:Type tabs:DrugHouseViewModelBase}">
 

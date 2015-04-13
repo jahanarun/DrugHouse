@@ -2,6 +2,8 @@
     Copyright (C) {2015}  {Jahan Arun, J}     */
 
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using DrugHouse.Model;
 using DrugHouse.ViewModel.Interfaces;
 using GalaSoft.MvvmLight.Command;
@@ -12,6 +14,7 @@ namespace DrugHouse.ViewModel.Tabs
     {
 
         public event EventHandler OnSave;
+        public event PropertyChangedEventHandler OnFocusChanged;
 
         #region Constructors
         protected TabViewModel(MasterViewModel vm)
@@ -24,6 +27,11 @@ namespace DrugHouse.ViewModel.Tabs
         }
 
         #endregion
+
+        public class EventPropName
+        {
+            public const string RelayCommandUpdated = "RelayCommandUpdated";
+        }
 
         #region Properties
         protected virtual IDataAccess Data { get; private set; }
@@ -122,6 +130,13 @@ namespace DrugHouse.ViewModel.Tabs
             return IsSaveEnabled;
         }
         #endregion
+
+        protected void ChangeFoucs(string prop)
+        {
+            var handler = OnFocusChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(prop));
+        }
 
     }
 }

@@ -12,7 +12,7 @@ namespace DrugHouse.ViewModel.Tabs
     public  class TabManager : DrugHouseViewModelBase
     {
 
-        private readonly Dictionary<Guid, ITabViewModel> tabGuids = new Dictionary<Guid, ITabViewModel>();
+        private readonly Dictionary<Guid, ITabViewModel> TabGuids = new Dictionary<Guid, ITabViewModel>();
 
         public TabManager(MasterViewModel master)
         {
@@ -61,7 +61,7 @@ namespace DrugHouse.ViewModel.Tabs
             if (IsTabGoodToAdd(tab))
             {
                 TabItemsValue.Add(tab);
-                tabGuids.Add(tab.Guid, tab);
+                TabGuids.Add(tab.Guid, tab);
                 tab.OnSave += (o,e) => RefreshGuid();
             }
             SelectTabBasedOnGuid(tab.Guid);
@@ -69,10 +69,10 @@ namespace DrugHouse.ViewModel.Tabs
 
         public void RefreshGuid()
         {
-            tabGuids.Clear();
+            TabGuids.Clear();
             foreach (var tab in TabItems)
             {
-                tabGuids.Add(tab.Guid, tab);
+                TabGuids.Add(tab.Guid, tab);
             }
         }
 
@@ -93,10 +93,10 @@ namespace DrugHouse.ViewModel.Tabs
 
         private void SelectTabBasedOnGuid(Guid guid)
         {
-            if (!tabGuids.ContainsKey(guid)) return;
+            if (!TabGuids.ContainsKey(guid)) return;
 
             ITabViewModel tab;
-            tabGuids.TryGetValue(guid, out tab);
+            TabGuids.TryGetValue(guid, out tab);
             SelectedTab = tab;
         }
 
@@ -104,7 +104,7 @@ namespace DrugHouse.ViewModel.Tabs
         {
 
             var tabGuid = tab.Guid;
-            return !tabGuids.ContainsKey(tabGuid);
+            return !TabGuids.ContainsKey(tabGuid);
         }
 
 
@@ -127,7 +127,7 @@ namespace DrugHouse.ViewModel.Tabs
             if (!TabItems.Contains(tab)) return;
 
             TabItemsValue.Remove(tab);
-            tabGuids.Remove(tab.Guid);
+            TabGuids.Remove(tab.Guid);
 
             if (TabItems.Contains(tab))  //Close action was cancelled
                 return;

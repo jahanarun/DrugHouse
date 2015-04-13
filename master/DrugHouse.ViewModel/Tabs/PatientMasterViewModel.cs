@@ -16,9 +16,12 @@ namespace DrugHouse.ViewModel.Tabs
     [TabAttribute("173BE214-DB56-4D7B-90EA-323BD561026B")]
     public class PatientMasterViewModel : TabViewModel
     {
+        #region Relay Commands
+
         public RelayCommand OpenPatientCommand { get; private set; }
         public RelayCommand FilterPatientCommand { get; private set; }
         public RelayCommand DeletePatientCommand { get; private set; }
+        #endregion
 
         private List<Patient> InternalePatientList;
        
@@ -174,6 +177,7 @@ namespace DrugHouse.ViewModel.Tabs
         }
 
         private PatientListRow SelectedPatientValue;
+
         public PatientListRow SelectedPatient
         {
             get { return SelectedPatientValue; }
@@ -185,6 +189,8 @@ namespace DrugHouse.ViewModel.Tabs
 
         }
         #endregion
+
+        #region Overridden Methods
 
         protected override void SaveOperations()
         {
@@ -201,5 +207,7 @@ namespace DrugHouse.ViewModel.Tabs
             FilterPatientCommand.Execute(null);
             SelectedPatient = (PatientListRow)PatientFilteredCollectionView.CurrentItem;
         }
+
+        #endregion
     }
 }

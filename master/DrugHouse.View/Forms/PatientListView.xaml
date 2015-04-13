@@ -43,8 +43,6 @@
 				<TextBlock Text="Type your search string here:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" />
 				<TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Height="25" Background="White" 
 						 Text="{Binding Path=SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <Button Grid.Column="3" Content="Open" Command="{Binding OpenPatientCommand}"/>
-                <Button Grid.Column="5" Content="Delete" Command="{Binding DeletePatientCommand}" />
 
             </Grid>
 		</StackPanel>

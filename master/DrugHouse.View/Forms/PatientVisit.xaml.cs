@@ -1,6 +1,7 @@
 ﻿/*  DrugHouse - An Hospital management software
     Copyright (C) {2015}  {Jahan Arun, J}     */
 
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DrugHouse.View.Forms
@@ -13,6 +14,11 @@ namespace DrugHouse.View.Forms
         public PatientVisit()
         {
             InitializeComponent();   
+        }
+
+        private void PatientVisit_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            ComplaintTextbox.Focus();
         }
     }
 }
