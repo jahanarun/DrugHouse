@@ -8,6 +8,7 @@ using System.Windows.Data;
 using DrugHouse.Model;
 using DrugHouse.Model.Enum;
 using DrugHouse.Model.Types;
+using DrugHouse.ViewModel.Interfaces;
 using DrugHouse.ViewModel.RowItems;
 using GalaSoft.MvvmLight.Command;
 
@@ -23,7 +24,7 @@ namespace DrugHouse.ViewModel.Tabs
         public RelayCommand DeletePatientCommand { get; private set; }
         #endregion
 
-        private List<Patient> InternalePatientList;
+        private List<Patient> InternalPatientList;
        
 
         protected override IDataAccess Data
@@ -84,7 +85,7 @@ namespace DrugHouse.ViewModel.Tabs
 
         private void FilterPatient(Func<Patient, bool> condition)
         {
-            var patientList = InternalePatientList.Where(condition).Select(patient => new PatientListRow()
+            var patientList = InternalPatientList.Where(condition).Select(patient => new PatientListRow()
             {
                 Id = patient.Id,
                 Name = patient.Name,
@@ -105,7 +106,7 @@ namespace DrugHouse.ViewModel.Tabs
         {
             using (var data = Data)
             {
-                InternalePatientList = data.GetAllPatients().ToList();
+                InternalPatientList = data.GetAllPatients().ToList();
             }   
         }
 
@@ -131,10 +132,14 @@ namespace DrugHouse.ViewModel.Tabs
 
         private void ExecuteDeletePatient()
         {
-            var patient = InternalePatientList.Find(x => x.Id == SelectedPatient.Id);
-            patient.DbStatus = RepositoryStatus.Deleted;
-            RaiseDirty();
-            FilterPatientCommand.Execute(null); 
+            var patient = InternalPatientList.Find(x => x.Id == SelectedPatient.Id);
+            var result = MessageService.YesNo("Do you want to delete the selected patient?", patient.Name + " - Delete Confirmation");
+            if (result == MessageResult.Yes)
+            {
+                patient.Delete();
+                RaiseDirty();
+                FilterPatientCommand.Execute(null);
+            }
         }
 
         private bool CanExecuteDeletePatient()
@@ -196,7 +201,7 @@ namespace DrugHouse.ViewModel.Tabs
         {
             using (var data = Data)
             {
-                data.SetStateForIEnumerable(InternalePatientList);
+                data.SetStateForIEnumerable(InternalPatientList);
             }
         }
 

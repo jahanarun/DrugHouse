@@ -85,13 +85,11 @@ namespace DrugHouse.Model.Types
             Admitances = new Collection<PatientAdmitance>(); 
         }
         #region Public Methods
-        //public ICase AddVisit()
-        //{
-        //    var result = new PatientVisit(this) {DbStatus = RepositoryStatus.New};
-        //    DbStatus=RepositoryStatus.Edited;
-        //    Visits.Add(result);
-        //    return result;
-        //}
+
+        public void Delete()
+        {
+            DbStatus = RepositoryStatus.Deleted;
+        }
         public ICase AddCase(Type t)
         {
             ICase result = null;

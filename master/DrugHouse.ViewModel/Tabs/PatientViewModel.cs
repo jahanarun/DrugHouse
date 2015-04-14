@@ -8,6 +8,7 @@ using System.Linq;
 using DrugHouse.Model.Enum;
 using DrugHouse.Model.Types;
 using DrugHouse.Shared.Enumerations;
+using DrugHouse.ViewModel.Interfaces;
 using DrugHouse.ViewModel.Patients;
 using DrugHouse.ViewModel.RowItems;
 using GalaSoft.MvvmLight.Command;
@@ -270,11 +271,15 @@ namespace DrugHouse.ViewModel.Tabs
 
         private void RemoveCase()
         {
-            Patient.RemoveCase(SelectedCase.Case);
-            var temp = SelectedCase;
-            CaseRows.Remove(temp);
-            SelectedCase = (CaseRows.Count > 0 ? CaseRows.First() : null);
-            RaiseDirty();
+            var result = MessageService.YesNo("Do you want to remove the selected Case?", "Case Delete");
+            if (result == MessageResult.Yes)
+            {
+                Patient.RemoveCase(SelectedCase.Case);
+                var temp = SelectedCase;
+                CaseRows.Remove(temp);
+                SelectedCase = (CaseRows.Count > 0 ? CaseRows.First() : null);
+                RaiseDirty();
+            }
         }
 
         private void AddCase(Type type)
