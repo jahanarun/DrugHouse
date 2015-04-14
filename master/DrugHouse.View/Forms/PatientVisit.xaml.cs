@@ -38,5 +38,18 @@ namespace DrugHouse.View.Forms
         {
             ComplaintTextbox.Focus();
         }
+
+        private void AddDrugButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DrugListBox.Items.Count > 0)
+            {
+                var listBoxItem = (ListBoxItem) DrugListBox
+                    .ItemContainerGenerator
+                    .ContainerFromItem(DrugListBox.Items[0]);
+
+                if(listBoxItem != null)
+                    listBoxItem.Focus();
+            }
+        }
     }
 }

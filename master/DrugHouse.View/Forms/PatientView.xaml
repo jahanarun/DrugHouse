@@ -31,6 +31,16 @@
                     <x:Type TypeName="enumerations:GenderType"></x:Type>
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
+            <Style x:Key="TextBlockHeaderStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Foreground" Value="#FF7EA81F"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style x:Key="LabelHeaderStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Foreground" Value="#FF7EA81F"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid d:DataContext="{d:DesignInstance Type=tabs:PatientViewModel}">
@@ -73,7 +83,7 @@
 
                 </TabControl.Resources>
 
-                <TabItem Header="Patient Info">
+                <TabItem Header="Patient _Info">
 
                     <Grid x:Name="PatientGrid" Height="Auto" >
                         <Grid.ColumnDefinitions>
@@ -137,15 +147,28 @@
 							 Text="{Binding Path=Remark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </TabItem>
-                <TabItem Header="Cases">
-                    <DockPanel LastChildFill="True" >
-                        <DockPanel DockPanel.Dock="Left" Width="170" LastChildFill="True">
-                            <DockPanel.Resources>
+                <TabItem Header="Ca_ses">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="170"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid DockPanel.Dock="Left" Grid.Column="0" >
+                            <Grid.Resources>
                                 <SolidColorBrush x:Key="NormalButtonBrush" Color="LightGreen"/>
                                 <SolidColorBrush x:Key="HighlightButtonBrush" Color="Green"/>
-                            </DockPanel.Resources>
-                            <Grid HorizontalAlignment="Stretch" DockPanel.Dock="Top">
-                                <Grid>
+                            </Grid.Resources>
+                           
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="_Visits" Target="{Binding ElementName=VisitList}" Style="{StaticResource LabelHeaderStyle}"/>
+
+                            <Grid HorizontalAlignment="Stretch" Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50"/>
                                         <ColumnDefinition/>
@@ -182,10 +205,10 @@
                                             Command="{Binding RemoveCaseCommand}">
                                         <Button.Template>
                                             <ControlTemplate>
-                                                <Path x:Name="MinusPath" Data="M0,10 L30,10 30,20 L0,20 0,10z" Fill="{StaticResource NormalButtonBrush}"/>
+                                                <Path x:Name="MinusPath" Data="M0,10 L30,10 30,20 L0,20 0,10z" Fill="IndianRed"/>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="MinusPath" Property="Fill" Value="{StaticResource HighlightButtonBrush}"/>
+                                                        <Setter TargetName="MinusPath" Property="Fill" Value="DarkRed"/>
 
                                                     </Trigger>
                                                 </ControlTemplate.Triggers>
@@ -231,17 +254,8 @@
 
                                     </Popup>
                                 </Grid>
-                            </Grid>
 
-
-                            <!--<Button Content="Add Visit" MinWidth="50"  Grid.Column="0" 
-											Command="{Binding AddVisitCommand}"/>
-
-									<Button Content="Add Admittance" MinWidth="70" Grid.Column="2" HorizontalAlignment="Right" 
-											Command="{Binding AddAdmittanceCommand}"/>-->
-                            <Grid DockPanel.Dock="Bottom" Height="20"/>
-
-                            <ListBox x:Name="VisitList"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"  
+                            <ListBox x:Name="VisitList" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"  
                                      BorderThickness="0,0,1,0"  ItemsSource="{Binding CaseRows}" 
                                      SelectedItem="{Binding SelectedCase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ListBox.ItemTemplate>
@@ -257,9 +271,10 @@
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
-                        </DockPanel>
+                        </Grid>
 
-                        <ContentPresenter x:Name="CaseContentPresenter" Content="{Binding PatientVisitViewModel, Mode=OneWay}" >
+                        <ContentPresenter x:Name="CaseContentPresenter" Grid.Column="1"
+                                          Content="{Binding PatientVisitViewModel, Mode=OneWay}" >
                             <ContentPresenter.Resources>
                                 <DataTemplate DataType="{x:Type tabs:DrugHouseViewModelBase}">
 
@@ -273,7 +288,7 @@
                             </ContentPresenter.Resources>
                         </ContentPresenter>
                         <!--<forms:Visit></forms:Visit>-->
-                    </DockPanel>
+                    </Grid>
                 </TabItem>
 
             </TabControl>

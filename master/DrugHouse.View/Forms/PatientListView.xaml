@@ -13,71 +13,77 @@
 			   xmlns:forms="clr-namespace:DrugHouse.View.Forms"
 			   xmlns:tabs="clr-namespace:DrugHouse.ViewModel.Tabs;assembly=DrugHouse.Sticker"
 			   d:DataContext="{d:DesignInstance Type=tabs:PatientMasterViewModel }"
-			   BorderBrush="Transparent"
-			   BorderThickness="0"
-			   >
-	<UserControl.Resources>
-		<ObjectDataProvider x:Key="GenderTypeEnum" MethodName="GetValues"
+			   BorderBrush="Transparent" BorderThickness="0"
+             Focusable="True" 
+             DataContextChanged="PatientListView_OnDataContextChanged">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="GenderTypeEnum" MethodName="GetValues"
 							ObjectType="{x:Type system:Enum}">
-			<ObjectDataProvider.MethodParameters>
-				<x:Type TypeName="styleAlias:GenderType"/>
-			</ObjectDataProvider.MethodParameters>
-		</ObjectDataProvider>
-	</UserControl.Resources>
-	<DockPanel d:DataContext="{d:DesignInstance  tabs:PatientMasterViewModel}" Background="{StaticResource PatientListTabLiteBrush}">
-		<StackPanel DockPanel.Dock="Top" >
-			<Grid x:Name="TopLayer" Height="10" Background="{StaticResource PatientListTabBrush}"/>
-			<Grid x:Name="FiltersGrid" DockPanel.Dock="Top" Margin="10,10,0,0">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" MinHeight="30"/>
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-				<TextBlock Text="Type your search string here:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" />
-				<TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Height="25" Background="White" 
-						 Text="{Binding Path=SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="styleAlias:GenderType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    <Grid d:DataContext="{d:DesignInstance  tabs:PatientMasterViewModel}" Background="{StaticResource PatientListTabLiteBrush}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            </Grid>
-		</StackPanel>
-		<DataGrid Name="GridPatient" AutoGenerateColumns="False"  DockPanel.Dock="Top"  Margin="10,10" HorizontalAlignment="Left"
-				  Background="Gray"
-				  FontSize="16" FontFamily="Segoe UI" 
-				  SelectionMode="Single" VerticalScrollBarVisibility="Visible"  
-				  ItemsSource="{Binding PatientFilteredCollectionView}" IsReadOnly="True" 
-				  SelectedItem="{Binding Path=SelectedPatient, Mode=TwoWay}"
-				  >
-			<DataGrid.Resources>
-				<SolidColorBrush x:Key="RowColor" Color="LightGreen"/>
-				<SolidColorBrush x:Key="RowColorAlternate" Color="#FFF4FFB6"/>
-			</DataGrid.Resources>
-			<i:Interaction.Triggers>
-				<i:EventTrigger EventName="MouseDoubleClick">
-					<command:EventToCommand Command="{Binding OpenPatientCommand}"  />
-				</i:EventTrigger>
-			</i:Interaction.Triggers>
-			<DataGrid.Style>
-				<Style TargetType="DataGrid">
-					<Setter Property="AlternatingRowBackground" Value="{StaticResource RowColorAlternate}"/>
-					<Setter Property="RowBackground" Value ="{StaticResource RowColor}"></Setter>
-				</Style>
-			</DataGrid.Style>
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="ID" Binding="{Binding Path=Id, Mode=OneWay}" Width="1*"/>
-				<DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=OneWay}" Width="3*"/>
-				<DataGridComboBoxColumn x:Name="GenderCombobox"  Header="Gender" Width="2*"
+        <Grid x:Name="TopLayer" Grid.Row="0" Background="{StaticResource PatientListTabBrush}"/>
+        <Grid x:Name="FiltersGrid" VerticalAlignment="Stretch" Grid.Row="1" Margin="10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="30"/>
+                <RowDefinition Height="5" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label Content="Type your _search string here:" Target="{Binding ElementName=SearchTextBox}"
+                   Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <TextBox x:Name="SearchTextBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Height="25" Background="White" 
+						 Text="{Binding Path=SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="SearchTextBox_OnKeyUp" />
+
+            <DataGrid Name="PatientGrid" Grid.Row="2" RowHeaderWidth="10" Grid.Column="0" Grid.ColumnSpan="3" 
+                      AutoGenerateColumns="False" HorizontalAlignment="Left"  
+                      Background="Gray" FontSize="16" FontFamily="Segoe UI" 
+                      SelectionMode="Single" VerticalScrollBarVisibility="Visible"  
+                      ItemsSource="{Binding PatientFilteredCollectionView}" IsReadOnly="True" 
+                      SelectedItem="{Binding Path=SelectedPatient, Mode=TwoWay}"
+                      IsTabStop="True" SelectionUnit="FullRow" KeyDown="PatientGrid_OnKeyDown" PreviewKeyDown="PatientGrid_OnKeyDown">
+
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="RowColor" Color="#93C093"/>
+                    <SolidColorBrush x:Key="RowColorAlternate" Color="#D1D9A1"/>
+                </DataGrid.Resources>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <command:EventToCommand Command="{Binding OpenPatientCommand}"  />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <DataGrid.Style>
+                    <Style TargetType="DataGrid">
+                        <Setter Property="AlternatingRowBackground" Value="{StaticResource RowColorAlternate}"/>
+                        <Setter Property="RowBackground" Value ="{StaticResource RowColor}"></Setter>
+                    </Style>
+                </DataGrid.Style>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=Id, Mode=OneWay}" Width="1*"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=OneWay}" Width="3*"/>
+                    <DataGridComboBoxColumn x:Name="GenderCombobox"  Header="Gender" Width="2*"
 										SelectedItemBinding="{Binding Gender, Mode=OneWay}" ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}"/>
-				<DataGridTextColumn Header="Age" Binding="{Binding Path=Age, Mode=OneWay}" Width="1*"/>
-				<DataGridTextColumn Header="Address" Binding="{Binding Path=Address, Mode=OneWay}" Width="3*"/>
-				<DataGridTextColumn Header="Location" Binding="{Binding Path=Location, Mode=OneWay}" Width="2*"/>
+                    <DataGridTextColumn Header="Age" Binding="{Binding Path=Age, Mode=OneWay}" Width="1*"/>
+                    <DataGridTextColumn Header="Address" Binding="{Binding Path=Address, Mode=OneWay}" Width="3*"/>
+                    <DataGridTextColumn Header="Location" Binding="{Binding Path=Location, Mode=OneWay}" Width="2*"/>
 
-			</DataGrid.Columns>
-		</DataGrid>
-	</DockPanel>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+    </Grid>
 </UserControl>
+
+    

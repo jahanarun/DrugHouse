@@ -121,6 +121,13 @@ namespace DrugHouse.ViewModel.Tabs
 
         private void ExecuteCloseTabCommand(ITabViewModel tab)
         {
+            if (tab == null)
+            {
+                if (SelectedTab != null)
+                    tab = SelectedTab;
+                else
+                    return;
+            }
             tab.PrepareToClose();
             SelectedTab = tab;
             if (!tab.IsReadyToClose) return;

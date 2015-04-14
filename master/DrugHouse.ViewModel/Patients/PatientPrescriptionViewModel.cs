@@ -188,7 +188,7 @@ namespace DrugHouse.ViewModel.Patients
         {
             var prescription = new PrescriptionRow(Visit.AddPrescription());
             prescription.PropertyChanged += (o,e) => RaiseDirty();
-            Prescriptions.Add(prescription);
+            Prescriptions.Insert(0, prescription);
             SelectedPrescription = prescription;
             RaiseDirty();
         }

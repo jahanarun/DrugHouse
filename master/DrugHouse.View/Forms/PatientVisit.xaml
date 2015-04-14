@@ -80,8 +80,8 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Grid.Row="0" Content="_Complaints:" Target="{Binding ElementName=ComplaintTextbox}"/>
                     <Label Grid.Column="0" Grid.Row="3" Content="_History:" Target="{Binding ElementName=HistoryTextbox}"/>
-                    <Label Grid.Column="3" Grid.Row="0" Content="_Principle Diagnosis:"  Target="{Binding ElementName=PrimaryDiagnosisArrowedDropdown}"/>
-                    <Label Grid.Column="3" Grid.Row="1" Content="_Secondary Diagnosis:"  Target="{Binding ElementName=SecondaryDiagnosisArrowedDropDown}"/>
+                    <Label Grid.Column="3" Grid.Row="0" Content="Principle _Diagnosis:"  Target="{Binding ElementName=PrimaryDiagnosisArrowedDropdown}"/>
+                    <Label Grid.Column="3" Grid.Row="1" Content="S_econdary Diagnosis:"  Target="{Binding ElementName=SecondaryDiagnosisArrowedDropDown}"/>
                     <Label Grid.Column="3" Grid.Row="2" Content="_Observation:"  Target="{Binding ElementName=ObservationTextbox}"/>
                     <Label Grid.Column="3" Grid.Row="5" Content="_Treatment:"  Target="{Binding ElementName=TreatmenTextbox}"/>
                     <localControls:DictionaryTextbox x:Name="ComplaintTextbox" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="0,5,0,10"
@@ -128,8 +128,8 @@
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Content="_Add Drug" MinWidth="70" DockPanel.Dock="Left"  TabIndex="7"
-                                            Command="{Binding AddDrugCommand}"/>
+                            <Button x:Name="AddDrugButton" Grid.Column="0" Content="_Add Drug" MinWidth="70" DockPanel.Dock="Left"  TabIndex="7"
+                                            Command="{Binding AddDrugCommand}" Click="AddDrugButton_OnClick"/>
                             <Button Grid.Column="2" Content="Delete Drug" MinWidth="70" DockPanel.Dock="Right"  IsTabStop="False"
                                             Command="{Binding RemoveDrugCommand}"/>
 
