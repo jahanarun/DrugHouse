@@ -126,7 +126,7 @@
                         <TextBlock Text="Remarks" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" FontSize="16" Foreground="#FF7EA81F" FontWeight="Bold" />
                         <TextBlock Text="Address" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" FontSize="16" Foreground="#FF7EA81F" FontWeight="Bold" />
                         <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=Id}" VerticalAlignment="Center"  />
-                        <TextBox x:Name="NameT" Grid.Row="2" Grid.Column="2" GotFocus="TextBox_OnGotFocus"
+                        <TextBox x:Name="NameTextBox" Grid.Row="2" Grid.Column="2" GotFocus="TextBox_OnGotFocus"
                                  Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  />
                         <TextBox Grid.Row="3" Grid.Column="2" GotFocus="TextBox_OnGotFocus"
                                  Text="{Binding Path=Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
