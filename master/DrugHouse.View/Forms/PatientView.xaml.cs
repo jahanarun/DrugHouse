@@ -3,6 +3,7 @@
 
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using DrugHouse.ViewModel.Tabs;
 
 namespace DrugHouse.View.Forms
@@ -37,9 +38,7 @@ namespace DrugHouse.View.Forms
             {
                 case PatientViewModel.FocusElement.Case:
                     TabControl.SelectedIndex = 1;
-                    CaseContentPresenter.Focus();
-                    break;
-
+                    break;                 
             }
         }
 
@@ -49,6 +48,16 @@ namespace DrugHouse.View.Forms
             ViewModel = (PatientViewModel)DataContext;
             if(ViewModel != null)
                 ViewModel.OnFocusChanged += OnFocusChanged;          
+        }
+
+        private void TextBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            var textbox = sender as TextBox;
+            if (textbox != null)
+            {
+                textbox.SelectionStart = 0;
+                textbox.SelectionLength = textbox.Text.Length;
+            }
         }
     }
 }

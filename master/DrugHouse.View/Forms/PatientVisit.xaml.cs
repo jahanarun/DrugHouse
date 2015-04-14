@@ -1,8 +1,11 @@
 ﻿/*  DrugHouse - An Hospital management software
     Copyright (C) {2015}  {Jahan Arun, J}     */
 
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace DrugHouse.View.Forms
 {
@@ -13,10 +16,25 @@ namespace DrugHouse.View.Forms
     {
         public PatientVisit()
         {
-            InitializeComponent();   
+            InitializeComponent(); 
+            this.IsVisibleChanged += OnIsVisibleChanged;
         }
 
-        private void PatientVisit_OnGotFocus(object sender, RoutedEventArgs e)
+        private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue == true)
+            {
+                Dispatcher.BeginInvoke(
+                DispatcherPriority.ContextIdle,
+                new Action(delegate()
+                {
+                    ComplaintTextbox.Focus();
+                }));
+            } 
+
+        }
+
+        private void PatientVisit_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             ComplaintTextbox.Focus();
         }

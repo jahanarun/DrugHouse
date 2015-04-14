@@ -116,18 +116,22 @@
                         <TextBlock Text="Remarks" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" FontSize="16" Foreground="#FF7EA81F" FontWeight="Bold" />
                         <TextBlock Text="Address" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" FontSize="16" Foreground="#FF7EA81F" FontWeight="Bold" />
                         <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=Id}" VerticalAlignment="Center"  />
-                        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  />
-                        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Path=Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" GotFocus="TextBox_OnGotFocus"
+                                 Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  />
+                        <TextBox Grid.Row="3" Grid.Column="2" GotFocus="TextBox_OnGotFocus"
+                                 Text="{Binding Path=Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
                         <ComboBox Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100"
 								  Text="{Binding Path=Gender}" ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}" SelectedItem="{Binding Gender}" />
                         <ComboBox Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left"
 								  Text="{Binding Path=GuardianRelationship}" ItemsSource="{Binding Source={StaticResource GuardianTypeEnum}}" SelectedItem="{Binding GuardianRelationship}" />
-                        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Path=GuardianName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="6" Grid.Column="2" GotFocus="TextBox_OnGotFocus"
+                                 Text="{Binding Path=GuardianName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
                         <TextBox Grid.Row="1"  Grid.Column="4" Grid.RowSpan="3"  Grid.ColumnSpan="2" Margin="0,10,0,10"
 							 Text="{Binding Path=Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <ComboBox x:Name="LocationComboBox" Grid.Row="4" Grid.Column="5"  Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
 							  ItemsSource="{Binding Locations}" SelectedItem="{Binding Path=Location, Mode=TwoWay}"/>
-                        <TextBox Grid.Row="5" Grid.Column="5"  VerticalAlignment="Center" Width="200" HorizontalAlignment="Left"
+                        <TextBox Grid.Row="5" Grid.Column="5"  GotFocus="TextBox_OnGotFocus"
+                                 VerticalAlignment="Center" Width="200" HorizontalAlignment="Left"
 							 Text="{Binding Path=PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
 							 Text="{Binding Path=Remark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -255,7 +259,7 @@
                             </ListBox>
                         </DockPanel>
 
-                        <ContentPresenter x:Name="CaseContentPresenter" Content="{Binding PatientVisitViewModel, Mode=OneWay}">
+                        <ContentPresenter x:Name="CaseContentPresenter" Content="{Binding PatientVisitViewModel, Mode=OneWay}" >
                             <ContentPresenter.Resources>
                                 <DataTemplate DataType="{x:Type tabs:DrugHouseViewModelBase}">
 

@@ -11,66 +11,210 @@
              xmlns:patients="clr-namespace:DrugHouse.ViewModel.Patients;assembly=DrugHouse.Sticker"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" d:DesignWidth="1120" d:DesignHeight="671" 
-             GotFocus="PatientVisit_OnGotFocus"
-             >
-    <DockPanel LastChildFill="True" Margin="5,5,5,5">
-        <DockPanel.Resources>
+             DataContextChanged="PatientVisit_OnDataContextChanged">
+
+    <Grid x:Name="DDD"  Margin="5,5,5,5">
+        <Grid.Resources>
             <valueConverter:VisibilityConverter x:Key="VisibilityConverter"/>
-        </DockPanel.Resources>
+        </Grid.Resources>
 
-        <Grid Background="White">
+        <Grid KeyboardNavigation.TabNavigation="Local"
+            d:DataContext="{d:DesignInstance patients:PatientVisitViewModel}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border  Grid.Row="0" BorderThickness="0" Margin="5,5,5,5">
-                <DockPanel LastChildFill="True" d:DataContext="{d:DesignInstance patients:PatientVisitViewModel}">
-                    <DockPanel.Resources>
-                        <SolidColorBrush x:Key="CapsuleBackColorBrush" Color="LightGoldenrodYellow"/>
-                        <SolidColorBrush x:Key="TabletBackColorBrush" Color="LightBlue"/>
-                        <SolidColorBrush x:Key="InjectionBackColorBrush" Color="LightPink"/>
-                        <SolidColorBrush x:Key="SyrupBackColorBrush" Color="LightGreen"/>
-                        <SolidColorBrush x:Key="NoDrugBackColorBrush" Color="White"/>
-                    </DockPanel.Resources>
-                    <Border BorderThickness="0,0,0,2" Background="White" BorderBrush="Gainsboro" MinHeight="50" DockPanel.Dock="Top" Height="50" >
-                        <Grid Name="StatusPanel"  >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
-                            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <SolidColorBrush x:Key="CapsuleBackColorBrush" Color="LightGoldenrodYellow"/>
+                <SolidColorBrush x:Key="TabletBackColorBrush" Color="LightBlue"/>
+                <SolidColorBrush x:Key="InjectionBackColorBrush" Color="LightPink"/>
+                <SolidColorBrush x:Key="SyrupBackColorBrush" Color="LightGreen"/>
+                <SolidColorBrush x:Key="NoDrugBackColorBrush" Color="White"/>
+            </Grid.Resources>
+            
+            <Border BorderThickness="0,0,0,2" Background="White" BorderBrush="Gainsboro" MinHeight="50" Grid.Row="0" Height="50" >
+                <Grid Name="StatusPanel"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Doctor Fees:" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Medicine Fees:" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Doctor Fees:" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Medicine Fees:" VerticalAlignment="Center"/>
 
-                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    <TextBox Grid.Row="0" Grid.Column="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"
                                  Text="{Binding DoctorFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Center"
+                    <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Center"
                                  Text="{Binding DrugFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding CaseDate}" FontWeight="Bold" VerticalAlignment="Center"/>
-                        </Grid>
-                    </Border>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding CaseDate}" FontWeight="Bold" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
 
-                    <Border MinHeight="100" DockPanel.Dock="Bottom" Height="250" BorderThickness="0,2,0,0" Background="White" BorderBrush="Gainsboro">
-                        <Grid Name="MedicinePanel" DataContext="{Binding PatientPrescriptionViewModel }">
+            <Border Grid.Row="1" BorderThickness="0" Background="White" BorderBrush="Gainsboro" 
+                            d:DataContext="{d:DesignInstance patients:PatientVisitViewModel}">
+                <Grid Name="DiagnosisPanel" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="130" />
+                        <ColumnDefinition Width="4*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Content="_Complaints:" Target="{Binding ElementName=ComplaintTextbox}"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="_History:" Target="{Binding ElementName=HistoryTextbox}"/>
+                    <Label Grid.Column="3" Grid.Row="0" Content="_Principle Diagnosis:"  Target="{Binding ElementName=PrimaryDiagnosisArrowedDropdown}"/>
+                    <Label Grid.Column="3" Grid.Row="1" Content="_Secondary Diagnosis:"  Target="{Binding ElementName=SecondaryDiagnosisArrowedDropDown}"/>
+                    <Label Grid.Column="3" Grid.Row="2" Content="_Observation:"  Target="{Binding ElementName=ObservationTextbox}"/>
+                    <Label Grid.Column="3" Grid.Row="5" Content="_Treatment:"  Target="{Binding ElementName=TreatmenTextbox}"/>
+                    <localControls:DictionaryTextbox x:Name="ComplaintTextbox" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="0,5,0,10"
+                                                             TabIndex="1"
+                                                             DictionaryItems="{Binding DictionaryItems}" 
+                                                             Text="{Binding Path=Complaints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <localControls:DictionaryTextbox x:Name="HistoryTextbox"  Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" Margin="0,5,0,10"
+                                                             TabIndex="2"
+                                                              DictionaryItems="{Binding DictionaryItems}" 
+                                                              Text="{Binding Path=History, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <localControls:ArrowedDropDown x:Name="PrimaryDiagnosisArrowedDropdown" Grid.Row="0" Grid.Column="4" Width="200"
+                                                           TabIndex="3"
+                                                          HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                          DictionaryItems="{Binding DiagnosesItems}" SelectedItem="{Binding Path=PrimaryDiagnosis, Mode=TwoWay}" />
+                    <localControls:ArrowedDropDown x:Name="SecondaryDiagnosisArrowedDropDown" Grid.Column="4" Grid.Row="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                           TabIndex="4"
+                                                           DictionaryItems="{Binding DiagnosesItems}" SelectedItem="{Binding SecondaryDiagnosis, Mode=TwoWay}"/>
+                    <localControls:DictionaryTextbox x:Name="ObservationTextbox" Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" Margin="0,5,0,10"
+                                                             TabIndex="5"
+                                                             DictionaryItems="{Binding DictionaryItems}" 
+                                                             Text="{Binding Path=Observation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <localControls:DictionaryTextbox x:Name="TreatmenTextbox" Grid.Column="4" Grid.Row="5" Grid.RowSpan="3"  Margin="0,5,0,10"
+                                                             TabIndex="6"
+                                                             DictionaryItems="{Binding DictionaryItems}" 
+                                                             Text="{Binding Path=Treatment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" KeyboardNavigation.TabNavigation="Cycle"
+                    Height="250" BorderThickness="0,2,0,0" Background="White" BorderBrush="Gainsboro">
+                <Grid Name="MedicinePanel" DataContext="{Binding PatientPrescriptionViewModel }">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.Resources>
+                        <valueConverter:DrugTypeConverter x:Key="DrugTypeConverter" />
+                    </Grid.Resources>
+
+                    <DockPanel Grid.Column="0" HorizontalAlignment="Stretch" >
+                        <Grid HorizontalAlignment="Stretch" DockPanel.Dock="Top" Height="30">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Grid.Resources>
-                                <!--<valueConverter:EnumDrugBooleanConverter x:Key="EnumDrugTypeConverter"/>-->
-                                <valueConverter:DrugTypeConverter x:Key="DrugTypeConverter" />
-                            </Grid.Resources>
+                            <Button Grid.Column="0" Content="_Add Drug" MinWidth="70" DockPanel.Dock="Left"  TabIndex="7"
+                                            Command="{Binding AddDrugCommand}"/>
+                            <Button Grid.Column="2" Content="Delete Drug" MinWidth="70" DockPanel.Dock="Right"  IsTabStop="False"
+                                            Command="{Binding RemoveDrugCommand}"/>
 
-                            <Grid>
-                                <Grid.Visibility>
-                                    <Binding Path= "IsDrugPanelVisible" Converter="{StaticResource VisibilityConverter}" UpdateSourceTrigger="PropertyChanged" FallbackValue="Visible" />
-                                </Grid.Visibility>
+                        </Grid>
+                        <Grid>
+                            <ListBox ScrollViewer.HorizontalScrollBarVisibility = "Disabled" HorizontalContentAlignment="Stretch" IsTabStop="False"
+                                             ItemsSource="{Binding Path=Prescriptions}" SelectedItem="{Binding SelectedPrescription, Mode=TwoWay}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}">
+                                        <Setter Property="LayoutTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform x:Name="transform" />
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <EventTrigger RoutedEvent="Loaded">
+                                                <EventTrigger.Actions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:2" />
+                                                            <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0" Duration="0:0:.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger.Actions>
+                                            </EventTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
 
-                                <!--<StackPanel Grid.Column="0" >
+                                    <DataTemplate DataType="rowItem:PrescriptionRow">
+                                        <Border x:Name="BackgroundGrid" BorderThickness="2" BorderBrush="Silver" >
+                                            <Grid HorizontalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="18" Grid.Row="0"
+                                                                   Grid.ColumnSpan="2" />
+                                                <TextBlock Text="{Binding Dosage }" Grid.Row="1" Grid.Column="0"/>
+                                                <TextBlock Text="{Binding DrugCount }" Grid.Row="1" Grid.Column="1"/>
+                                                <TextBlock Text="{Binding DrugType}" Grid.Row="1" Grid.Column="2"/>
+                                            </Grid>
+                                        </Border>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Capsule}">
+                                                <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource CapsuleBackColorBrush}"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Syrup}">
+                                                <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource SyrupBackColorBrush}"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Tablet}">
+                                                <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource TabletBackColorBrush}"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Injection}">
+                                                <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource InjectionBackColorBrush}"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.None}">
+                                                <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource NoDrugBackColorBrush}"></Setter>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+
+
+                            </ListBox>
+                        </Grid>
+                    </DockPanel>
+
+                    <Grid Grid.Column="1">
+                        <Grid.Visibility>
+                            <Binding Path= "IsDrugPanelVisible" Converter="{StaticResource VisibilityConverter}" UpdateSourceTrigger="PropertyChanged" FallbackValue="Visible" />
+                        </Grid.Visibility>
+
+                        <!--<StackPanel Grid.Column="0" >
                                     <StackPanel.Resources>
                                         <Style TargetType="{x:Type RadioButton}">
                                             <Setter Property="Focusable" Value="False" />
@@ -164,8 +308,8 @@
                                     </RadioButton>
                                 </StackPanel>-->
 
-                                <Grid Margin="5,0,5,0" >
-                                    <!--<Grid.Style>
+                        <Grid Margin="5,0,5,0" >
+                            <!--<Grid.Style>
                                         <Style TargetType="{x:Type Grid}">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding ElementName=CapsuleRadioButton, Path=IsChecked}" Value="True">
@@ -186,202 +330,78 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Grid.Style>-->
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"/>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition />
-                                        <RowDefinition Height="5"/>
-
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="10" />
-                                        <ColumnDefinition Width="90" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="10" />
-                                        <ColumnDefinition Width="200"  />
-                                        <ColumnDefinition Width="10" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Select Drug" FontSize="14" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Row="0" Grid.Column="4" Text="Prescription" FontSize="14" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="4" Text="Drug Count" VerticalAlignment="Center" />
-                                    <TextBlock Grid.Row="4" Grid.Column="4" Text="Remarks" VerticalAlignment="Center" />
-                                    <ListBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Grid.ColumnSpan="2" 
-                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                             ItemsSource="{Binding DrugList}" SelectedItem="{Binding SelectedDrug, Mode=TwoWay}">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel x:Name="DrugItemPanel" Width="150">
-                                                    <TextBlock Text="{Binding Name}"/>
-                                                </StackPanel>
-                                                <DataTemplate.Triggers>
-                                                    <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Capsule">
-                                                        <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource CapsuleBackColorBrush}"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Tablet">
-                                                        <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource TabletBackColorBrush}"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Syrup">
-                                                        <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource SyrupBackColorBrush}"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Injection">
-                                                        <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource InjectionBackColorBrush}"/>
-                                                    </DataTrigger>
-                                                </DataTemplate.Triggers>
-                                                
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                        <ListBox.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal"/>
-                                            </ItemsPanelTemplate>
-                                        </ListBox.ItemsPanel>
-                                    </ListBox>
-                                    <ComboBox Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                              ItemsSource="{Binding PrescriptionCollection}"
-                                              SelectedItem="{Binding SelectedDosage}"/>
-                                    <TextBox Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True" 
-                                             Text="{Binding Path=SelectedDrugCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <TextBox Grid.Row="5" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True" 
-                                             Text="{Binding Path=SelectedRemark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                </Grid>
-                            </Grid>
-
-                            <DockPanel Grid.Column="1" HorizontalAlignment="Stretch" >
-                                <DockPanel LastChildFill="False" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Height="30">
-                                    <Button Content="Add Drug" MinWidth="70" DockPanel.Dock="Left"
-                                Command="{Binding AddDrugCommand}"/>
-                                    <Button Content="Delete Drug" MinWidth="70" DockPanel.Dock="Right"
-                                Command="{Binding RemoveDrugCommand}"/>
-
-                                </DockPanel>
-                                <Grid>
-                                    <ListBox ScrollViewer.HorizontalScrollBarVisibility = "Disabled" HorizontalContentAlignment="Stretch"
-                                             ItemsSource="{Binding Path=Prescriptions}" SelectedItem="{Binding SelectedPrescription, Mode=TwoWay}">
-                                        <ListBox.ItemContainerStyle>
-                                            <Style TargetType="{x:Type ListBoxItem}">
-                                                <Setter Property="LayoutTransform">
-                                                    <Setter.Value>
-                                                        <ScaleTransform x:Name="transform" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Style.Triggers>
-                                                    <EventTrigger RoutedEvent="Loaded">
-                                                        <EventTrigger.Actions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:2" />
-                                                                    <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0" Duration="0:0:.2"/>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </EventTrigger.Actions>
-                                                    </EventTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ListBox.ItemContainerStyle>
-                                        <ListBox.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel/>
-                                            </ItemsPanelTemplate>
-                                        </ListBox.ItemsPanel>
-                                        <ListBox.ItemTemplate>
-
-                                            <DataTemplate DataType="rowItem:PrescriptionRow">
-                                                <Border x:Name="BackgroundGrid" BorderThickness="2" BorderBrush="Silver" >
-                                                    <Grid HorizontalAlignment="Stretch">
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition />
-                                                            <RowDefinition />
-                                                        </Grid.RowDefinitions>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition />
-                                                            <ColumnDefinition />
-                                                            <ColumnDefinition />
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="18" Grid.Row="0"
-                                                                   Grid.ColumnSpan="2" />
-                                                        <TextBlock Text="{Binding Dosage }" Grid.Row="1" Grid.Column="0"/>
-                                                        <TextBlock Text="{Binding DrugCount }" Grid.Row="1" Grid.Column="1"/>
-                                                        <TextBlock Text="{Binding DrugType}" Grid.Row="1" Grid.Column="2"/>
-                                                    </Grid>
-                                                </Border>
-                                                <DataTemplate.Triggers>
-                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Capsule}">
-                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource CapsuleBackColorBrush}"></Setter>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Syrup}">
-                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource SyrupBackColorBrush}"></Setter>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Tablet}">
-                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource TabletBackColorBrush}"></Setter>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.Injection}">
-                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource InjectionBackColorBrush}"></Setter>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DrugType}" Value="{x:Static enumerations:DrugType.None}">
-                                                        <Setter TargetName="BackgroundGrid" Property="Background" Value="{StaticResource NoDrugBackColorBrush}"></Setter>
-                                                    </DataTrigger>
-                                                </DataTemplate.Triggers>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-
-
-                                    </ListBox>
-                                </Grid>
-                            </DockPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border BorderThickness="0" Background="White" BorderBrush="Gainsboro" d:DataContext="{d:DesignInstance patients:PatientVisitViewModel}">
-                        <Grid Name="DiagnosisPanel" >
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition />
+                                <RowDefinition Height="5"/>
+
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="130" />
-                                <ColumnDefinition Width="4*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="130" />
-                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="90" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="200"  />
+                                <ColumnDefinition Width="10" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Grid.Row="0"  Margin="0,5">Complaints:</TextBlock>
-                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,5">History:</TextBlock>
-                            <TextBlock Grid.Column="3" Grid.Row="0" Margin="0,5" >Principle Diagnosis:</TextBlock>
-                            <TextBlock Grid.Column="3" Grid.Row="1" Margin="0,5" >Secondary Diagnosis:</TextBlock>
-                            <TextBlock Grid.Column="3" Grid.Row="2" Margin="0,5">Observation:</TextBlock>
-                            <TextBlock Grid.Column="3" Grid.Row="5" Margin="0,5">Treatment:</TextBlock>
-                            <localControls:DictionaryTextbox x:Name="ComplaintTextbox" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Margin="0,5,0,10"
-                                                             DictionaryItems="{Binding DictionaryItems}" 
-                                                             Text="{Binding Path=Complaints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <localControls:DictionaryTextbox  Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" Margin="0,5,0,10"
-                                                              DictionaryItems="{Binding DictionaryItems}" 
-                                                              Text="{Binding Path=History, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <localControls:ArrowedDropDown x:Name="PrimaryDiagnosisComboBox" Grid.Row="0" Grid.Column="4" Width="200"
-                                                          HorizontalAlignment="Left" VerticalAlignment="Center"
-                                                          DictionaryItems="{Binding DiagnosesItems}" SelectedItem="{Binding Path=PrimaryDiagnosis, Mode=TwoWay}" />
-                            <localControls:ArrowedDropDown Grid.Column="4" Grid.Row="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                                          DictionaryItems="{Binding DiagnosesItems}" SelectedItem="{Binding SecondaryDiagnosis, Mode=TwoWay}"/>
-                            <localControls:DictionaryTextbox Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" Margin="0,5,0,10"
-                                                             DictionaryItems="{Binding DictionaryItems}" 
-                                                             Text="{Binding Path=Observation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <localControls:DictionaryTextbox Grid.Column="4" Grid.Row="5" Grid.RowSpan="3"  Margin="0,5,0,10"
-                                                             DictionaryItems="{Binding DictionaryItems}" 
-                                                             Text="{Binding Path=Treatment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <Label Grid.Row="0" Grid.Column="1" Content="_Select Drug" FontSize="14" VerticalAlignment="Center" 
+                                           Target="{Binding ElementName=DrugListBox}"/>
+                            <Label Grid.Row="0" Grid.Column="4" Content="_Prescription" FontSize="14" VerticalAlignment="Center"
+                                           Target="{Binding ElementName=PrescriptionComboBox}"/>
+                            <Label Grid.Row="2" Grid.Column="4" Content="Drug Co_unt" VerticalAlignment="Center" 
+                                           Target="{Binding ElementName=DrugCountTextBox}"/>
+                            <Label Grid.Row="4" Grid.Column="4" Content="Remar_ks" VerticalAlignment="Center" 
+                                           Target="{Binding ElementName=RemarkTextBox}"/>
+                            <ListBox x:Name="DrugListBox" Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Grid.ColumnSpan="2" 
+                                             TabIndex="8"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                             ItemsSource="{Binding DrugList}" SelectedItem="{Binding SelectedDrug, Mode=TwoWay}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel x:Name="DrugItemPanel" Width="150">
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </StackPanel>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Capsule">
+                                                <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource CapsuleBackColorBrush}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Tablet">
+                                                <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource TabletBackColorBrush}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Syrup">
+                                                <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource SyrupBackColorBrush}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path= DrugType, Converter={StaticResource DrugTypeConverter}}" Value="Injection">
+                                                <Setter TargetName="DrugItemPanel" Property="Background" Value="{StaticResource InjectionBackColorBrush}"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                            <ComboBox x:Name="PrescriptionComboBox" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                              TabIndex="9"
+                                              ItemsSource="{Binding PrescriptionCollection}"
+                                              SelectedItem="{Binding SelectedDosage}"/>
+                            <TextBox x:Name="DrugCountTextBox" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True" TabIndex="10"
+                                             Text="{Binding Path=SelectedDrugCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox x:Name="RemarkTextBox"  Grid.Row="5" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True"  TabIndex="11"
+                                             Text="{Binding Path=SelectedRemark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
-                    </Border>
-                </DockPanel>
+                    </Grid>
+
+                </Grid>
             </Border>
+
         </Grid>
-    </DockPanel>
+    </Grid>
 </UserControl>
