@@ -71,6 +71,10 @@
     <Compile Include="Migrations\201504071441571_AddedDrugCount.Designer.cs">
       <DependentUpon>201504071441571_AddedDrugCount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504140811488_RenamedDrugCountToDosage.cs" />
+    <Compile Include="Migrations\201504140811488_RenamedDrugCountToDosage.Designer.cs">
+      <DependentUpon>201504140811488_RenamedDrugCountToDosage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Reports\MedicalCertificateDocument.cs" />
     <Compile Include="Reports\Report.cs" />
@@ -137,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504071441571_AddedDrugCount.resx">
       <DependentUpon>201504071441571_AddedDrugCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504140811488_RenamedDrugCountToDosage.resx">
+      <DependentUpon>201504140811488_RenamedDrugCountToDosage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
