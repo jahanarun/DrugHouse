@@ -6,6 +6,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              x:Name="DictionaryUserControl"
+             Focusable="True" GotFocus="DictionaryTextbox_OnGotFocus"
              d:DesignHeight="300" d:DesignWidth="500">
 
     <UserControl.Resources>

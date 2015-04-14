@@ -7,16 +7,16 @@
              mc:Ignorable="d" 
              x:Name="ArrowedTextboxControl"
              d:DesignHeight="300" d:DesignWidth="500"
-             GotFocus="ArrowedTextbox_OnGotFocus">
+             KeyDown="ArrowedDropDown_OnPreviewKeyDown">
 
     <UserControl.Resources>
         <system:Double x:Key="PopupWidth">210</system:Double>
         <system:Double x:Key="PopupHeight">260</system:Double>
     </UserControl.Resources>
 
-    <Grid DataContext="{Binding ElementName=ArrowedTextboxControl}">
+    <Grid x:Name="RootGrid" DataContext="{Binding ElementName=ArrowedTextboxControl}" Focusable="True">
 
-        <Button x:Name="ArrowButton" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+        <Button x:Name="ArrowButton" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsTabStop="False"
 			Click="ToggleButton_Click" >
             <Button.Template>
                 <ControlTemplate>
@@ -49,7 +49,7 @@
             </Button.Template>
         </Button>
 
-        <Popup Name="ListPopup"   AllowsTransparency="True"  Width="{StaticResource PopupWidth}"
+        <Popup Name="ListPopup"  AllowsTransparency="True"  Width="{StaticResource PopupWidth}"
                Height="{StaticResource PopupHeight}"
 			   PlacementTarget="{Binding ElementName=ArrowButton}"
 			   StaysOpen="False" Opened="ListPopup_OnOpened" Closed="ListPopup_OnClosed">
@@ -62,14 +62,14 @@
                     </Grid.RowDefinitions>
                     <TextBox x:Name="MainTextBox" Text="{Binding Text, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
                              Grid.Row="0"
-                             PreviewKeyDown="MainTextBox_OnPreviewKeyDown" PreviewKeyUp="MainTextBox_OnPreviewKeyUp" >
+                             PreviewKeyDown="MainTextBox_OnPreviewKeyDown">
 
                     </TextBox>
                     <ListBox x:Name="ItemsListBox" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Stretch" Background="AntiqueWhite"
                              Grid.Row="1"
 						  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                          SelectedItem="{Binding PopupSelectedItem}"  ItemsSource="{Binding MatchedItems}" 
-                         KeyDown="ItemsListBox_OnKeyDown" PreviewKeyDown="ItemsListBox_OnKeyDown"
+                         KeyUp="ItemsListBox_OnKeyUp" PreviewKeyUp="ItemsListBox_OnKeyUp"
                          PreviewMouseUp="ItemsListBox_OnPreviewMouseUp">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

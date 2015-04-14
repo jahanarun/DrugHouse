@@ -373,5 +373,10 @@ namespace DrugHouse.View.Controls
             ReplaceText();
             ClosePopupMenu();
         }
+
+        private void DictionaryTextbox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            MainTextBox.Focus();
+        }
     }
 }

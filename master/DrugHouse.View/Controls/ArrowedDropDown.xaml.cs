@@ -20,7 +20,6 @@ namespace DrugHouse.View.Controls
         #region Constructor
         public ArrowedDropDown()
         {
-            //DictionaryItems = new List<ToggleButtonItem>();
             MatchedItems = new ObservableCollection<ToggleButtonItem>();
             InitializeComponent();
             ItemSourceEvent += (o, e) => InitializeList();
@@ -200,15 +199,12 @@ namespace DrugHouse.View.Controls
             switch (key)
             {
                 case Key.Enter:
-                    ClosePopupMenu();
                     return true;
 
                 case Key.Space:
-                    ClosePopupMenu();
                     return true;
 
                 case Key.Tab:
-                    ClosePopupMenu();
                     return true;
             }
             return false;
@@ -218,13 +214,6 @@ namespace DrugHouse.View.Controls
 
         #region Event Handlers
 
-        private void MainTextBox_OnPreviewKeyUp(object sender, KeyEventArgs e)
-        {
-            if (IsNavigationalKey(e.Key))
-                return;
-            //Filter();
-
-        }
         private void MainTextBox_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
 
@@ -259,19 +248,19 @@ namespace DrugHouse.View.Controls
                 e.Handled = true;
 
         }
-        private void ItemsListBox_OnKeyDown(object sender, KeyEventArgs e)
+        private void ItemsListBox_OnKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
+                ClosePopupMenu();
+
+            else if (TryCommitKeys(e.Key))
             {
                 ClosePopupMenu();
-                return;
-            }
-            if (TryCommitKeys(e.Key))
-            {
                 e.Handled = true;
-                return;
             }
-            if (!IsNavigationalKey(e.Key))
+                
+            
+            else if (!IsNavigationalKey(e.Key))
                 MainTextBox.Focus();
 
         }
@@ -293,12 +282,18 @@ namespace DrugHouse.View.Controls
             MainTextBox.Focus();
         }
 
-        private void ArrowedTextbox_OnGotFocus(object sender, RoutedEventArgs e)
+
+        private void ListPopup_OnClosed(object sender, EventArgs e)
         {
-            OpenPopup();
+            SelectedItem = PopupSelectedItem;
+            RootGrid.Focus();
         }
 
-
+        private void ArrowedDropDown_OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                OpenPopup();
+        }
 
         #endregion
 
@@ -315,10 +310,6 @@ namespace DrugHouse.View.Controls
 
         #endregion
 
-        private void ListPopup_OnClosed(object sender, EventArgs e)
-        {
-            SelectedItem = PopupSelectedItem;
-        }
     }
 
 }
