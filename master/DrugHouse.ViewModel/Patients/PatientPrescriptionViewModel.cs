@@ -43,7 +43,7 @@ namespace DrugHouse.ViewModel.Patients
 
         public class PropName
         {
-            public const string SelectedDrugCount = "SelectedDrugCount";
+            public const string SelectedDuration = "SelectedDuration";
             public const string SelectedDrug = "SelectedDrug";
             public const string SelectedPrescription = "SelectedPrescription";
             public const string SelectedTypeDrugList = "SelectedTypeDrugList";
@@ -93,11 +93,11 @@ namespace DrugHouse.ViewModel.Patients
                     return;
                 SelectedDrugValue = SelectedPrescriptionValue.Drug;
                 SelectedDrugTypeValue = SelectedPrescriptionValue.DrugType;
-                SelectedDrugCountValue = SelectedPrescriptionValue.DrugCount;
+                SelectedDurationValue = SelectedPrescriptionValue.Duration;
                 SelectedRemarkValue = SelectedPrescriptionValue.Remark;
 
                 SelectionChanged(PropName.SelectedDrug);
-                SelectionChanged(PropName.SelectedDrugCount);
+                SelectionChanged(PropName.SelectedDuration);
                 SelectionChanged(PropName.SelectedPrescription);
                 SelectionChanged(PropName.SelectedDrugType);
                 SelectionChanged(PropName.SelectedDosage);
@@ -155,17 +155,17 @@ namespace DrugHouse.ViewModel.Patients
             }
         }
 
-        private int SelectedDrugCountValue;
-        public int SelectedDrugCount
+        private int SelectedDurationValue;
+        public int SelectedDuration
         {
-            get { return SelectedDrugCountValue; }
+            get { return SelectedDurationValue; }
             set
             {
                 if (SelectedPrescription == null)
                     return;
-                SelectedDrugCountValue = value;
-                SelectedPrescription.DrugCount = value;
-                RaisePropertyChanged(PropName.SelectedDrugCount);
+                SelectedDurationValue = value;
+                SelectedPrescription.Duration = value;
+                RaisePropertyChanged(PropName.SelectedDuration);
             }
         }
 
