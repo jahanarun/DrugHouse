@@ -79,10 +79,25 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
+                        
+                        <Setter Property="HeaderTemplate" >
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <Label Content="{Binding}"/>
+                                <DataTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                                    </Trigger>
+                                </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </Setter.Value>
+
+                        </Setter>
+                        
                     </Style>
 
                 </TabControl.Resources>
-
+                
                 <TabItem Header="Patient _Info">
 
                     <Grid x:Name="PatientGrid" Height="Auto" >
