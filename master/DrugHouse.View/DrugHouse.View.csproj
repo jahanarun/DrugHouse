@@ -141,6 +141,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\UiHelper.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
     <Compile Include="Forms\PatientVisit.xaml.cs">
       <DependentUpon>PatientVisit.xaml</DependentUpon>
