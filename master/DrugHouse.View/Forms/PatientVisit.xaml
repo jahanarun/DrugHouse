@@ -48,10 +48,12 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Doctor Fees:" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Medicine Fees:" VerticalAlignment="Center"/>
 
-                    <TextBox Grid.Row="0" Grid.Column="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                 Text="{Binding DoctorFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Left"   VerticalAlignment="Center"
-                                 Text="{Binding DrugFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Width="100" HorizontalAlignment="Left"
+                             VerticalAlignment="Center" GotFocus="TextBox_OnGotFocus"
+                             Text="{Binding DoctorFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Left"   
+                             VerticalAlignment="Center" GotFocus="TextBox_OnGotFocus"
+                             Text="{Binding DrugFee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding CaseDate}" FontWeight="Bold" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
@@ -180,7 +182,7 @@
                                                 <TextBlock Text="{Binding Name}" Foreground="Black" FontSize="18" Grid.Row="0"
                                                                    Grid.ColumnSpan="2" />
                                                 <TextBlock Text="{Binding Dosage }" Grid.Row="1" Grid.Column="0"/>
-                                                <TextBlock Text="{Binding DrugCount }" Grid.Row="1" Grid.Column="1"/>
+                                                <TextBlock Text="{Binding TotalDrugs }" Grid.Row="1" Grid.Column="1"/>
                                                 <TextBlock Text="{Binding DrugType}" Grid.Row="1" Grid.Column="2"/>
                                             </Grid>
                                         </Border>
@@ -352,8 +354,8 @@
                                            Target="{Binding ElementName=DrugListBox}"/>
                             <Label Grid.Row="0" Grid.Column="4" Content="_Prescription" FontSize="14" VerticalAlignment="Center"
                                            Target="{Binding ElementName=PrescriptionComboBox}"/>
-                            <Label Grid.Row="2" Grid.Column="4" Content="Drug Co_unt" VerticalAlignment="Center" 
-                                           Target="{Binding ElementName=DrugCountTextBox}"/>
+                            <Label Grid.Row="2" Grid.Column="4" Content="D_uration (in days)" VerticalAlignment="Center" 
+                                           Target="{Binding ElementName=DurationTextBox}"/>
                             <Label Grid.Row="4" Grid.Column="4" Content="Remar_ks" VerticalAlignment="Center" 
                                            Target="{Binding ElementName=RemarkTextBox}"/>
                             <ListBox x:Name="DrugListBox" Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" Grid.ColumnSpan="2" 
@@ -392,8 +394,9 @@
                                               TabIndex="9"
                                               ItemsSource="{Binding PrescriptionCollection}"
                                               SelectedItem="{Binding SelectedDosage}"/>
-                            <TextBox x:Name="DrugCountTextBox" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True" TabIndex="10"
-                                             Text="{Binding Path=SelectedDrugCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox x:Name="DurationTextBox" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch" 
+                                     AcceptsReturn="True" TabIndex="10" GotFocus="TextBox_OnGotFocus"
+                                     Text="{Binding Path=SelectedDuration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox x:Name="RemarkTextBox"  Grid.Row="5" Grid.Column="4" HorizontalAlignment="Stretch" AcceptsReturn="True"  TabIndex="11"
                                              Text="{Binding Path=SelectedRemark, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>

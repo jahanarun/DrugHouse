@@ -1,9 +1,11 @@
 ﻿/*  DrugHouse - An Hospital management software
     Copyright (C) {2015}  {Jahan Arun, J}     */
 
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using DrugHouse.ViewModel.Tabs;
 
 namespace DrugHouse.View.Forms
@@ -16,6 +18,7 @@ namespace DrugHouse.View.Forms
         public PatientView()
         {
             InitializeComponent();
+            this.IsVisibleChanged += OnIsVisibleChanged;
         }
 
 
@@ -58,6 +61,19 @@ namespace DrugHouse.View.Forms
                 textbox.SelectionStart = 0;
                 textbox.SelectionLength = textbox.Text.Length;
             }
+        }
+        private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue == true)
+            {
+                Dispatcher.BeginInvoke(
+                DispatcherPriority.ContextIdle,
+                new Action(delegate()
+                {
+                    NameTextBox.Focus();
+                }));
+            }
+
         }
     }
 }

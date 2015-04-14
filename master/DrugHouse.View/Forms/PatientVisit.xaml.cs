@@ -51,5 +51,15 @@ namespace DrugHouse.View.Forms
                     listBoxItem.Focus();
             }
         }
+
+        private void TextBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            var textbox = sender as TextBox;
+            if (textbox != null)
+            {
+                textbox.SelectionStart = 0;
+                textbox.SelectionLength = textbox.Text.Length;
+            }
+        }
     }
 }
